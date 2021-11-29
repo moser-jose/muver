@@ -1,8 +1,10 @@
 import React from 'react'
 import { Moon, NotificationBing, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
+import { SlideHeader } from './SlideHeader'
 const Header = () => {
     return (
+        <>
         <div className="header">
             <div className="logo">
                 <a href="/">
@@ -12,6 +14,7 @@ const Header = () => {
             <div className="menu">
                 <nav>
                     <ul>
+                        <li><a href="/">Home</a></li>
                         <li><a href="/">Series</a></li>
                         <li><a href="/">Filmes</a></li>
                         <li><a href="/">Pessoas</a></li>
@@ -36,6 +39,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { StateVideoContext } from './contexts/ApiContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StateVideoContext>
+      <App />
+    </StateVideoContext>
   </React.StrictMode>,
   document.getElementById('root')
 );
