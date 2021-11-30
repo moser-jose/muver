@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useVideoContext } from '../contexts/ApiContext'; 
-import { Profile, Star } from 'iconsax-react';
+import { ArrowLeft3, ArrowRight3, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
+import Trailers from './Trailers';
 
 const properties = {
     indicators: true,
-    arrows:false,/* 
-    autoplay:false */
+    arrows:false,
+    autoplay:false
   };
-export const SlideHeader = () => {
-    const {tendencias}=useVideoContext();
+export const SlideHeader = ({data}) => {
+    
+    
     return (
-            <Slide easing="ease" {...properties}>
+        
+        <Slide easing="ease" {...properties}>
             {
-                tendencias && tendencias.slice(0,5).map((item,k) => (
+                data && data.slice(0,5).map((item,k) => (
                     <div className="each-slide" key={k} >
-                        
-                        <div style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}>
-                        
+                        <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}>
                             <div className="pr">
                                 {
                                     item.media_type==="tv" ?
@@ -37,6 +38,9 @@ export const SlideHeader = () => {
                                                 </span>
                                             </div>
                                             <p className="texto">{item.overview}</p>
+                                            <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                                    Ver mais</a>
+
                                         </>:
                                         <>
                                             <span className="media-type">{item.media_type}</span>
@@ -56,15 +60,19 @@ export const SlideHeader = () => {
                                                 
                                             </div>
                                             <p className="texto">{item.overview}</p>
+                                            <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                                    Ver mais</a>
                                         </>
                                 }
                             </div>
-    
+                            <div className="img">
+                                <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`}/>
+                            </div>
                         </div>
                     </div>
                 ))
             }
-            </Slide>
+        </Slide>
             
     )
 }
