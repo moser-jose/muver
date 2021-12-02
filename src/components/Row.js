@@ -1,20 +1,51 @@
+import { Star } from 'iconsax-react'
 import React from 'react'
-const Row = ({data,title}) => {
+const Row = ({data,title, type}) => {
     return (
            <div className="populares">
                <div className="mais">
-               <p>{title} mais populares</p>
+               <p>{title}</p>
                <a href="/">Ver mais</a>
                </div>
-                <div className="filmeR" >
+
+               {
+                   type === "actor" ?
+                   <div className="filmeR" >
                     {
                         data && data.slice(0,7).map((item, key)=>{
-                            return  <a href={`${item.id}`} key={key}>
-                                <img  src={`https://image.tmdb.org/t/p/original${item.poster_path}`}/>
-                            </a>
+                                return <a className="actor-p" href={`${item.id}`} key={key} >
+                                    <img  src={`https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
+                                    <div className="info">
+                                        <span>{item.name}</span>
+                                        
+                                    </div>   
+                                </a>
                         })
                     }
+                    
+                </div>:
+                <div className="filmeR" >
+                {
+                    data && data.slice(0,7).map((item, key)=>{
+                            return <a href={`${item.id}`} key={key} >
+                                <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
+                                <div className="info">
+                                    {
+                                        type==="filme" ? 
+                                        <span>{item.title}</span>
+                                        :  type==="tv" &&
+                                        <span>{item.name}</span>
+                                    }
+                                    <span className="perc"><Star size="18" color="#cccc32" variant="Bulk"/> {item.vote_average}</span>
+                                </div>   
+                            </a>
+                            
+                    })
+                }
+                
                 </div>
+               }
+                
            </div>
             
     )

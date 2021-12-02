@@ -7,16 +7,29 @@ import Trailers from './Trailers';
 const properties = {
     indicators: true,
     arrows:false,
-    autoplay:false
+    autoplay:true
   };
 export const SlideHeader = ({data}) => {
-    
-    
+    const [list, setList]=useState([])
+    useEffect(()=>{
+        function randomList(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+            while (0 !== currentIndex) {
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+            return array;
+        }
+        setList(randomList(data))
+    },[data])
     return (
         
         <Slide easing="ease" {...properties}>
             {
-                data && data.slice(0,5).map((item,k) => (
+                list && list.slice(0,5).map((item,k) => (
                     <div className="each-slide" key={k} >
                         <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}>
                             <div className="pr">
