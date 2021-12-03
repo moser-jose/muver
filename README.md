@@ -1,6 +1,7 @@
-# [Muver](http://github.io/moser-jose/muver)
+# [Muver](https://muver.vercel.app/)
 
-Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais.
+Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais. [https://muver.vercel.app/](https://muver.vercel.app/)
+
 
 <p align="center">
     <img src="src/assets/img/muver.svg" width="25%">
