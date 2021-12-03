@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useVideoContext } from '../contexts/ApiContext'; 
+import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
 import { ArrowLeft3, ArrowRight3, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
 import Trailers from './Trailers';
@@ -11,6 +11,7 @@ const properties = {
   };
 export const SlideHeader = ({data}) => {
     const [list, setList]=useState([])
+    const {i18n}=useApiContext();
     useEffect(()=>{
         function randomList(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,8 +27,12 @@ export const SlideHeader = ({data}) => {
         setList(randomList(data))
     },[data])
     return (
-        
-        <Slide easing="ease" {...properties}>
+        <div>
+            <div className="open">
+                <span className="pro">{i18n.t('header.projecto')} 👨🏽‍💻</span>
+                <a title={i18n.t('header.github')} target="_blank" href="https://github.com/moser-jose/muver"><span className="iconspeck speck-github"></span></a>
+            </div>
+            <Slide easing="ease" {...properties}>
             {
                 list && list.slice(0,5).map((item,k) => (
                     <div className="each-slide" key={k} >
@@ -52,7 +57,7 @@ export const SlideHeader = ({data}) => {
                                             </div>
                                             <p className="texto">{item.overview}</p>
                                             <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
-                                                    Ver mais</a>
+                                            {i18n.t('home.ver_mais')}</a>
 
                                         </>:
                                         <>
@@ -74,7 +79,7 @@ export const SlideHeader = ({data}) => {
                                             </div>
                                             <p className="texto">{item.overview}</p>
                                             <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
-                                                    Ver mais</a>
+                                            {i18n.t('home.ver_mais')}</a>
                                         </>
                                 }
                             </div>
@@ -85,7 +90,9 @@ export const SlideHeader = ({data}) => {
                     </div>
                 ))
             }
-        </Slide>
+            </Slide>
+        </div>
+        
             
     )
 }

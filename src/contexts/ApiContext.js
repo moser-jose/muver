@@ -15,7 +15,7 @@ export const ApiContext = ({ children }) => {
     const [pessoasTrending, setPessoasTreding]=useState([]);
     const [loading,setLoading ]=useState(false)
     /* const [movieId, setMovieId]=useState([]); */
-    const [upcoming, setUpcoming]=useState([]);
+    //const [upcoming, setUpcoming]=useState([]);
    
 
 
@@ -42,7 +42,7 @@ export const ApiContext = ({ children }) => {
             const tv= await axios.get(url.tvDiscover);
             const gM= await axios.get(url.generosFilmes);
             const pt= await axios.get(url.pessoasTrending);
-            const up= await axios.get(url.filmesBrevemente);
+            //const up= await axios.get(url.filmesBrevemente);
             setTendencias(t.data.results);
             setFilmesDiscover(d.data.results);
             setTvDiscover(tv.data.results);

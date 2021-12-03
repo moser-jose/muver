@@ -27,7 +27,29 @@ body{
     position: relative;
     /* padding: 20px 50px; */
     width: 100%;
-    
+    .open{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 90%;
+        .pro{
+            padding: 5px 0;
+            display: block;
+            font-size: 12px;
+        }
+        a{
+            text-decoration: none;
+            display: flex;
+            span{
+                font-size: 16px;
+                &:hover{
+                    color: #afaaaa;
+                }
+            }
+            
+        }
+    }
     .header{
         background-color: #ffffff10;
         backdrop-filter: blur(28px);
@@ -42,7 +64,7 @@ body{
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
-        top: 20px;
+        top: 40px;
         width: 90%;
         .logo{
             a{
@@ -229,7 +251,8 @@ body{
     position: relative;
     background-size: cover !important;
     display: flex;
-    height: 650px;
+    /* height: 650px; */
+    height: calc(100vh - 27.5px);
     background: linear-gradient(
         rgba(24, 24, 24, 0.3),
         rgba(24, 24, 24, 0.2)
@@ -303,7 +326,7 @@ body{
         align-items: center;
         padding: 10px 0;
         text-decoration: none;
-        width: 140px;
+        width: 150px;
         font-size: 18px;
         justify-content: center;
         &:hover{

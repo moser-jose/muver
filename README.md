@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# [Muver](http://github.io/moser-jose/muver)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais.
 
-## Available Scripts
+<p align="center">
+    <img src="src/assets/img/muver.svg" width="25%">
+</p>
 
-In the project directory, you can run:
+ <div align="center">
 
-### `npm start`
+[![Version](https://img.shields.io/github/package-json/v/moser-jose/muver)](https://github.com/moser-jose/muver)
+[![Last Commit](https://img.shields.io/github/last-commit/moser-jose/muver)](https://github.com/moser-jose/muver)
+[![The MIT License](https://img.shields.io/github/license/moser-jose/muver)](http://opensource.org/licenses/MIT)
+[![Autor](https://img.shields.io/static/v1?label=autor&message=moser-jose&color=red)](https://github.com/moser-jose?tab=repositories)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+</div>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+    <img src="src/assets/img/home.png">
 
-### `npm test`
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalação dos pacotes usando o yarn
 
-### `npm run build`
+`yarn add`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Instalação dos pacotes usando o NPM
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Como contribuir
 
-### `npm run eject`
+Para fazer um pull-request, primeiramente crie um fork do projecto para a sua conta, então clone o projecto em sua maquina:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`git clone https://github.com/moser-jose/muver.git`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Instale todos os pacotes necessários pelo ``NPM`` ou ``YARN``
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Agora pronto, você já pode começar a contribuir com o projeto!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Reportando Issues
 
-## Learn More
+Você pode criar uma issue [aqui](https://github.com/moser-jose/muver/issues), mas, lembre-se de ser claro e informar o máximo de detalhes possíveis.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Submetendo Pull Requests
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Crie pull requests pequenos, para que a revisão seja feita mais facilmente
+* Inclua detalhes do que está sendo feito na descrição
+* Altera a documentação se for necessário
 
-### Code Splitting
+## Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Este projeto é regido pela licença [MIT](/LICENSE.md).
+Lembre-se apenas de ser uma pessoa legal e enviar de volta eventuais modificações, correções ou melhorias. ✌️
 
-### Analyzing the Bundle Size
+## Autor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| [<img src="https://avatars0.githubusercontent.com/u/8234620?" width="115"><br><sub>@moser-jose</sub>](https://github.com/moser-jose) |
+| :---: |

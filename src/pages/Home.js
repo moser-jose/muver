@@ -1,15 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import Header from '../components/Header'
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
-
-import axios from '../api';
-import { Genrs } from '../components/Genrs';
-import Trailers from '../components/Trailers';
 import { useApiContext } from '../contexts/ApiContext';
 
 const Home = () => {
-    const{tendencias,filmesdiscover,tvDiscover,pessoasTrending,loading,setLoading}=useApiContext();
+    const{tendencias,filmesdiscover,tvDiscover,pessoasTrending,loading}=useApiContext();
     
    
     return (
