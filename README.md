@@ -21,7 +21,9 @@ Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um s
 
 </p>
 
-## Instalação dos pacotes usando o yarn
+## Configurações
+
+### Instalação dos pacotes usando o yarn
 
 `yarn add`
 
@@ -29,6 +31,13 @@ Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um s
 
 `npm install`
 
+### DOTENV
+
+1. Cria um ficheiro `.env` na pasta raiz e copie todas linhas de código que estão no ficheiro `.env.example` para o ficheiro `.env` criado;
+
+2. Cria uma conta no [https://www.themoviedb.org/signup](https://www.themoviedb.org/signup) e obtenha a chave da API;
+
+3. No ficheiro `.env` na linha `REACT_APP_API_KEY=` coloque a chave da API que obtiveste do site [https://www.themoviedb.org](https://www.themoviedb.org)
 ## Como contribuir
 
 Para fazer um pull-request, primeiramente crie um fork do projecto para a sua conta, então clone o projecto em sua maquina:
