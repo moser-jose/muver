@@ -1,9 +1,9 @@
 import './assets/sass/app.scss';
-import Home from './pages/Home';
+import Router from './router';
 function App() {
   return (
     <div className="App">
-      <Home/>
+      <Router/>
     </div>
   );
 }

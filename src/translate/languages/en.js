@@ -2,7 +2,7 @@ const messages = {
     en: {
         translations: {
             header:{
-                filme:'Movie',
+                filme:'Movies',
                 series:'Tv Shows',
                 actores: 'People',
                 login:'Login',
@@ -13,7 +13,9 @@ const messages = {
                 github:'Project on Github'
             },
             home:{
-                ver_mais:'View more'
+                ver_mais:'View more',
+                tv:'Tv',
+                filme:'Movie'
             }
         }
     }

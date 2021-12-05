@@ -4,7 +4,7 @@ import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
 
-const Home = () => {
+const Series = () => {
     const{tendencias,filmesdiscover,tvDiscover,pessoasTrending,loading}=useApiContext();
     
    
@@ -13,17 +13,15 @@ const Home = () => {
             <div className="container">
                 <div className="home">
                     <Header/>
-                    <SlideHeader  data={tendencias}/>   
-                    <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
-                    {/* <Genrs  data={genrsMovie}/> */}
+                    <SlideHeader type="tv" data={tvDiscover}/>   
+                    {/* <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
                     <Row type="tv" title="As Séries mais populares" data={tvDiscover}/>
-                    <Row type="actor" title="Os Actores mais populares" data={pessoasTrending}/>
-                   {/*  <Trailers type="filmes" data={movieId}/> */}
-                   {/* <Row type="filme" title="Filmes com maiores pontuações" data={upcoming}/> */}
-                </div>
+                    <Row type="actor" title="Os Actores mais populares" data={pessoasTrending}/> */}
+                   </div>
             </div>:
             <></>
     )
 }
 
-export default Home
+export default Series
+

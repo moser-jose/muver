@@ -6,7 +6,7 @@ import PT from '../assets/img/pt.png'
 import US from '../assets/img/us.png'
 import FR from '../assets/img/fr.png'
 import {useApiContext} from '../contexts/ApiContext'
-const I18N_STORAGE_KEY = 'i18nextLng'
+import { Link } from 'react-router-dom'
 const Header = () => {
     const {i18n}=useApiContext();
     const [clickIdioma, setClickIdioma]=useState(false);
@@ -16,16 +16,16 @@ const Header = () => {
     }
     const handleClickIdioma=(idioma)=>{
         if(idioma==="PT"){
-            localStorage.setItem(I18N_STORAGE_KEY,"pt-PT");
+            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
         }
         else if(idioma==="EN"){
-            localStorage.setItem(I18N_STORAGE_KEY,"en-US");
+            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"en-US");
         }
         else if(idioma==="FR"){
-            localStorage.setItem(I18N_STORAGE_KEY,"fr-FR");
+            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"fr-FR");
         }
         else{
-            localStorage.setItem(I18N_STORAGE_KEY,"pt-PT");
+            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
         }
         setSelectIdioma(idioma)
         window.location = window.location
@@ -40,10 +40,10 @@ const Header = () => {
                 <div className="menu">
                     <nav>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/">{i18n.t('header.filme')}</a></li>
-                            <li><a href="/">{i18n.t('header.series')}</a></li>
-                            <li><a href="/">{i18n.t('header.actores')}</a></li>
+                            {/* <li><a href="/">Home</a></li> */}
+                            <li><Link to="/filmes">{i18n.t('header.filme')}</Link></li>
+                            <li><Link to="/series">{i18n.t('header.series')}</Link></li>
+                            <li><Link to="/">{i18n.t('header.actores')}</Link></li>
                         </ul>
                     </nav>
                 </div>

@@ -9,7 +9,7 @@ const properties = {
     arrows:false,
     autoplay:true
   };
-export const SlideHeader = ({data}) => {
+export const SlideHeader = ({data,type}) => {
     const [list, setList]=useState([])
     const {i18n}=useApiContext();
     useEffect(()=>{
@@ -39,9 +39,15 @@ export const SlideHeader = ({data}) => {
                         <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}>
                             <div className="pr">
                                 {
-                                    item.media_type==="tv" ?
+                                    item.media_type==="tv" || type=="tv" ?
                                         <>
-                                            <span className="media-type">{item.media_type}</span>
+                                            <span className="media-type">
+                                            {
+                                            item.media_type  ?
+                                            item.media_type:
+                                            i18n.t('home.tv')
+                                            }
+                                            </span>
                                             <p className="titulo">{item.name}</p>
                                             <div className="media">
                                             <h5 className="original">{item.original_name}</h5>
@@ -61,7 +67,11 @@ export const SlideHeader = ({data}) => {
 
                                         </>:
                                         <>
-                                            <span className="media-type">{item.media_type}</span>
+                                            <span className="media-type">{
+                                            item.media_type  ?
+                                            item.media_type:
+                                            i18n.t('home.filme')
+                                            }</span>
                                             <p className="titulo">{item.title}</p>
                                             
                                             <div className="media">

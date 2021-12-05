@@ -13,7 +13,9 @@ const messages = {
                 github:'Projecto no Github'
             },
             home:{
-                ver_mais:'Ver mais'
+                ver_mais:'Ver mais',
+                tv:'Série',
+                filme:'Filme'
             }
         }
     }

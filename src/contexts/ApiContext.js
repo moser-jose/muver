@@ -4,8 +4,6 @@ import {PT,US,FR} from '../api/url';
 import { i18n } from '../translate/i18n'
 export const StateContext = createContext();
 
-const I18N_STORAGE_KEY = 'i18nextLng'
-
 export const ApiContext = ({ children }) => {
     const [selectIdioma, setSelectIdioma]=useState("PT");
     const [tendencias, setTendencias]=useState([]);
@@ -14,14 +12,12 @@ export const ApiContext = ({ children }) => {
     const [genrsMovie, setGenrsMovie]=useState([]);
     const [pessoasTrending, setPessoasTreding]=useState([]);
     const [loading,setLoading ]=useState(false)
-    /* const [movieId, setMovieId]=useState([]); */
-    //const [upcoming, setUpcoming]=useState([]);
    
 
 
     useEffect(() => {
         function getIdioma(){
-            const idioma= localStorage.getItem(I18N_STORAGE_KEY);
+            const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
             if(idioma==="pt-PT"){
                 setSelectIdioma("PT")
             }

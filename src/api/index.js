@@ -8,7 +8,7 @@ const config = {
     },
   };
   const api = axios.create({
-    baseURL: "https://api.themoviedb.org/3",
+    baseURL: `${process.env.REACT_APP_APP_URL}`,
     https: config,
   });
 

@@ -3,8 +3,8 @@
 Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais. [https://muver.vercel.app/](https://muver.vercel.app/)
 
 
-<p align="center">
-    <img src="src/assets/img/muver.svg" width="25%">
+<p align="center" >
+    <img src="src/assets/img/muver.svg" style="margin:2%" width="25%">
 </p>
 
  <div align="center">

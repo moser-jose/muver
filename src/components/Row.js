@@ -1,5 +1,7 @@
 import { Star } from 'iconsax-react'
 import React from 'react'
+import { Link } from 'react-router-dom'
+var slugify = require('slugify')
 const Row = ({data,title, type}) => {
     return (
            <div className="populares">
@@ -13,13 +15,13 @@ const Row = ({data,title, type}) => {
                    <div className="filmeR" >
                     {
                         data && data.slice(0,7).map((item, key)=>{
-                                return <a className="actor-p" href={`${item.id}`} key={key} >
+                                return <Link className="actor-p" to={`${item.id}`} key={key} >
                                     <img  src={`https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
                                     <div className="info">
                                         <span>{item.name}</span>
                                         
                                     </div>   
-                                </a>
+                                </Link>
                         })
                     }
                     
@@ -27,7 +29,7 @@ const Row = ({data,title, type}) => {
                 <div className="filmeR" >
                 {
                     data && data.slice(0,7).map((item, key)=>{
-                            return <a href={`${item.id}`} key={key} >
+                            return <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} key={key} >
                                 <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                                 <div className="info">
                                     {
