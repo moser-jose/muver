@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from '../api'
+import { SlideDetalhe } from '../components/SlideDetalhe';
+import VideoModal from '../components/VideoModal';
 const I18N_STORAGE_KEY = 'i18nextLng';
 const Detalhe = () => {
     const params = useParams();
@@ -18,7 +20,8 @@ const Detalhe = () => {
     return (
         loading===true ? 
         <>
-            <p>{filme.title}</p>
+            
+            <SlideDetalhe data={filme} type="filme" />
         </>:
         <></>
     )

@@ -1,0 +1,115 @@
+import React, { useState, useEffect } from 'react'
+import ReactPlayer from 'react-player/youtube'
+import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
+import { ArrowRight3, PlayCircle, Profile, Star } from 'iconsax-react';
+import { Slide } from 'react-slideshow-image';
+import OpenSource from './OpenSource';
+import Header from './Header';
+import VideoModal from './VideoModal';
+
+
+export const SlideDetalhe = ({data,type}) => {
+    const [modal, setModal]=useState(false);
+    const [url, setUrl]=useState("");
+    const {i18n}=useApiContext();
+    const Modal=(link)=>{
+        setModal(true);
+        setUrl(link);
+    }
+    /* useEffect(()=>{
+        
+    },[url]) */
+    console.log(url)
+    return (
+        <div className="film-slide">
+            {
+                modal===true && <VideoModal setModal={setModal} url={url}/>
+            }
+           <OpenSource/>
+           <Header/>
+           <div className="filme-ho" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${data.backdrop_path})`}}>
+                <div className="pr">
+                    <div className="cap">
+                        <img src={`https://image.tmdb.org/t/p/original${data.poster_path}`}/>
+                    </div>
+                    <div className="data">
+                        {
+                            type==="tv"?
+                                <>
+                                    <span className="media-type">
+                                    {i18n.t('home.tv')}
+                                    </span>
+                                    <p className="titulo">{data.name}</p>
+                                    <div className="media">
+                                    <h5 className="original">{data.original_name}</h5>
+                                        <span>
+                                            <Star size="24" color="#cccc32" variant="Bulk"/>
+                                            {data.vote_average}/10
+                                        </span>
+                                        <span>
+                                            <Profile size="24" color="#1a1a1a" variant="Bulk"/>
+                                            {data.vote_count}
+                                        </span>
+                                    </div>
+                                    <p className="texto">{data.overview}</p>
+                                    <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                    {i18n.t('home.ver_mais')}</a>
+
+                                </>: type==="filme" ?
+                                <>
+                                    <span className="media-type">{i18n.t('home.filme')}</span>
+                                    <p className="titulo">{data.title}</p>
+                                    <div className="media">
+                                        <h5 className="original">{data.original_title}</h5>
+                                        <span>
+                                            <Star size="24" color="#cccc32" variant="Bulk"/>
+                                            {data.vote_average}/10
+                                        </span>
+                                        <span>
+                                            
+                                            <Profile size="24" color="#1a1a1a" variant="Bulk"/>
+                                            {data.vote_count}
+                                        </span>
+                                        
+                                    </div>
+                                    <p className="texto">{data.overview}</p>
+                                    {data.genres.map((item, key)=>{
+                                        return <a key={key} href={`/filmes/genero/${item.id}`} className="ver gen">{item.name}</a>
+                                    })}
+                                    
+                                </>:<></>
+                        }
+                    </div>
+                </div>
+                <div className="img trailer">
+                    
+                    {
+                        data.videos.results.filter((el)=>{
+
+                            return el.type==="Trailer"
+                            
+                        }).slice(0,3).map(function (item, key) {
+                            return <div key={key} className="trail" /* style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${data.backdrop_path})`}} */>
+                                {/* <PlayCircle size="58" color="#ee344c" variant="Bulk"/> */}
+                                <ReactPlayer
+                                    width="100%" 
+                                    height="100%" 
+                                    url={`https://www.youtube.com/watch?v=${item.key}`}
+                                    light={true}
+                                    playIcon={<></>}
+                                  />
+                                <div className="v-c" title={item.type+ " - "+item.name}>
+                                    <div className="pla" onClick={()=>Modal(item.key)}>
+                                        <PlayCircle onClick={()=>Modal(item.key)} size="38" color="#fff" variant="Bulk"/>
+                                    </div>
+                                </div>
+                            </div>
+                        })
+                    }
+                    
+                    
+                </div>
+            </div>
+        </div>            
+    )
+}

@@ -3,6 +3,9 @@ import { useApiContext, useVideoContext } from '../contexts/ApiContext';
 import { ArrowLeft3, ArrowRight3, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
 import Trailers from './Trailers';
+import OpenSource from './OpenSource';
+import VideoModal from './VideoModal';
+import slugify from 'slugify';
 
 const properties = {
     indicators: true,
@@ -28,10 +31,8 @@ export const SlideHeader = ({data,type}) => {
     },[data])
     return (
         <div>
-            <div className="open">
-                <span className="pro">{i18n.t('header.projecto')} 👨🏽‍💻</span>
-                <a title={i18n.t('header.github')} target="_blank" href="https://github.com/moser-jose/muver"><span className="iconspeck speck-github"></span></a>
-            </div>
+            
+            <OpenSource/>
             <Slide easing="ease" {...properties}>
             {
                 list && list.slice(0,5).map((item,k) => (
@@ -88,7 +89,7 @@ export const SlideHeader = ({data,type}) => {
                                                 
                                             </div>
                                             <p className="texto">{item.overview}</p>
-                                            <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                            <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
                                         </>
                                 }
