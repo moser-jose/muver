@@ -8,7 +8,7 @@ import Header from './Header';
 import VideoModal from './VideoModal';
 
 
-export const SlideDetalhe = ({data,type}) => {
+export const SlideDetalhe = ({data,type,certificacao}) => {
     const [modal, setModal]=useState(false);
     const [url, setUrl]=useState("");
     const {i18n}=useApiContext();
@@ -16,10 +16,6 @@ export const SlideDetalhe = ({data,type}) => {
         setModal(true);
         setUrl(link);
     }
-    /* useEffect(()=>{
-        
-    },[url]) */
-    console.log(url)
     return (
         <div className="film-slide">
             {
@@ -60,7 +56,10 @@ export const SlideDetalhe = ({data,type}) => {
                                     <span className="media-type">{i18n.t('home.filme')}</span>
                                     <p className="titulo">{data.title}</p>
                                     <div className="media">
-                                        <h5 className="original">{data.original_title}</h5>
+                                        <div className="tit">
+                                            <span>{certificacao.certification}</span>
+                                            <h5 className="original">{data.original_title}</h5>
+                                        </div>
                                         <span>
                                             <Star size="24" color="#cccc32" variant="Bulk"/>
                                             {data.vote_average}/10

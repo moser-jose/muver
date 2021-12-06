@@ -306,11 +306,27 @@ body{
         display: flex;
         align-items: center;
         gap: 50px;
-        
-        h5{
-            color: #ee344c;
-            font-size: 20px;
+        .tit{
+            display: flex;
+            align-items: center;
+            span{
+                margin-right: 10px;
+                border: 1px solid #fff;
+                padding: 0 14px;
+                font-size: 14px;
+                border-radius: 2px;
+                height: 22px;
+                font-weight: 500;
+            }
+            h5{
+                color: #ee344c;
+                font-size: 20px;
+                
+                
+            }
         }
+        
+        
         span{
             display: flex;
             align-items: center;

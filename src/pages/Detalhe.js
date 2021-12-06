@@ -1,18 +1,188 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from '../api'
 import { SlideDetalhe } from '../components/SlideDetalhe';
-import VideoModal from '../components/VideoModal';
-const I18N_STORAGE_KEY = 'i18nextLng';
+const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Detalhe = () => {
     const params = useParams();
     const [filme, setFilme]=useState([]);
+    const [certificacao, setCertificacao]=useState([]);
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
-        const idioma= localStorage.getItem(I18N_STORAGE_KEY);
         async function getFilmes() {
-            const f= await axios.get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&append_to_response=videos,images,reviews,credits,similar`);
-            setFilme(f.data)
+            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&append_to_response=videos,images,reviews,credits,similar`);
+            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}`);
+            setFilme(f.data);
+            cert.data.results.filter((item)=>{
+                if(idioma==="pt-PT")
+                {
+                    if(item.iso_3166_1==="PT"){
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.type === 3 && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X")
+                            {setCertificacao(el)}
+                            else{
+                                item.release_dates.filter((el)=>{
+                                    if(el.type === 3 
+                                        && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X"                                        
+                                         )
+                                    setCertificacao(el)
+                                    console.log(el)
+                                })
+                            }
+                        })
+                    }
+                    else{
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.certification!==""
+                            && el.certification!=="M18"
+                            && el.certification!=="18+"
+                            && el.certification!=="M/18"
+                            && el.certification!=="K-18"
+                            && el.certification!=="R18+"
+                            && el.certification!=="X18+"
+                            && el.certification!=="18"
+                            && el.certification!=="18SX"
+                            && el.certification!=="R-18"
+                            && el.certification!=="N-18"
+                            && el.certification!=="X")
+                            setCertificacao(el)
+                        })
+                    }
+                }
+                else if(idioma==="en-US"){
+                    if(item.iso_3166_1==="US"){
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.type === 3 && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X")
+                            {setCertificacao(el)}
+                            else{
+                                item.release_dates.filter((el)=>{
+                                    if(el.type === 3 
+                                        && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X"                                        
+                                         )
+                                    setCertificacao(el)
+                                    console.log(el)
+                                })
+                            }
+                        })
+                    }
+                    else{
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.certification!==""
+                            && el.certification!=="M18"
+                            && el.certification!=="18+"
+                            && el.certification!=="M/18"
+                            && el.certification!=="K-18"
+                            && el.certification!=="R18+"
+                            && el.certification!=="X18+"
+                            && el.certification!=="18"
+                            && el.certification!=="18SX"
+                            && el.certification!=="R-18"
+                            && el.certification!=="N-18"
+                            && el.certification!=="X")
+                            setCertificacao(el)
+                        })
+                    }
+                }
+                else if(idioma==="fr-FR"){
+                    if(item.iso_3166_1==="FR"){
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.type === 3 && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X")
+                            {setCertificacao(el)}
+                            else{
+                                item.release_dates.filter((el)=>{
+                                    if(el.type === 3 
+                                        && el.certification!==""
+                                        && el.certification!=="M18"
+                                        && el.certification!=="18+"
+                                        && el.certification!=="M/18"
+                                        && el.certification!=="K-18"
+                                        && el.certification!=="R18+"
+                                        && el.certification!=="X18+"
+                                        && el.certification!=="18"
+                                        && el.certification!=="18SX"
+                                        && el.certification!=="R-18"
+                                        && el.certification!=="N-18"
+                                        && el.certification!=="X"                                        
+                                         )
+                                    setCertificacao(el)
+                                })
+                            }
+                        })
+                    }
+                    else{
+                        item.release_dates.slice(0,1).filter((el)=>{
+                            if(el.certification!==""
+                            && el.certification!=="M18"
+                            && el.certification!=="18+"
+                            && el.certification!=="M/18"
+                            && el.certification!=="K-18"
+                            && el.certification!=="R18+"
+                            && el.certification!=="X18+"
+                            && el.certification!=="18"
+                            && el.certification!=="18SX"
+                            && el.certification!=="R-18"
+                            && el.certification!=="N-18"
+                            && el.certification!=="X")
+                            setCertificacao(el)
+                        })
+                    }
+                }
+            })
             setLoading(true);
         }
         getFilmes()
@@ -20,8 +190,7 @@ const Detalhe = () => {
     return (
         loading===true ? 
         <>
-            
-            <SlideDetalhe data={filme} type="filme" />
+            <SlideDetalhe certificacao={certificacao} data={filme} type="filme" />
         </>:
         <></>
     )

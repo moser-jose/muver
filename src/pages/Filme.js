@@ -12,7 +12,6 @@ const Filme = () => {
     return (
         loading===true ?
             <>
-                
                 <div className="container">
                     <div className="home">
                         <Header/>
