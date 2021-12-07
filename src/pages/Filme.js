@@ -1,4 +1,5 @@
 import React from 'react'
+import { Genrs } from '../components/Genrs';
 import Header from '../components/Header'
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
@@ -6,7 +7,7 @@ import VideoModal from '../components/VideoModal';
 import { useApiContext } from '../contexts/ApiContext';
 
 const Filme = () => {
-    const{tendencias,filmesdiscover,tvDiscover,pessoasTrending,loading}=useApiContext();
+    const{genrsMovie,tendencias,filmesdiscover,tvDiscover,pessoasTrending,loading}=useApiContext();
     
    
     return (
@@ -16,10 +17,15 @@ const Filme = () => {
                     <div className="home">
                         <Header/>
                         <SlideHeader type="filme" data={filmesdiscover}/>   
-                        <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
-                        {/* 
-                        <Row type="tv" title="As Séries mais populares" data={tvDiscover}/>
-                        <Row type="actor" title="Os Actores mais populares" data={pessoasTrending}/> */}
+                        <div className="all-gen">
+                            <div className="gen-row">
+                                <div className="ge">
+                                    {/* <p>Géneros</p> */}
+                                    <Genrs data={genrsMovie}/>
+                                </div>
+                                <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </>:

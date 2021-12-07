@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
-import { ArrowRight3, PlayCircle, Profile, Star } from 'iconsax-react';
+import { ArrowRight3, Calendar, Crown, Flash, Hex, PlayCircle, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
 import OpenSource from './OpenSource';
 import Header from './Header';
@@ -10,12 +10,32 @@ import VideoModal from './VideoModal';
 
 export const SlideDetalhe = ({data,type,certificacao}) => {
     const [modal, setModal]=useState(false);
+    const [productor, setProductor]=useState([]);
+    const [director, setDirector]=useState([]);
+    const [writer, setWriter]=useState([]);
     const [url, setUrl]=useState("");
     const {i18n}=useApiContext();
     const Modal=(link)=>{
         setModal(true);
         setUrl(link);
     }
+
+    useEffect(()=>{
+
+        const filterProd=data.credits.crew.find(function (el) {
+            return el.job =="Producer";
+        });
+        const filterDirect=data.credits.crew.find(function (el) {
+            return el.job =="Director";
+        });
+        const filterWriter=data.credits.crew.find(function (el) {
+            return el.job =="Writer";
+        });
+
+        setProductor(filterProd)
+        setDirector(filterDirect)
+        setWriter(filterWriter)
+    },[])
     return (
         <div className="film-slide">
             {
@@ -53,7 +73,10 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
 
                                 </>: type==="filme" ?
                                 <>
-                                    <span className="media-type">{i18n.t('home.filme')}</span>
+                                    <div className="mediaT">
+                                        <span className="media-type">{i18n.t('home.filme')}</span>
+                                        <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {data.release_date}</span>
+                                    </div>
                                     <p className="titulo">{data.title}</p>
                                     <div className="media">
                                         <div className="tit">
@@ -75,6 +98,33 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     {data.genres.map((item, key)=>{
                                         return <a key={key} href={`/filmes/genero/${item.id}`} className="ver gen">{item.name}</a>
                                     })}
+
+                                    <div className="eq">
+
+                                        {
+                                            director &&
+                                            <div className="eq-p">
+                                                <h4>{director.original_name}</h4>
+                                                <h6>{director.job}<Crown size="16" color="#fff" variant="Bulk"/></h6>
+                                            </div>
+                                        }
+                                        
+                                        {
+                                            productor &&
+                                            <div className="eq-p">
+                                                <h4>{productor.original_name}</h4>
+                                                <h6>{productor.job} <Flash size="16" color="#fff" variant="Bulk"/></h6>
+                                            </div>
+                                        }
+                                        {
+                                            writer &&
+                                            <div className="eq-p">
+                                                <h4>{writer.original_name}</h4>
+                                                <h6>{writer.job}<Hex size="16" color="#fff" variant="Bulk"/></h6>
+                                            </div>
+                                        }
+
+                                    </div>
                                     
                                 </>:<></>
                         }
@@ -88,8 +138,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                             return el.type==="Trailer"
                             
                         }).slice(0,3).map(function (item, key) {
-                            return <div key={key} className="trail" /* style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${data.backdrop_path})`}} */>
-                                {/* <PlayCircle size="58" color="#ee344c" variant="Bulk"/> */}
+                            return <div key={key} className="trail">
                                 <ReactPlayer
                                     width="100%" 
                                     height="100%" 
@@ -97,7 +146,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     light={true}
                                     playIcon={<></>}
                                   />
-                                <div className="v-c" title={item.type+ " - "+item.name}>
+                                <div className="v-c" onClick={()=>Modal(item.key)} title={item.type+ " - "+item.name}>
                                     <div className="pla" onClick={()=>Modal(item.key)}>
                                         <PlayCircle onClick={()=>Modal(item.key)} size="38" color="#fff" variant="Bulk"/>
                                     </div>

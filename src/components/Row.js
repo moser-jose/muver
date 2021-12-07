@@ -28,7 +28,7 @@ const Row = ({data,title, type}) => {
                 </div>:
                 <div className="filmeR" >
                 {
-                    data && data.slice(0,7).map((item, key)=>{
+                    data && data.slice(0,6).map((item, key)=>{
                             return <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} key={key} >
                                 <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                                 <div className="info">

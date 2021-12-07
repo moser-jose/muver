@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from '../api'
+import Actor from '../components/Actor';
 import { SlideDetalhe } from '../components/SlideDetalhe';
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Detalhe = () => {
@@ -10,8 +11,18 @@ const Detalhe = () => {
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
         async function getFilmes() {
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&append_to_response=videos,images,reviews,credits,similar`);
-            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}`);
+            let id="pt"
+            if(idioma==="en-US"){
+                id="en"
+            }
+            else if(idioma==="fr-FR"){
+                id="fr"
+            }
+            else{
+                id="pt"
+            }
+            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar&include_image_language=null,${id}`);
+            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false`);
             setFilme(f.data);
             cert.data.results.filter((item)=>{
                 if(idioma==="pt-PT")
@@ -48,7 +59,6 @@ const Detalhe = () => {
                                         && el.certification!=="X"                                        
                                          )
                                     setCertificacao(el)
-                                    console.log(el)
                                 })
                             }
                         })
@@ -104,7 +114,6 @@ const Detalhe = () => {
                                         && el.certification!=="X"                                        
                                          )
                                     setCertificacao(el)
-                                    console.log(el)
                                 })
                             }
                         })
@@ -186,11 +195,13 @@ const Detalhe = () => {
             setLoading(true);
         }
         getFilmes()
-    },[])
+    },[]) 
     return (
         loading===true ? 
         <>
             <SlideDetalhe certificacao={certificacao} data={filme} type="filme" />
+            <Actor data={filme.credits} titulo="Actores" type="actores"/>
+            <Actor data={filme.credits} titulo="Equipe técnica" type="equipe"/>
         </>:
         <></>
     )

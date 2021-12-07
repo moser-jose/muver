@@ -18,7 +18,7 @@ Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um s
 
 <p align="center">
     <img src="src/assets/img/home.png">
-
+<img src="src/assets/img/home-filme.png">
 </p>
 
 ## Configurações
