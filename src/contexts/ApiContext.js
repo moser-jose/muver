@@ -12,8 +12,8 @@ export const ApiContext = ({ children }) => {
     const [genrsMovie, setGenrsMovie]=useState([]);
     const [pessoasTrending, setPessoasTreding]=useState([]);
     const [loading,setLoading ]=useState(false)
-   
-
+    const [modal, setModal]=useState(false);
+    const [url, setUrl]=useState("");
 
     useEffect(() => {
         function getIdioma(){
@@ -58,7 +58,7 @@ export const ApiContext = ({ children }) => {
     
     return (
         <StateContext.Provider
-            value={{ i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
+            value={{url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
             {children}
         </StateContext.Provider>
     );

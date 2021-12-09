@@ -35,7 +35,6 @@ const Detalhe = () => {
                const col= await axios.get(`${process.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
                 setColection(col)
             }
-
             cert.data.results.filter((item)=>{
                 if(idioma==="pt-PT")
                 {
@@ -208,7 +207,6 @@ const Detalhe = () => {
         }
         getFilmes()
     },[]) 
-    console.log(filme)
     return (
         loading===true ? 
         <>
@@ -217,11 +215,9 @@ const Detalhe = () => {
             <Actor data={filme.credits} titulo="Equipe técnica" type="equipe"/>
             {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
-            }
-
+            }            
+            <Galery vid={filme.videos} data={filme.images}/>
             <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
-            <Galery/>
-            <Images data={filme.images.backdrops}/>
         </>:
         <></>
     )

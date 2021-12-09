@@ -1,11 +1,18 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
+import { useApiContext } from '../contexts/ApiContext'
 
-const VideoModal = ({url,setModal}) => {
+const VideoModal = (/* {url,setModal} */) => {
+    const {setModal,setUrl, url}=useApiContext();
+
+    const closeModal=()=>{
+        setModal(false);
+        setUrl("");
+    }
     return (
         <div className="modal">
             <div className="corpo">
-                <span className="close" onClick={()=>setModal(false)}>+</span>
+                <span className="close" onClick={closeModal}>+</span>
                 
                 <ReactPlayer
                     className="video"

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import Images from './Images';
+import Videos from './Videos';
 
-const Galery = () => {
+const Galery = ({data, vid}) => {
+    console.log(vid)
     const [imagens, setImagens]=useState(true);
     const [posters, setPosters]=useState(false);
     const [videos, setVideos]=useState(false);
@@ -34,6 +37,11 @@ const Galery = () => {
                         }></div>
                 </div>
             </div>
+            {
+                imagens===true ? <Images data={data.backdrops}/>:
+                posters===true ? <Images data={data.posters}/>:
+                videos===true && <Videos data={vid}/>
+            }
             
         </div>
     )

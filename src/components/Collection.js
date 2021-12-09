@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import {limita} from '../functions'
 var slugify = require('slugify')
 const Collection = ({data, colection, back, poster}) => {
 
@@ -16,7 +17,7 @@ const Collection = ({data, colection, back, poster}) => {
                             return <a key={key} className="fi" href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`}>{item.title}</a>
                         })
                     }
-                    <p>{colection.data.overview}</p>
+                    <p>{limita(colection.data.overview,300)}</p>
                     <a  className="ver" href="/">Ver colecção</a>
                 </div>
                 <img src={`https://image.tmdb.org/t/p/w300${data.poster_path===null ? poster:data.poster_path}`}/>

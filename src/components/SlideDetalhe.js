@@ -9,11 +9,10 @@ import VideoModal from './VideoModal';
 import {limita} from '../functions'
 
 export const SlideDetalhe = ({data,type,certificacao}) => {
-    const [modal, setModal]=useState(false);
+    const {setModal, setUrl}=useApiContext();
     const [productor, setProductor]=useState([]);
     const [director, setDirector]=useState([]);
     const [writer, setWriter]=useState([]);
-    const [url, setUrl]=useState("");
     const {i18n}=useApiContext();
     const Modal=(link)=>{
         setModal(true);
@@ -38,9 +37,6 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
     },[])
     return (
         <div className="film-slide">
-            {
-                modal===true && <VideoModal setModal={setModal} url={url}/>
-            }
            <OpenSource/>
            <Header/>
            <div className="filme-ho" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${data.backdrop_path})`}}>
