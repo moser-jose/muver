@@ -1,4 +1,5 @@
 import React from 'react'
+import Galery from '../components/Galery';
 import { Genrs } from '../components/Genrs';
 import Header from '../components/Header'
 import Row from '../components/Row';
@@ -24,6 +25,7 @@ const Filme = () => {
                                     <Genrs data={genrsMovie}/>
                                 </div>
                                 <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
+                                
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
-import { ArrowRight3, Calendar, Crown, Flash, Hex, PlayCircle, Profile, Star } from 'iconsax-react';
+import { ArrowRight3, Calendar, Crown, Flash, Hex, Play, PlayCircle, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
 import OpenSource from './OpenSource';
 import Header from './Header';
 import VideoModal from './VideoModal';
-
+import {limita} from '../functions'
 
 export const SlideDetalhe = ({data,type,certificacao}) => {
     const [modal, setModal]=useState(false);
@@ -75,6 +75,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                 <>
                                     <div className="mediaT">
                                         <span className="media-type">{i18n.t('home.filme')}</span>
+                                        <span className="media-type-t"><Play size="16" color="#fff" variant="Bulk"/> {data.status}</span>
                                         <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {data.release_date}</span>
                                     </div>
                                     <p className="titulo">{data.title}</p>
@@ -94,7 +95,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                         </span>
                                         
                                     </div>
-                                    <p className="texto">{data.overview}</p>
+                                    <p className="texto">{limita(data.overview,300)}</p>
                                     {data.genres.map((item, key)=>{
                                         return <a key={key} href={`/filmes/genero/${item.id}`} className="ver gen">{item.name}</a>
                                     })}

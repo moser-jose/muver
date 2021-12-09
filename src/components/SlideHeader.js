@@ -6,7 +6,7 @@ import Trailers from './Trailers';
 import OpenSource from './OpenSource';
 import VideoModal from './VideoModal';
 import slugify from 'slugify';
-
+import {limita} from '../functions'
 const properties = {
     indicators: true,
     arrows:false,
@@ -88,7 +88,7 @@ export const SlideHeader = ({data,type}) => {
                                                 </span>
                                                 
                                             </div>
-                                            <p className="texto">{item.overview}</p>
+                                            <p className="texto">{limita(item.overview,300)}</p>
                                             <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
                                         </>
