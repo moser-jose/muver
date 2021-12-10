@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 var slugify = require('slugify')
 const Row = ({data,title, type}) => {
+    console.log("filmes",data)
     return (
            <div className="populares">
                <div className="mais">

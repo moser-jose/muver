@@ -38,11 +38,10 @@ const Filme = () => {
             return id
         }
         async function Breve(){
-            const film=await axios.get(`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&region=${getIdioma()}`)
-            var end=film.data.dates.maximum
+            const film=await axios.get(`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&page=1&region=${getIdioma()}`)
+            var end=film.data.dates.maximum;  
             var resultProductData = film.data.results.filter(a => {
-            var date = a.release_date;
-                return (date >= getData() && date <= end);
+                return a.release_date >= getData()  && a.release_date <= end;
             });
             setfilmBrev(resultProductData);
         }
@@ -59,7 +58,6 @@ const Filme = () => {
                         <div className="all-gen">
                             <div className="gen-row">
                                 <div className="ge">
-                                    {/* <p>Géneros</p> */}
                                     <Genrs data={genrsMovie}/>
                                 </div>
                                 <div className="direito">

@@ -5,6 +5,7 @@ import Actor from '../components/Actor';
 import Collection from '../components/Collection';
 import Galery from '../components/Galery';
 import Images from '../components/Images';
+import Keywords from '../components/Keywords';
 import Row from '../components/Row';
 import Similar from '../components/Similar';
 import { SlideDetalhe } from '../components/SlideDetalhe';
@@ -213,10 +214,13 @@ const Detalhe = () => {
             <SlideDetalhe certificacao={certificacao} data={filme} type="filme" />
             <Actor data={filme.credits} titulo="Actores" type="actores"/>
             <Actor data={filme.credits} titulo="Equipe técnica" type="equipe"/>
+            
+            <Keywords lang={filme.production_countries} companies={filme.production_companies} poster={filme.poster_path} back={filme.backdrop_path} data={filme.keywords}/>
+             
+            <Galery vid={filme.videos} data={filme.images}/>
             {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
-            }            
-            <Galery vid={filme.videos} data={filme.images}/>
+            } 
             <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
         </>:
         <></>

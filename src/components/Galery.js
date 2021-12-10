@@ -27,9 +27,16 @@ const Galery = ({data, vid}) => {
             <div className="gal">
                 <p className="titulo">Galeria</p>
                 <div className="nav-home">
-                    <span onClick={handleImagens}>Imagens</span>
-                    <span onClick={handlePosters}>Posters</span>
-                    <span onClick={handleVideos}>Videos</span>
+                    {
+                        data.backdrops.length!==0 && <span onClick={handleImagens}>Imagens</span>
+                    }
+                    {
+                        data.posters.length!==0 && <span onClick={handlePosters}>Posters</span>
+                    }
+                    {
+                        vid.results.length!==0 && <span onClick={handleVideos}>Videos</span>
+                    }
+                    
                     <div  className={
                             imagens === true ? 'animacao s-imagens' :
                                 posters === true ? 'animacao s-posters':
