@@ -7,25 +7,14 @@ const Row = ({data,title, type}) => {
            <div className="populares">
                <div className="mais">
                <p>{title}</p>
-               <a href="/">Ver mais</a>
-               </div>
 
                {
-                   type === "actor" ?
-                   <div className="filmeR" >
-                    {
-                        data && data.slice(0,7).map((item, key)=>{
-                                return <Link className="actor-p" to={`${item.id}`} key={key} >
-                                    <img  src={`https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
-                                    <div className="info">
-                                        <span>{item.name}</span>
-                                        
-                                    </div>   
-                                </Link>
-                        })
-                    }
-                    
-                </div>:
+                   data && data.length > 6 && <a href="/">Ver mais</a>
+               }
+
+               </div>
+
+               
                 <div className="filmeR" >
                 {
                     data && data.slice(0,6).map((item, key)=>{
@@ -46,7 +35,7 @@ const Row = ({data,title, type}) => {
                 }
                 
                 </div>
-               }
+               
                 
            </div>
             

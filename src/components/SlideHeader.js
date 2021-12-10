@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
-import { ArrowLeft3, ArrowRight3, Profile, Star } from 'iconsax-react';
+import { ArrowLeft3, ArrowRight3, Calendar, Play, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
 import Trailers from './Trailers';
 import OpenSource from './OpenSource';
@@ -68,11 +68,19 @@ export const SlideHeader = ({data,type}) => {
 
                                         </>:
                                         <>
-                                            <span className="media-type">{
+
+                                    <div className="mediaT">
+                                        <span className="media-type">{
                                             item.media_type  ?
                                             item.media_type:
                                             i18n.t('home.filme')
                                             }</span>
+                                        <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {item.release_date}</span>
+                                    </div>
+
+
+
+
                                             <p className="titulo">{item.title}</p>
                                             
                                             <div className="media">

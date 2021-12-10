@@ -14,7 +14,8 @@ export const ApiContext = ({ children }) => {
     const [loading,setLoading ]=useState(false)
     const [modal, setModal]=useState(false);
     const [url, setUrl]=useState("");
-
+    const [filmesTendencias, setfilmesTendencias]=useState([]);
+    const [filmesBrevemente, setfilmesBrevemente]=useState([]);
     useEffect(() => {
         function getIdioma(){
             const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
@@ -38,13 +39,15 @@ export const ApiContext = ({ children }) => {
             const tv= await axios.get(url.tvDiscover);
             const gM= await axios.get(url.generosFilmes);
             const pt= await axios.get(url.pessoasTrending);
-            //const up= await axios.get(url.filmesBrevemente);
+            const ftendenci= await axios.get(url.filmesTendencias);
+            const breve= await axios.get(url.filmesBrevemente);
+            setfilmesBrevemente(breve);
             setTendencias(t.data.results);
             setFilmesDiscover(d.data.results);
             setTvDiscover(tv.data.results);
             setGenrsMovie(gM.data.genres);
             setPessoasTreding(pt.data.results);
-            /* setUpcoming(up.data.results); */
+            setfilmesTendencias(ftendenci.data.results);
             setLoading(true);
         }
         
@@ -58,7 +61,7 @@ export const ApiContext = ({ children }) => {
     
     return (
         <StateContext.Provider
-            value={{url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
+            value={{filmesBrevemente,filmesTendencias,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
             {children}
         </StateContext.Provider>
     );
