@@ -11,7 +11,7 @@ const Keywords = ({data, back,lang, companies}) => {
                 <div className="colect">
                     <h2>Palavras Chave</h2>
                         {
-                            data.keywords.map((item, key)=>{
+                            data.keywords.slice(0,18).map((item, key)=>{
                                 return <a key={key} className="fi" href={`/keywords/${item.id}`}>{item.name}</a>
                             })
                         }

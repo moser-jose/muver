@@ -1311,6 +1311,82 @@ div[dir="ltr"] {
         }
     }
 }
+
+.simi{
+
+    margin:  0 auto;
+    width: 90%;
+    .reviews{
+        margin: 30px 0;
+        .titulo{
+            margin: 20px 0;
+            p{
+                font-size: 1.6rem;
+            }
+        }
+        .rev{
+            
+            background-color: #ffffff10;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            gap: 20px;
+            margin-top: 20px;
+            .img{
+                    height: 80px;
+                    width: 80px;
+                img{
+                    height: 80px;
+                    width: 80px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            .re{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                div{
+                    
+                
+                    p{
+                        max-width: 890px;
+                        a{
+                            color: #9f9999ba;
+                        }
+                    }
+                    h3,h5,p{
+                        font-family: "Rubik";
+                        span{
+                            color: #ee344c;
+                        }
+                    }
+                    h3{
+
+                    }
+                    h5{
+                        font-size: 12px;
+                        font-weight: 300;
+                        margin: -3px 0 10px;
+                        span{
+                            font-weight: 600;
+                        }
+                        
+                    }
+                    
+                }
+            }
+            .star{
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-weight: 500;
+            }
+        }
+    }
+}
 //Responsible
 
 @media only screen and (min-width: 1461px) and (max-width: 1600px){

@@ -6,6 +6,7 @@ import Collection from '../components/Collection';
 import Galery from '../components/Galery';
 import Images from '../components/Images';
 import Keywords from '../components/Keywords';
+import Reviews from '../components/Reviews';
 import Row from '../components/Row';
 import Similar from '../components/Similar';
 import { SlideDetalhe } from '../components/SlideDetalhe';
@@ -221,7 +222,12 @@ const Detalhe = () => {
             {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
-            <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
+            <div className="simi">
+                <Reviews data={filme.reviews.results}  />
+                <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
+            </div>
+            
+
         </>:
         <></>
     )
