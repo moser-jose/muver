@@ -16,6 +16,7 @@ const Detalhe = () => {
     const [filme, setFilme]=useState([]);
     const [certificacao, setCertificacao]=useState([]);
     const [colection, setColection]=useState([]);
+    const [recomendation, setRecomendation]=useState([]);
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
         async function getFilmes() {
@@ -30,9 +31,11 @@ const Detalhe = () => {
                 id="pt"
             }
             const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
-            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false`);
-            setFilme(f.data);
+            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
+            const recomend= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
             
+            setFilme(f.data);
+            setRecomendation(recomend);
             if(f.data.belongs_to_collection!==null){
                const col= await axios.get(`${process.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
                 setColection(col)
@@ -223,8 +226,9 @@ const Detalhe = () => {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
             <div className="simi">
-                <Reviews data={filme.reviews.results}  />
                 <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
+                <Reviews data={filme.reviews.results}  />
+                <Similar data={recomendation.data.results} type="filme" title="Os Filmes Recomendados"/>
             </div>
             
 

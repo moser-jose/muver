@@ -1,7 +1,9 @@
 import React from 'react'
 import Act from '../assets/img/profile.jpg'
+import { useParams } from 'react-router-dom';
 const Actor = ({data, titulo, type, act}) => {
-    console.log(data)
+    const params = useParams();
+    console.log(params.id)
     return (
         <div className={`actores ${act===true && 'act-f'}`}>
             {
@@ -10,7 +12,7 @@ const Actor = ({data, titulo, type, act}) => {
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
                         {
-                            type==="actores" && data.length > 8 && <a href="/">Ver mais</a>
+                            type==="actores" && data.length > 8 && <a href={`${params.id}/autores`}>Ver mais</a>
                            
                         }
                     </div>
@@ -35,8 +37,8 @@ const Actor = ({data, titulo, type, act}) => {
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
                         {
-                            type==="actores" ? data.cast.length > 9 && <a href="/">Ver mais</a>:
-                            type==="equipe" && data.crew.length > 9 && <a href="/">Ver mais</a>
+                            type==="actores" ? data.cast.length > 9 && <a href={`${params.id}/autores`}>Ver mais</a>:
+                            type==="equipe" && data.crew.length > 9 && <a href={`${params.id}/autores`}>Ver mais</a>
                         }
                     </div>
                     <div className="all-act">

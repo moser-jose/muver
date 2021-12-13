@@ -14,6 +14,9 @@ const Reviews = ({data}) => {
         data.length!==0 ? <div className="reviews">
         <div className="titulo">
             <p>Avaliações</p>
+            {
+                data && data.length > 6 && <a href="/">Ver mais</a>
+            }
         </div>
         {
             data.slice(0,6).map((item, key)=>{

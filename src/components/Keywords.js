@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Keywords = ({data, back,lang, companies}) => {
-    console.log(companies)
     return (
         <div className="colecao" 
         style={{'background': 
@@ -28,7 +27,7 @@ const Keywords = ({data, back,lang, companies}) => {
                 <div className="colect">
                         <div className="img-k">
                             {
-                                companies.map((item, key)=>{
+                                companies.slice(0,6).map((item, key)=>{
                                     return item.logo_path && <img key={key} src={`https://image.tmdb.org/t/p/original${item.logo_path}`}/>
                                 })
                             }

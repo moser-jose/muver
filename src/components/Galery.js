@@ -3,7 +3,6 @@ import Images from './Images';
 import Videos from './Videos';
 
 const Galery = ({data, vid}) => {
-    console.log(vid)
     const [imagens, setImagens]=useState(true);
     const [posters, setPosters]=useState(false);
     const [videos, setVideos]=useState(false);

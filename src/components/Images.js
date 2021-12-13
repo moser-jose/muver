@@ -22,7 +22,6 @@ const Images = ({data}) => {
             'image':`https://image.tmdb.org/t/p/w780/${item.file_path}`
         })
     ))
-    console.log(list)
     return (
         <div className="imagens">
 			{
