@@ -11,7 +11,6 @@ const Similar = ({data,title, type}) => {
                <p>{title}</p>
                {
                    type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/similares`}>Ver mais</Link>
-                   /* "/filme/:slug/:id/similares?page=:page" */
                }
                
                </div>
