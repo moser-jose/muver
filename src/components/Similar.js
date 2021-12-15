@@ -1,14 +1,19 @@
 import React from 'react'
 import { Star } from 'iconsax-react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 var slugify = require('slugify')
 
 const Similar = ({data,title, type}) => {
+    const params = useParams();
     return (
         <div className="populares">
                <div className="mais">
                <p>{title}</p>
-               <a href="/">Ver mais</a>
+               {
+                   type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/similares`}>Ver mais</Link>
+                   /* "/filme/:slug/:id/similares?page=:page" */
+               }
+               
                </div>
 
                {

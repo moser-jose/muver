@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom'
 import AutoresDetalhes from './components/Dados/AutoresDetalhes'
+import SimilarDetalhes from './components/Dados/SimilarDetalhes'
 import Detalhe from './pages/Detalhe'
 import Filmes from './pages/Filme'
 import Home from './pages/Home'
@@ -14,6 +15,7 @@ const router = () => {
                 <Route path="/series" element={<Series/>} />
                 <Route path="/filme/:slug/:id" element={<Detalhe/>} />
                 <Route path="/filme/:slug/:id/autores" element={<AutoresDetalhes/>} />
+                <Route path="/filme/:slug/:id/similares" element={<SimilarDetalhes/>} />
 
                     {/* <Route path="privacidade" element={<Privacidade />} />
                     <Route path="termos" element={<Termos />} />
