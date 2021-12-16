@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
-import { ArrowLeft3, ArrowRight3, Calendar, Play, Profile, Star } from 'iconsax-react';
+import { useApiContext } from '../contexts/ApiContext'; 
+import { ArrowRight3, Calendar, Profile, Star } from 'iconsax-react';
 import { Slide } from 'react-slideshow-image';
-import Trailers from './Trailers';
 import OpenSource from './OpenSource';
-import VideoModal from './VideoModal';
 import slugify from 'slugify';
 import {limita} from '../functions'
 const properties = {

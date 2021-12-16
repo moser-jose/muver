@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player/youtube'
-import { useApiContext, useVideoContext } from '../contexts/ApiContext'; 
+import { useApiContext } from '../contexts/ApiContext'; 
 import { ArrowRight3, Calendar, Crown, Flash, Hex, Play, PlayCircle, Profile, Star } from 'iconsax-react';
-import { Slide } from 'react-slideshow-image';
 import OpenSource from './OpenSource';
 import Header from './Header';
-import VideoModal from './VideoModal';
 import {limita} from '../functions'
 
 export const SlideDetalhe = ({data,type,certificacao}) => {

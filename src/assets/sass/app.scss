@@ -1119,6 +1119,9 @@ div[dir="ltr"] {
 .actores{
     width: 90%;
     margin: 0 auto;
+    a{
+        text-decoration: none;
+    }
     .mais{
         display: flex;
         align-items: center;

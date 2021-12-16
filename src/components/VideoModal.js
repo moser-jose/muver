@@ -2,7 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import { useApiContext } from '../contexts/ApiContext'
 
-const VideoModal = (/* {url,setModal} */) => {
+const VideoModal = () => {
     const {setModal,setUrl, url}=useApiContext();
 
     const closeModal=()=>{

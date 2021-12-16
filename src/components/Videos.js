@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { PlayCircle } from 'iconsax-react'
 import ReactPlayer from 'react-player'
-import VideoModal from './VideoModal';
 import { useApiContext } from '../contexts/ApiContext';
 
 const Videos = ({data}) => {

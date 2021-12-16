@@ -42,7 +42,6 @@ const Filme = () => {
                                     <Row type="filme" title="Tendências" data={filmesTendencias}/>
                                     <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
                                     <Row type="filme" title="Filmes a estrear em breve" data={filmBrev}/>
-                                    
                                 </div>
                             </div>
                         </div>
