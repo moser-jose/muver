@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from '../api'
+import {getIdioma} from '../functions'
 import Actor from '../components/Actor';
 import Collection from '../components/Collection';
 import Galery from '../components/Galery';
-import Images from '../components/Images';
 import Keywords from '../components/Keywords';
 import Reviews from '../components/Reviews';
-import Row from '../components/Row';
-import Similar from '../components/Similar';
 import { SlideDetalhe } from '../components/SlideDetalhe';
+import Type from '../components/Type';
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Detalhe = () => {
     const params = useParams();
@@ -20,24 +19,13 @@ const Detalhe = () => {
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
         async function getFilmes() {
-            let id="pt"
-            if(idioma==="en-US"){
-                id="en"
-            }
-            else if(idioma==="fr-FR"){
-                id="fr"
-            }
-            else{
-                id="pt"
-            }
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
             const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
             const recomend= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
-            
             setFilme(f.data);
             setRecomendation(recomend);
             if(f.data.belongs_to_collection!==null){
-               const col= await axios.get(`${process.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+               const col= await axios.get(`${process.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
                 setColection(col)
             }
             cert.data.results.filter((item)=>{
@@ -226,9 +214,9 @@ const Detalhe = () => {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
             <div className="simi">
-                <Similar data={filme.similar.results} type="filme" title="Os Filmes similares"/>
+                <Type data={filme.similar.results} outher="similar" type="filme" title="Os Filmes similares"/>
                 <Reviews data={filme.reviews.results}  />
-                <Similar data={recomendation.data.results} type="filme" title="Os Filmes Recomendados"/>
+                <Type data={recomendation.data.results} outher="recomendations" type="filme" title="Os Filmes Recomendados"/>
             </div>
             
 

@@ -2,34 +2,30 @@ import { ArrowLeft2, ArrowRight2, Play, Star } from 'iconsax-react';
 import React,{useState,useEffect} from 'react'
 import ReactPaginate from 'react-paginate';
 import { useParams } from 'react-router-dom';
+import {getIdioma} from '../../functions'
 import slugify from 'slugify';
 import axios from '../../api'
 import Header from '../Header'
 import OpenSource from '../OpenSource'
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
-const SimilarDetalhes = () => {
+const TypeDetalhes = () => {
     const params = useParams();
     const [filme, setFilme]=useState([]);
-    const [similares, setSimilares]=useState([]);
+    const [data, setData]=useState([]);
     const [loading, setLoading]=useState(false);
     const [page, setPage]=useState(1);
-    params.toString();
     useEffect(()=>{
         async function getFilmes() {
-            let id="pt"
-            if(idioma==="en-US"){
-                id="en"
-            }
-            else if(idioma==="fr-FR"){
-                id="fr"
-            }
-            else{
-                id="pt"
-            }
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
-            const similares= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
+            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
             setFilme(f.data);
-            setSimilares(similares.data)
+            if(params.type==="similares"){
+                const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
+                setData(data.data)
+            }
+            else if(params.type==="recomendados"){
+                const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
+                setData(data.data)
+            }
             setLoading(true);
         }
         getFilmes()
@@ -52,7 +48,7 @@ const SimilarDetalhes = () => {
            <div className="pr">
                <div className="data">
                    <h2 className="title"><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
-                   <h2 className="_p">Filmes Similares</h2>
+                   <h2 className="_p">{params.type==="similares" ? "Filmes Similares" : params.type==="recomendados" && "Filmes Recomendados"}</h2>
                </div>
            </div>
        </div>
@@ -62,7 +58,7 @@ const SimilarDetalhes = () => {
                 </div>
                 <div className="filmeR simil" >
                 {
-                    similares.results.map((item, key)=>{
+                    data.results.map((item, key)=>{
                             return <a href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} key={key} >
                                 <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                                 <div className="info">
@@ -79,7 +75,7 @@ const SimilarDetalhes = () => {
                     nextLabel={<ArrowRight2 size="18" color="#fff" variant="Outline"/>}
                     breakLabel={"..."}
                     breakClassName={"break-me"}
-                    pageCount={500}
+                    pageCount={data.total_pages}
                     marginPagesDisplayed={2}
                     pageRangeDisplayed={5}
                     onPageChange={handlePageClick}
@@ -92,4 +88,4 @@ const SimilarDetalhes = () => {
     )
 }
 
-export default SimilarDetalhes
+export default TypeDetalhes

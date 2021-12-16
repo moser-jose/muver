@@ -3,15 +3,22 @@ import { Star } from 'iconsax-react'
 import { Link, useParams } from 'react-router-dom'
 var slugify = require('slugify')
 
-const Similar = ({data,title, type}) => {
+const Type = ({data,title, type, outher}) => {
     const params = useParams();
     return (
         <div className="populares">
                <div className="mais">
                <p>{title}</p>
-               {
+
+               {data.length > 7 && 
+               
+                   outher==="similar" &&
                    type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/similares`}>Ver mais</Link>
-               }
+                }
+                {data.length > 7 &&
+                   outher==="recomendations" &&
+                   type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/recomendados`}>Ver mais</Link>
+                }
                
                </div>
 
@@ -57,4 +64,4 @@ const Similar = ({data,title, type}) => {
     )
 }
 
-export default Similar
+export default Type

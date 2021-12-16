@@ -13,7 +13,7 @@ const Collection = ({data, colection, back, poster}) => {
                     <h2>{data.name}</h2>
                     <span>Inclui filmes como</span>
                     {
-                        colection.data.parts.map((item, key)=>{
+                        colection.data.parts.slice(0,10).map((item, key)=>{
                             return <a key={key} className="fi" href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`}>{item.title}</a>
                         })
                     }
