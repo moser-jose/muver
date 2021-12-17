@@ -1,10 +1,8 @@
 import React from 'react'
-import Act from '../assets/img/profile.jpg'
 import { useParams } from 'react-router-dom';
 import DataActor from './Dados/DataActor';
 const Actor = ({data, titulo, type, act}) => {
     const params = useParams();
-    console.log(params.id)
     return (
         <div className={`actores ${act===true && 'act-f'}`}>
             {

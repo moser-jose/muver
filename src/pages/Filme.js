@@ -10,12 +10,12 @@ import { useApiContext } from '../contexts/ApiContext';
 
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Filme = () => {
-    const{pessoasTrending,filmesTendencias,genrsMovie,filmesdiscover,loading}=useApiContext();
+    const{TopMovie,pessoasTrending,filmesTendencias,genrsMovie,filmesdiscover,loading}=useApiContext();
     const [filmBrev, setfilmBrev]=useState([]);
-   
     useEffect(()=>{
+        
         async function Breve(){
-            const film=await axios.get(`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&page=1&region=${getIdioma(idioma)}`)
+            const film=await axios.get(`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&page=1&region=${getIdioma(idioma)==='en'?'us':getIdioma(idioma)}`)
             var end=film.data.dates.maximum;  
             var resultProductData = film.data.results.filter(a => {
                 return a.release_date >= getData()  && a.release_date <= end;
@@ -41,7 +41,9 @@ const Filme = () => {
                                     <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
                                     <Row type="filme" title="Tendências" data={filmesTendencias}/>
                                     <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
+                                    <Row type="filme" title="Filmes com maior pontuação" data={TopMovie}/>
                                     <Row type="filme" title="Filmes a estrear em breve" data={filmBrev}/>
+                                    
                                 </div>
                             </div>
                         </div>

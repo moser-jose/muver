@@ -1,9 +1,9 @@
 import { Star } from 'iconsax-react'
 import React from 'react'
 import slugify from 'slugify'
-export const DataAll = ({item,key, type}) => {
+export const DataAll = ({item, type}) => {
     return (
-        <a href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} key={key} >
+        <a href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} >
             <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
             <div className="info">
                 {

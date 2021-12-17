@@ -1,3 +1,4 @@
+         
 const limita=(str,limite)=> {
     let nova="";
     for(let i=0;i<limite;i++) {
@@ -5,7 +6,7 @@ const limita=(str,limite)=> {
     }
     return nova;
 }
-const getIdioma=idioma=> {
+const getIdioma=(idioma)=> {
    let id="pt"
    if(idioma==="en-US"){
        id="en"

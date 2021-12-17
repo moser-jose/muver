@@ -2,9 +2,9 @@ import React from 'react'
 import slugify from 'slugify'
 import Act from '../../assets/img/profile.jpg'
 
-const DataActor = ({item, key, type}) => {
+const DataActor = ({item, type}) => {
     return (
-        <a href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="cast" key={key}>
+        <a href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="cast">
             {
                 item.profile_path===null?
                     <img src={Act}/>:
