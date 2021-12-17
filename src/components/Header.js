@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Moon, NotificationBing, Sun1 } from 'iconsax-react'
+import { Moon, NotificationBing, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
 import { SlideHeader } from './SlideHeader'
 import PT from '../assets/img/pt.png'
@@ -47,6 +47,9 @@ const Header = () => {
                         </ul>
                     </nav>
                 </div>
+                <div className='search' title='Pesquisar'>
+                    <SearchNormal  className='serc' size="22" color="#fff" variant="Bulk"/>
+                </div>
                 <div className="user">
                     <div className="theme">
                         <input type="checkbox" className="checkbox" id="chk" />
@@ -72,7 +75,7 @@ const Header = () => {
                         </div>
                         }
                     </div>
-                    <NotificationBing size="20" color="#ffffff" variant="Bulk"/>
+                    <NotificationBing size="22" color="#ffffff" variant="Bulk"/>
                     <div className="login">
                         <a href="/" >{i18n.t('header.login')}</a>
                     </div>
