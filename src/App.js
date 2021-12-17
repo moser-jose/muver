@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './assets/sass/app.scss';
+import Github from './components/Github';
 import Up from './components/Up';
 import VideoModal from './components/VideoModal';
 import { useApiContext } from './contexts/ApiContext';
@@ -22,7 +23,8 @@ function App() {
     <div className="App">
         {modal === true && <VideoModal/>}
       <Router/>
-      {scrollPosition > 70 && <Up/>}
+      {scrollPosition > 70 && <><Up/><Github/></>}
+      
     </div>
   );
 }

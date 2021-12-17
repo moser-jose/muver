@@ -38,7 +38,7 @@ const Filme = () => {
                                     <Genrs data={genrsMovie}/>
                                 </div>
                                 <div className="direito">
-                                    <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
+                                    <Row type="filme" title="Filmes mais populares" data={filmesdiscover}/>
                                     <Row type="filme" title="Tendências" data={filmesTendencias}/>
                                     <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
                                     <Row type="filme" title="Filmes com maior pontuação" data={TopMovie}/>

@@ -1618,6 +1618,55 @@ div[dir="ltr"] {
         cursor: pointer;
     }
 }
+.project-github{
+    background-color: #ffffff10;
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 30px 0 15px; 
+    margin: 40px 0 0;
+    
+    p{
+        font-family: "Rubik";
+        font-size: 17px;
+        letter-spacing: .5px;
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+        span{
+            background-color:#ee344c;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .mo{
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 300;
+            background-color: #000000e6;
+            padding: 4px 8px;
+            border-radius: 14px;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+            &:hover{
+                background-color: #00000088;
+            }
+        }
+    }
+    .dir{
+        margin-top: 20px;
+        font-size: 14px;
+        a{
+            color: #ee344c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
+}
 //Responsible
 
 @media only screen and (min-width: 1461px) and (max-width: 1600px){

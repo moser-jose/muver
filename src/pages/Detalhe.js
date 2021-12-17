@@ -214,9 +214,9 @@ const Detalhe = () => {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
             <div className="simi">
-                {filme.similar.results.length!==0 && <Type data={filme.similar.results} outher="similar" type="filme" title="Os Filmes similares"/>}
+                {filme.similar.results.length!==0 && <Type data={filme.similar.results} outher="similar" type="filme" title="Filmes similares"/>}
                 <Reviews data={filme.reviews.results}  />
-                {recomendation.data.results.length!==0 && <Type data={recomendation.data.results} outher="recomendations" type="filme" title="Os Filmes Recomendados"/>}
+                {recomendation.data.results.length!==0 && <Type data={recomendation.data.results} outher="recomendations" type="filme" title="Filmes Recomendados"/>}
                 
             </div>
             
