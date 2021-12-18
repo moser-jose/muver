@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
+import Loading from '../components/Loading';
 
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Filme = () => {
@@ -50,7 +51,7 @@ const Filme = () => {
                     </div>
                 </div>
             </>:
-            <></>
+            <Loading/>
     )
 }
 

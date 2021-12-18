@@ -7,6 +7,7 @@ import userFemale from '../assets/img/user-act-f.jpg'
 import slugify from 'slugify';
 import ReactPaginate from 'react-paginate';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
+import Loading from '../components/Loading';
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Actores = () => {
     const [data, setData]=useState([]);
@@ -75,7 +76,7 @@ const Actores = () => {
                     activeClassName={"active"}
                 />
             </div>
-        </div>:<></>
+        </div>:<Loading/>
     )
 }
 

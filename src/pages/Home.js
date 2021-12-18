@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import Loading from '../components/Loading';
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
@@ -22,7 +23,7 @@ const Home = () => {
                    {/* <Row type="filme" title="Filmes com maiores pontuações" data={upcoming}/> */}
                 </div>
             </div>:
-            <></>
+            <Loading/>
     )
 }
 

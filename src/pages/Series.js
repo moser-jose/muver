@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
+import Loading from '../components/Loading';
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
@@ -19,7 +20,7 @@ const Series = () => {
                     <Row type="actor" title="Os Actores mais populares" data={pessoasTrending}/> */}
                    </div>
             </div>:
-            <></>
+            <Loading/>
     )
 }
 
