@@ -43,7 +43,7 @@ const Header = () => {
                             {/* <li><a href="/">Home</a></li> */}
                             <li><Link to="/filmes">{i18n.t('header.filme')}</Link></li>
                             <li><Link to="/series">{i18n.t('header.series')}</Link></li>
-                            <li><Link to="/">{i18n.t('header.actores')}</Link></li>
+                            <li><Link to="/actores">{i18n.t('header.actores')}</Link></li>
                         </ul>
                     </nav>
                 </div>

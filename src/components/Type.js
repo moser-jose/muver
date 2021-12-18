@@ -8,10 +8,11 @@ const Type = ({data,title, type, outher}) => {
         <div className="populares">
             <div className="mais">
                 <p>{title}</p>
-                {   data.length > 7 ? 
+                {   data.length > 7 && 
                         outher==="similar" &&
-                        type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/similares`}>Ver mais</Link>:
-                    data.length > 7 &&
+                        type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/similares`}>Ver mais</Link>
+                }
+                    {    data.length > 7 &&
                         outher==="recomendations" &&
                         type==="filme" && <Link to={`/filme/${params.slug}/${params.id}/recomendados`}>Ver mais</Link>
                 }
