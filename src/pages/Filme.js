@@ -11,7 +11,7 @@ import Loading from '../components/Loading';
 
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Filme = () => {
-    const{TopMovie,pessoasTrending,filmesTendencias,genrsMovie,filmesdiscover,loading}=useApiContext();
+    const{tendencia,setTendencia, TopMovie,pessoasTrending,filmesTendenciasDia,filmesTendenciasSemana,genrsMovie,filmesdiscover,loading}=useApiContext();
     const [filmBrev, setfilmBrev]=useState([]);
     useEffect(()=>{
         
@@ -39,11 +39,18 @@ const Filme = () => {
                                     <Genrs data={genrsMovie}/>
                                 </div>
                                 <div className="direito">
-                                    <Row type="filme" title="Filmes mais populares" data={filmesdiscover}/>
-                                    <Row type="filme" title="Tendências" data={filmesTendencias}/>
+                                    <Row other="maispopular" type="filme" title="Filmes mais populares" data={filmesdiscover}/>
+                                  
+                                  {
+                                      tendencia===false ? <Row other="tendencias-dia" type="filme" title="Tendências" data={filmesTendenciasDia}/>:
+                                        <Row other="tendencias-semana" type="filme" title="Tendências" data={filmesTendenciasSemana}/>
+                                  }
+                                    
+                                    
+                                    
                                     <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
-                                    <Row type="filme" title="Filmes com maior pontuação" data={TopMovie}/>
-                                    <Row type="filme" title="Filmes a estrear em breve" data={filmBrev}/>
+                                    <Row other="pontuacao" type="filme" title="Filmes com maior pontuação" data={TopMovie}/>
+                                    <Row other="brevemente"   type="filme" title="Filmes a estrear em breve" data={filmBrev}/>
                                     
                                 </div>
                             </div>

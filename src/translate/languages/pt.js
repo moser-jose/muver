@@ -15,7 +15,8 @@ const messages = {
             home:{
                 ver_mais:'Ver mais',
                 tv:'Série',
-                filme:'Filme'                
+                filme:'Filme',
+                carregar:'En cours'                
             }
         }
     }

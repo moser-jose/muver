@@ -1,15 +1,48 @@
 import { Star } from 'iconsax-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useApiContext } from '../contexts/ApiContext'
 import { DataAll } from './Dados/DataAll'
 var slugify = require('slugify')
-const Row = ({data,title, type}) => {
+const Row = ({data,title, type,other}) => {
+    const{tendencia, setTendencia}=useApiContext();
     return (
            <div className="populares">
                <div className="mais">
-               <p>{title}</p>
+               <span className='p'>{
+                    other==="maispopular" ? title:
+                    other==="tendencias-semana" ? <>{title} 
+                        <div className='tendenc'>
+                            <span  className={tendencia===false ? 'active':<></>} onClick={()=>setTendencia(false)}>Dia</span>
+                            <span className={tendencia===true ? 'active':<></>} onClick={()=>setTendencia(true)}>Semana</span>
+                            <div  className={
+                                tendencia === false ? 'animacao s-dia' :'animacao s-semana'
+                            }></div>
+                        </div>
+                    </>:
+                    other==="tendencias-dia" ? <>{title} 
+                        <div className='tendenc'>
+                            <span  className={tendencia===false ? 'active':<></>} onClick={()=>setTendencia(false)}>Dia</span>
+                            <span className={tendencia===true ? 'active':<></>} onClick={()=>setTendencia(true)}>Semana</span>
+                            <div  className={
+                                tendencia === false ? 'animacao s-dia' :'animacao s-semana'
+                            }></div>
+                        </div>
+                    </>:
+                    other==="pontuacao" ? title :
+                    other==="brevemente" && title
+                 }</span>
                     {
-                        data && data.length > 6 && <a href="/">Ver mais</a>
+                        other==="maispopular"?
+                        data && data.length > 6 && <a href="/filmes/mais-populares">Ver mais</a>:
+                        other==="tendencias-semana" ?
+                        data && data.length > 6 && <a href="/filmes/tendecias-semana">Ver mais</a>:
+                        other==="tendencias-dia" ?
+                        data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>:
+                        other==="brevemente" ?
+                        data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>:
+                        other==="pontuacao" &&
+                        data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>
                     }
                </div>
                

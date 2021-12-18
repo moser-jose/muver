@@ -16,8 +16,10 @@ export const ApiContext = ({ children }) => {
     const [loading,setLoading ]=useState(false)
     const [modal, setModal]=useState(false);
     const [url, setUrl]=useState("");
-    const [filmesTendencias, setfilmesTendencias]=useState([]);
+    const [filmesTendenciasSemana, setfilmesTendenciasSemana]=useState([]);
+    const [filmesTendenciasDia, setfilmesTendenciasDia]=useState([]);
     const [filmesBrevemente, setfilmesBrevemente]=useState([]);
+    const [tendencia, setTendencia]=useState(false);
     useEffect(() => {
         setSelectIdioma(getIdioma(idioma).toUpperCase());
         const language=getIdioma(idioma)==="en" ? US:
@@ -31,7 +33,8 @@ export const ApiContext = ({ children }) => {
                 await axios.get(url.tvDiscover),
                 await axios.get(url.generosFilmes),
                 await axios.get(url.pessoasTrending),
-                await axios.get(url.filmesTendencias),
+                await axios.get(url.filmesTendenciasSemana),
+                await axios.get(url.filmesTendenciasDia),
                 await axios.get(url.filmesBrevemente),
                 await axios.get(url.filmesTop)
             ])
@@ -40,9 +43,10 @@ export const ApiContext = ({ children }) => {
             setTvDiscover(data[2].data.results);
             setGenrsMovie(data[3].data.genres);
             setPessoasTreding(data[4].data.results);
-            setfilmesTendencias(data[5].data.results);
-            setfilmesBrevemente(data[6]);
-            setTopMovie(data[7].data.results);
+            setfilmesTendenciasSemana(data[5].data.results);
+            setfilmesTendenciasDia(data[6].data.results);
+            setfilmesBrevemente(data[7]);
+            setTopMovie(data[8].data.results);
             setLoading(true);
         }
         getTendencias(language);
@@ -50,7 +54,7 @@ export const ApiContext = ({ children }) => {
     
     return (
         <StateContext.Provider
-            value={{TopMovie,filmesBrevemente,filmesTendencias,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
+            value={{tendencia, setTendencia,TopMovie,filmesBrevemente,filmesTendenciasDia,filmesTendenciasSemana,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
             {children}
         </StateContext.Provider>
     );

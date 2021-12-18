@@ -1,10 +1,12 @@
 import React from 'react'
+import { useApiContext } from '../contexts/ApiContext';
 
 const Loading = () => {
+    const {i18n}=useApiContext();
     return (
-        <div class="center">
-            <div class="ring"></div>
-            <span>carregando...</span>
+        <div className="center">
+            <div className="ring"></div>
+            <span>{i18n.t('home.carregar')}...</span>
       </div>
     )
 }

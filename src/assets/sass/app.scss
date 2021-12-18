@@ -465,8 +465,9 @@ body{
         justify-content: space-between;
         
         
-        p{
+        .p{
             font-size: 1.6rem;
+            display: flex;
             
         }
         a{
@@ -579,6 +580,48 @@ body{
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       }
 }
+
+.tendenc{
+    margin-left: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    border-radius: 12px;
+    background-color: #ffffff10;
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    position: relative;
+    .animacao {
+        position: absolute;
+        height: 25px;
+        z-index: -1;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #ee344c;
+        border-radius: 10px;
+        transition: all 1s;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    span{
+        font-size: 14px;
+        padding: 1px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .s-dia,
+    span:nth-child(1):hover ~ .animacao {
+        width: 38px;
+        left: 8px;
+    }
+    .s-semana,
+    span:nth-child(2):hover ~ .animacao {
+        width: 69.16px;
+        left: 64px;
+    }
+}
+
 div[dir="ltr"] {
     position: relative !important;
     

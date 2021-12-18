@@ -6,6 +6,7 @@ import Up from './components/Up'
 import Actores from './pages/Actores'
 import Detalhe from './pages/Detalhe'
 import Filmes from './pages/Filme'
+import FilmesPage from './pages/FilmesPage'
 import Series from './pages/Series'
 const router = () => {
     return (
@@ -18,6 +19,7 @@ const router = () => {
                 <Route path="/filme/:slug/:id/autores" element={<AutoresDetalhes/>} />
                 <Route path="/filme/:slug/:id/:type" element={<TypeDetalhes/>} />
                 <Route path="/actores" element={<Actores/>} />
+                <Route path="/filmes/:type" element={<TypeDetalhes/>} />
 
                     {/* <Route path="privacidade" element={<Privacidade />} />
                     <Route path="termos" element={<Termos />} />
