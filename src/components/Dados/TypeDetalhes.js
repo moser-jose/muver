@@ -19,7 +19,7 @@ const TypeDetalhes = () => {
     useEffect(()=>{
         async function getFilmes() {
 
-            if(params.type!=="mais-populares" && params.type !=="tendecias-dia" && params.type!=="tendecias-semana"){
+            if(params.type!=="mais-populares" && params.type!=="maior-pontuacao" && params.type!=="brevemente" && params.type !=="tendecias-dia" && params.type!=="tendecias-semana"){
                 const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
                 setFilme(f.data);
             }
@@ -45,6 +45,20 @@ const TypeDetalhes = () => {
                 })
                 setData(data.data);
             }
+            else if(params.type==="brevemente"){
+                const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
+                data.data.results.slice(0,1).map((item)=>{
+                    setFilme(item);
+                })
+                setData(data.data);
+            }
+            else if(params.type==="maior-pontuacao"){
+                const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
+                data.data.results.slice(0,1).map((item)=>{
+                    setFilme(item);
+                })
+                setData(data.data);
+            }
             
             else if(params.type==="similares"){
                 const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
@@ -54,6 +68,7 @@ const TypeDetalhes = () => {
                 const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`); 
                 setData(data.data)
             }
+            
             
             setLoading(true);
         }
@@ -79,7 +94,7 @@ const TypeDetalhes = () => {
            <div className="pr">
                <div className="data">
                     {
-                        params.type==="mais-populares"||params.type==="tendecias-dia" ||params.type==="tendecias-semana" ?<></>: <h2 className="title"><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
+                        params.type==="mais-populares"||params.type==="maior-pontuacao"||params.type==="brevemente"||params.type==="tendecias-dia" ||params.type==="tendecias-semana" ?<></>: <h2 className="title"><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
                     }
                    
                    <h2 className="_p">{
@@ -87,7 +102,10 @@ const TypeDetalhes = () => {
                    params.type==="recomendados" ? "Filmes Recomendados":
                    params.type==="mais-populares" ? "Filmes mais populares":
                    params.type==="tendecias-semana" ? "Tendências da Semana":
-                   params.type==="tendecias-dia" && "Tendências do Dia"
+                   params.type==="tendecias-dia" ? "Tendências do Dia":
+                   params.type==="brevemente" ? "Filmes a estrear em breve":
+                   params.type==="maior-pontuacao" && "Filmes com maior pontuação"
+                   
                    }</h2>
                </div>
            </div>

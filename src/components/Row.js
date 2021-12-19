@@ -40,9 +40,9 @@ const Row = ({data,title, type,other}) => {
                         other==="tendencias-dia" ?
                         data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>:
                         other==="brevemente" ?
-                        data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>:
+                        data && data.length > 6 && <a href="/filmes/brevemente">Ver mais</a>:
                         other==="pontuacao" &&
-                        data && data.length > 6 && <a href="/filmes/tendecias-dia">Ver mais</a>
+                        data && data.length > 6 && <a href="/filmes/maior-pontuacao">Ver mais</a>
                     }
                </div>
                
