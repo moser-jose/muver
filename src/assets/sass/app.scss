@@ -6,12 +6,386 @@
     box-sizing: border-box;
     list-style: none;
     font-family: 'Poppins','Rubik', sans-serif;
+    
+}
+a{
     color: #fff;
 }
 
 body{
     background-color: #1a1a1a;
+    color: #fff;
 }
+
+ 
+ //Theme - Light
+ .light{
+    background-color: #fff !important;
+    //color: #0d141f !important;
+    a{
+        color: #0d141f !important 
+    }
+    .header{
+        a{
+            color: #fff !important;
+        }
+        .ball{
+            background-color: #303030 !important;
+        }
+    }
+    .home{
+        a{
+            color: #fff !important;
+        }
+        .open{
+            .pro{
+                color: #0d141f !important;
+            }
+            .iconspeck{
+                color: #0d141f !important;
+            }
+        }
+    }
+    .populares{
+        color: #1a1a1a;
+        a{
+            color: #1a1a1a !important;
+        }
+        .mais{
+            a{
+                
+                background-color: #b6b5b5cf;
+                color: #fff !important;
+                &:hover{
+                    background-color: #b6b5b5f3;
+                }
+            }
+        }
+        .filmeR{
+                a{
+                    .info{
+                        span{
+                            color: #fff;
+                        }
+                    }
+                  }
+          }
+    }
+    .all-gen{
+        .gen-row{
+            .ge{
+                background-color: #b6b5b5cf;
+            }
+        }
+    }
+    .tendenc{
+        background-color: #b6b5b5cf !important;
+        span{
+            color: #fff !important;
+        }
+    }
+    .actores{
+        margin: 0 auto;
+        a{
+            text-decoration: none;
+        }
+        .mais{
+            a{
+                background-color: #b6b5b5cf;
+                color: #fff !important;
+                &:hover{
+                    background-color: #b6b5b5f3;
+                }
+            }
+        }
+        .all-act{
+            .cast{
+            
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                h4{
+                    color: #1a1a1a !important;
+                }
+                h6{
+                    span{
+                        font-weight: 500;
+                        color: #1a1a1a !important;
+                        font-size: 10px;
+                        padding: 1px 4px;
+                        color: #fff !important;
+                        background-color:#ee344c ;
+                        border-radius: 8px;
+                        padding-bottom: 1.5px;
+                        margin-right: 5px;
+                    }
+                }
+                img{
+                    border-radius: 50%;
+                    width: 130px;
+                    height: 130px;
+                    object-fit: cover;
+                };
+            }
+        }
+        
+    }
+    .film-slide,.autores-detalhes,.simi-detalhe{
+        .header{
+            .user{
+                .theme{
+                    margin-right: 100px;
+                    .checkbox {
+                        opacity: 0;
+                        position: absolute;
+                        &:checked + .label .ball {
+                            transform: translate(18px, -50%);
+                        }
+                        
+                    }
+                    .label {
+                        .ball {
+                            transform: translate(0px, -50%);
+                        }
+                        .light{
+                            transform: translate(18px, -50%) !important ;
+                        }
+                        .dark{
+                            transform: translate(0px, -50%) !important ;
+                        }
+                        
+                    }
+                    
+                }
+            }
+        }
+        .filme-ho{
+            .pr{
+                .data{
+                    .gen{
+                        color: #fff !important;
+                    }
+                }
+            }
+        }
+        .open{
+            .pro{
+                color: #1a1a1a;
+            }
+        }
+        .aut{
+            height: 500px;
+            .pr{
+                .data{
+                    .title{
+                        font-size: 30px;
+                        background-color: #ffffff10;
+                        backdrop-filter: blur(28px);
+                        -webkit-backdrop-filter: blur(28px);
+                        border-radius: 8px;
+                        padding: 14px 20px;
+                        margin-bottom: 80px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        cursor: pointer;
+                    }
+                    ._p{
+                        font-size: 35px;
+                    }
+                }
+            }
+        }
+        .todos-actores{
+            .titulo{
+                p{
+                    color: #1a1a1a;
+                }
+            }
+            .todos{
+                .todos-a{
+                    h4{
+                        span{
+                            font-weight: 500;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+            .filmeR{
+                a{
+                    .info{
+                        span{
+                            color: #fff;
+                        }
+                    }
+                  }
+          }
+        }
+    }
+    .pagination{
+        li{
+            background-color: #adadad94;
+            a{
+                color: #fff !important;
+            }
+        }
+    
+    }
+    .colecao{
+        .colect{
+            .fi{
+                color: #fff !important;
+            }
+           .ver{
+                color: #fff !important;
+           }
+        }
+    }
+    .simi{
+        margin:  0 auto;
+        width: 90%;
+        .reviews{
+            margin: 30px 0;
+            .titulo{
+                margin: 20px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                p{
+                    font-size: 1.6rem;
+                    color: #1a1a1a;
+                }
+                a{
+                    padding: 6px 14px;
+                    border-radius: 4px;
+                    background-color: #ffffff10;
+                    backdrop-filter: blur(28px);
+                    -webkit-backdrop-filter: blur(28px);
+                    font-size: 14px;
+                    text-align: center;
+                    font-weight: 500;
+                    text-decoration: none;
+                }
+            }
+            .rev{
+                background-color: #303030;
+                .img{
+                    img{
+                        border: 2px solid #fff;
+                    }
+                }
+                .re{
+                    div{
+                        p{
+                            a{
+                                color: #b4afaf !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .galeira{
+        .titulo{
+            color: #1a1a1a;
+        }
+        .gal{
+            div{
+                span{
+                    color: #1a1a1a;
+                }
+            }
+        }
+    }
+    .project-github{
+        background-color: #20202098;
+        .git-h{
+            a{font-weight: 600;}
+        }
+        p{
+            span{
+                background-color:#ee344c;
+                padding: 1px 8px;
+                border-radius: 10px;
+                font-size: 12px;
+            }
+            
+            .mo{
+                color: #fff !important;
+            }
+        }
+        .dir{
+            a{
+                color: #1a1a1a !important;
+            }
+        }
+    }
+    .btn-top{
+        background-color: #b6b5b5cf !important ;
+        path {
+            fill: #1a1a1ace;
+        }
+    }
+    .center{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff !important;
+    .ring{
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        animation: ring 2s linear infinite;
+        &::before{
+            position: absolute;
+            content: '';
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255,255,255,.3);
+        }
+    }
+    @keyframes ring {
+        0%{
+            transform: rotate(0deg);
+            box-shadow: 1px 5px 2px #ee344c;
+        }
+        50%{
+            transform: rotate(180deg);
+            box-shadow: 1px 5px 2px #ffffff63;
+        }
+        100%{
+            transform: rotate(360deg);
+            box-shadow: 1px 5px 2px #5b7aa5;
+        }
+    }
+    span{
+        color: #474747;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 200px;
+        animation: text 3s ease-in-out infinite;
+      }
+      @keyframes text {
+        50%{
+          color: #13111191;
+        }
+      }
+    
+    }
+    
+}
+
+
 .btn-top{
     position: fixed;
     bottom: 4%;
@@ -42,13 +416,8 @@ body{
 }
 
 .home{
-    /* background: linear-gradient(
-        rgba(24, 24, 24, 0.3),
-        rgba(24, 24, 24, 0.2)
-    ),url("../img/header.jpg") center center no-repeat; */
     background-size: cover;
     position: relative;
-    /* padding: 20px 50px; */
     width: 100%;
     .open{
         display: flex;
@@ -126,6 +495,7 @@ body{
                     &:checked + .label .ball {
                         transform: translate(18px, -50%);
                     }
+                    
                 }
                 .label {
                     background-color: #fff;
@@ -150,11 +520,11 @@ body{
                         font-family: "Poppins", sans-serif;
                     }
                     &::before {
-                        content: "Light";
+                        content: "Dark";
                         left: -23px;
                     }
                     &::after {
-                        content: "Dark";
+                        content: "Light";
                         right: -23px;
                     }
                     .ball {
@@ -164,8 +534,14 @@ body{
                         top: 50%;
                         height: 12px;
                         width: 12px;
-                        transform: translate(0px, -50%);
+                        /* transform: translate(0px, -50%); */
                         transition: transform 0.2s linear;
+                    }
+                    .light{
+                        transform: translate(18px, -50%) !important ;
+                    }
+                    .dark{
+                        transform: translate(0px, -50%) !important ;
                     }
                     .icon-moon {
                         color: #757373;
@@ -175,7 +551,9 @@ body{
                         color: #f39c12;
                         font-size: 10px;
                     }
+                    
                 }
+                
             }
             .idioma{
                 border: 1px solid #fff;
@@ -770,11 +1148,11 @@ div[dir="ltr"] {
                         font-family: "Poppins", sans-serif;
                     }
                     &::before {
-                        content: "Light";
+                        content: "Dark";
                         left: -23px;
                     }
                     &::after {
-                        content: "Dark";
+                        content: "Light";
                         right: -23px;
                     }
                     .ball {
@@ -786,6 +1164,12 @@ div[dir="ltr"] {
                         width: 12px;
                         transform: translate(0px, -50%);
                         transition: transform 0.2s linear;
+                    }
+                    .light{
+                        transform: translate(18px, -50%) !important ;
+                    }
+                    .dark{
+                        transform: translate(0px, -50%) !important ;
                     }
                     .icon-moon {
                         color: #757373;
@@ -1537,6 +1921,11 @@ div[dir="ltr"] {
 
     margin:  0 auto;
     width: 90%;
+    .mais{
+        p{
+            font-size: 1.6rem;
+        }
+    }
     .reviews{
         margin: 30px 0;
         .titulo{
@@ -1545,7 +1934,7 @@ div[dir="ltr"] {
             justify-content: space-between;
             align-items: center;
             p{
-                font-size: 1.6rem;
+                font-size: 1.6rem !important;
             }
             a{
                 padding: 6px 14px;
@@ -1763,9 +2152,7 @@ div[dir="ltr"] {
       }
     
   }
-  
-
-
+ 
 //Responsible
 
 @media only screen and (min-width: 1461px) and (max-width: 1600px){

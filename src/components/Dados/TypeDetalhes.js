@@ -60,11 +60,11 @@ const TypeDetalhes = () => {
                 setData(data.data);
             }
             
-            else if(params.type==="similares"){
+            if(params.type==="similares"){
                 const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
                 setData(data.data)
             }
-            else if(params.type==="recomendados"){
+            if(params.type==="recomendados"){
                 const data= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`); 
                 setData(data.data)
             }

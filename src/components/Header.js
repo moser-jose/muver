@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Moon, NotificationBing, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
-import { SlideHeader } from './SlideHeader'
 import PT from '../assets/img/pt.png'
 import US from '../assets/img/us.png'
 import FR from '../assets/img/fr.png'
 import {useApiContext} from '../contexts/ApiContext'
 import { Link } from 'react-router-dom'
 const Header = () => {
-    const {i18n}=useApiContext();
+    const {i18n,theme,setTheme}=useApiContext();
     const [clickIdioma, setClickIdioma]=useState(false);
     const {selectIdioma, setSelectIdioma}=useApiContext();
+    const [themeButton, setThemeButton] = useState(true);
     const handleClick=()=>{
         setClickIdioma(!clickIdioma);
     }
@@ -30,6 +30,28 @@ const Header = () => {
         setSelectIdioma(idioma)
         window.location = window.location
     }
+    const handleTheme=()=>{
+        if (theme==="light") {
+            document.querySelector('body').classList.remove('light');
+            localStorage.setItem(process.env.REACT_APP_THEME,"dark");
+            setTheme("dark")
+        }
+        else {
+            document.querySelector('body').classList.add('light');
+            localStorage.setItem(process.env.REACT_APP_THEME,"light");
+            setTheme("light")
+        }
+       
+    }
+    useEffect(() => {
+        if(theme ==="light")
+            document.querySelector('body').classList.add('light');
+        else
+            document.querySelector('body').classList.add('dark');
+        
+    }, [])
+
+    console.log(theme)
     return (
             <div className="header">
                 <div className="logo">
@@ -52,11 +74,11 @@ const Header = () => {
                 </div>
                 <div className="user">
                     <div className="theme">
-                        <input type="checkbox" className="checkbox" id="chk" />
+                        <input onClick={handleTheme} type="checkbox" className="checkbox" id="chk" />
                         <label className="label" htmlFor="chk">
-                            <Sun1 size="11" color="#ad6d08" variant="Bulk"/>
                             <Moon size="11" color="#000" variant="Bulk"/>
-                            <div className="ball"></div>
+                            <Sun1 size="11" color="#ad6d08" variant="Bulk"/>
+                            <div className={theme === "dark" ? "ball dark  " : "ball light"}></div>
                         </label>
                     </div>
                     <div className="idioma" onClick={handleClick}>

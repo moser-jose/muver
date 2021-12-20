@@ -4,7 +4,9 @@ import {PT,US,FR} from '../api/url';
 import { i18n } from '../translate/i18n'
 import {getIdioma} from '../functions'
 export const StateContext = createContext();
+/* localStorage.setItem(process.env.REACT_APP_THEME,"dark"); */
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
+const theme_page= localStorage.getItem(process.env.REACT_APP_THEME);
 export const ApiContext = ({ children }) => {
     const [selectIdioma, setSelectIdioma]=useState("PT");
     const [tendencias, setTendencias]=useState([]);
@@ -20,7 +22,22 @@ export const ApiContext = ({ children }) => {
     const [filmesTendenciasDia, setfilmesTendenciasDia]=useState([]);
     const [filmesBrevemente, setfilmesBrevemente]=useState([]);
     const [tendencia, setTendencia]=useState(false);
+    const [theme, setTheme]=useState("dark");
     useEffect(() => {
+        const th=localStorage.getItem(process.env.REACT_APP_THEME)
+        if(th==="light"){
+            setTheme("light")
+            document.querySelector('body').classList.add('light');
+        }
+        else if(th==="dark"){
+            setTheme("dark")
+            document.querySelector('body').classList.add('dark');
+        }
+        else{
+            setTheme("dark")
+            localStorage.setItem(process.env.REACT_APP_THEME,"dark")
+            document.querySelector('body').classList.add('dark');
+        }
         setSelectIdioma(getIdioma(idioma).toUpperCase());
         const language=getIdioma(idioma)==="en" ? US:
                         getIdioma(idioma)==="pt" ? PT:
@@ -54,7 +71,7 @@ export const ApiContext = ({ children }) => {
     
     return (
         <StateContext.Provider
-            value={{tendencia, setTendencia,TopMovie,filmesBrevemente,filmesTendenciasDia,filmesTendenciasSemana,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
+            value={{theme, setTheme,tendencia, setTendencia,TopMovie,filmesBrevemente,filmesTendenciasDia,filmesTendenciasSemana,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
             {children}
         </StateContext.Provider>
     );
