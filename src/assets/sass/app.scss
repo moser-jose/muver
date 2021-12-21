@@ -55,7 +55,7 @@ body{
             a{
                 
                 background-color: #b6b5b5cf;
-                color: #fff !important;
+                color: #4c4c4cbf !important;
                 &:hover{
                     background-color: #b6b5b5f3;
                 }
@@ -74,6 +74,7 @@ body{
     .all-gen{
         .gen-row{
             .ge{
+                .generos{p{color: #4c4c4cbf !important;}}
                 background-color: #b6b5b5cf;
             }
         }
@@ -92,7 +93,7 @@ body{
         .mais{
             a{
                 background-color: #b6b5b5cf;
-                color: #fff !important;
+                color: #4c4c4cbf !important;
                 &:hover{
                     background-color: #b6b5b5f3;
                 }
@@ -227,8 +228,20 @@ body{
     .pagination{
         li{
             background-color: #adadad94;
-            a{
-                color: #fff !important;
+            &.next,&.previous,a{
+                color: #5c5c5ced !important;
+                path{
+                    fill: #5c5c5ced !important;
+                }
+            }
+            &.active,&.disabled{
+                a{
+                    color: #fff !important;
+                    cursor: default !important;
+                }
+                path{
+                    fill: #fff !important;
+                }
             }
         }
     
@@ -303,7 +316,7 @@ body{
     .project-github{
         background-color: #20202098;
         .git-h{
-            a{font-weight: 600;}
+            a{font-weight: 500;}
         }
         p{
             span{
