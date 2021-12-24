@@ -1,4 +1,5 @@
 import React from 'react'
+import slugify from 'slugify'
 
 const Keywords = ({data, back,lang, companies}) => {
     return (
@@ -11,7 +12,7 @@ const Keywords = ({data, back,lang, companies}) => {
                     <h2>Palavras Chave</h2>
                         {
                             data.keywords.slice(0,18).map((item, key)=>{
-                                return <a key={key} className="fi" href={`/keywords/${item.id}`}>{item.name}</a>
+                                return <a key={key} className="fi" href={`/keywords/${slugify(item.name,{lower:true,strict: true})}/${item.id}`}>{item.name}</a>
                             })
                         }
                        <div className="pais">

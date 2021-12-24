@@ -5,6 +5,7 @@ import { ArrowRight3, Calendar, Crown, Flash, Hex, Play, PlayCircle, Profile, St
 import OpenSource from './OpenSource';
 import Header from './Header';
 import {limita} from '../functions'
+import slugify from 'slugify';
 
 export const SlideDetalhe = ({data,type,certificacao}) => {
     const {setModal, setUrl}=useApiContext();
@@ -91,7 +92,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     </div>
                                     <p className="texto">{limita(data.overview,300)}</p>
                                     {data.genres.map((item, key)=>{
-                                        return <a key={key} href={`/filmes/genero/${item.id}`} className="ver gen">{item.name}</a>
+                                        return <a key={key} href={`/filmes/genero/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="ver gen">{item.name}</a>
                                     })}
 
                                     <div className="eq">

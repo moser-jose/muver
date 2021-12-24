@@ -54,7 +54,7 @@ const AutoresDetalhes = () => {
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${filme.backdrop_path} )`}}>
                 <div className="pr">
                     <div className="data">
-                        <h2 className="title" onClick={()=>navigate(-1)}><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
+                        <a href={`/filme/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
                         <h2 className="_p">Actores e Equipe Técnica</h2>
                     </div>
                 </div>

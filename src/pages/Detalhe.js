@@ -220,8 +220,6 @@ const Detalhe = () => {
                 {recomendation.data.results.length!==0 && <Type data={recomendation.data.results} outher="recomendations" type="filme" title="Filmes Recomendados"/>}
                 
             </div>
-            
-
         </>:
         <Loading/>
     )
