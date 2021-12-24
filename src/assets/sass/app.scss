@@ -305,9 +305,9 @@ body{
         }
     }
     .project-github{
-        background-color: #20202098;
+        background-color: #000;
         .git-h{
-            a{font-weight: 500;}
+            a{font-weight: 500;color: #fff !important;}
         }
         p{
             span{
@@ -319,11 +319,12 @@ body{
             
             .mo{
                 color: #fff !important;
+                background-color: #6c6c6cbd;
             }
         }
         .dir{
             a{
-                color: #1a1a1a !important;
+                color: #fff !important;
             }
         }
     }
