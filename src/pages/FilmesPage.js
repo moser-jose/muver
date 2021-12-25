@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from '../api'
 import Header from '../components/Header';
 import OpenSource from '../components/OpenSource';
-import userMale from '../assets/img/user-act.jpg'
-import userFemale from '../assets/img/user-act-f.jpg'
-import slugify from 'slugify';
 import ReactPaginate from 'react-paginate';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 import Loading from '../components/Loading';

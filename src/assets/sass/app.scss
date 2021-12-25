@@ -1401,6 +1401,53 @@ div[dir="ltr"] {
                 }
                 ._p{
                     font-size: 35px;
+                    margin-bottom: 20px;
+                }
+                .mediaT{
+                    margin-bottom: 20px;
+                }
+                .media-type-t{
+                    padding: 6px 14px !important;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    background-color: #ffffff10;
+                    backdrop-filter: blur(28px);
+                    -webkit-backdrop-filter: blur(28px);
+                    border-radius: 4px;
+                    font-weight: 500;
+                    width: 155px;
+                    justify-content: center;
+                }
+                .biograf{
+                    font-size: 14px;
+                    max-width: 550px;
+                    font-weight: 500;
+                    margin: 20px 0 30px;
+                    letter-spacing: .4px;
+                }
+                .birth{
+                    padding: 10px 14px;
+                    border-radius: 4px;
+                    background-color: #ffffff10;
+                    backdrop-filter: blur(28px);
+                    -webkit-backdrop-filter: blur(28px);
+                    text-align: center;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    margin-bottom: 2px;
+                    display: initial;
+                }
+                
+                .popul{
+                    display: flex;
+                    align-items: center;
+                    font-weight: 500;
+                    gap: 6px;
+                }
+                .ver{
+                    background-color: #ee344ced;
                 }
             }
         }

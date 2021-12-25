@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header'
-import axios from '../../api'
-import { useParams,useNavigate } from 'react-router-dom';
-import OpenSource from '../OpenSource';
-import userMale from '../../assets/img/user-act.jpg'
-import userFemale from '../../assets/img/user-act-f.jpg'
-import { Play } from 'iconsax-react';
+import Header from '../components/Header'
+import axios from '../api'
+import { useParams } from 'react-router-dom';
+import OpenSource from '../components/OpenSource';
+import { Cake, ProfileDelete, UserOctagon } from 'iconsax-react';
+import { limita } from '../functions';
 var slugify = require('slugify')
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
-const AutoresDetalhes = () => {
+const ActoresDetalhe = () => {
     const params = useParams();
-    const navigate=useNavigate();
-    const [filme, setFilme]=useState([]);
+    const [actor, setActor]=useState([]);
     const [crew, setCrew]=useState([]);
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
@@ -26,8 +24,8 @@ const AutoresDetalhes = () => {
             else{
                 id="pt"
             }
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
-            setFilme(f.data);
+            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/person/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            setActor(f.data);
             function groupBy(list, keyGetter) {
                 const map = new Map();
                 list.forEach((item) => {
@@ -51,14 +49,33 @@ const AutoresDetalhes = () => {
         <div className="autores-detalhes">
             <OpenSource/>
             <Header/>
-            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${filme.backdrop_path} )`}}>
+            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${actor.profile_path} )`,'height':'100vh'}}>
                 <div className="pr">
                     <div className="data">
-                        <a href={`/filme/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
-                        <h2 className="_p">Actores e Equipe Técnica</h2>
+                        <h2 className="_p">{actor.name}</h2>
+                        <div className="mediaT">
+                            <span className="media-type-t"><Cake size="18" color="#fff" variant="Bulk"/> {actor.birthday}</span>
+                            {
+                                actor.deathday!==null &&
+                                <span className="media-type-t"><ProfileDelete size="18" color="#fff" variant="Bulk"/> {actor.deathday}</span>
+                            }
+                        </div>
+                        <p className='biograf'>{limita(actor.biography,320)}...</p>
+                        <div className="mediaT">
+                            <p className="birth">{actor.place_of_birth}</p>
+                            <span className="popul"><UserOctagon size="26" color="#fff " variant="Bulk"/>{actor.popularity}</span>
+                        </div>
+                        {actor.also_known_as.slice(0,5).map((item, key)=>{
+                            return <span key={key} href="/"className="ver gen">{item}</span>
+                        })}
+                        
                     </div>
+
+                    <div className="img">
+                                <img src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}/>
+                            </div>
                 </div>
-            </div>
+            </div>{/* 
             <div className="todos-actores">
                 <div className="titulo">
                     <p>Actores</p>
@@ -67,14 +84,14 @@ const AutoresDetalhes = () => {
                     {
                         filme.credits.cast.map((item, key)=>(
                             <a key={key} href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="todos-a">
-                            <img src={
-                                 item.profile_path===null && item.gender===0 ? userMale: 
-                                 item.profile_path===null && item.gender===1 ? userFemale:
-                                 item.profile_path===null && item.gender===2 ? userMale:
-                                 `https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
-                            <h3>{item.name}</h3>
-                            <h4><span>como</span> {item.character}</h4>
-                        </a>
+                                <img src={
+                                    item.profile_path===null && item.gender===0 ? userMale: 
+                                    item.profile_path===null && item.gender===1 ? userFemale:
+                                    item.profile_path===null && item.gender===2 ? userMale:
+                                    `https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
+                                <h3>{item.name}</h3>
+                                <h4><span>como</span> {item.character}</h4>
+                            </a>
                         ))
                     }
                 </div>
@@ -102,9 +119,9 @@ const AutoresDetalhes = () => {
                         }) 
                     }
                 </div>
-            </div>
+            </div> */}
         </div>:<></>
     )
 }
 
-export default AutoresDetalhes
+export default ActoresDetalhe

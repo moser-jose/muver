@@ -11,7 +11,7 @@ import { SlideDetalhe } from '../components/SlideDetalhe';
 import Type from '../components/Type';
 import Loading from '../components/Loading';
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
-const Detalhe = () => {
+const FilmeDetalhe = () => {
     const params = useParams();
     const [filme, setFilme]=useState([]);
     const [certificacao, setCertificacao]=useState([]);
@@ -225,4 +225,4 @@ const Detalhe = () => {
     )
 }
 
-export default Detalhe
+export default FilmeDetalhe
