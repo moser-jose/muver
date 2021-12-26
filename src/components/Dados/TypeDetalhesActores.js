@@ -1,4 +1,4 @@
-import { ArrowLeft2, ArrowRight2, Play, Star, UserOctagon } from 'iconsax-react';
+import { Star, UserOctagon } from 'iconsax-react';
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import {getIdioma} from '../../functions'

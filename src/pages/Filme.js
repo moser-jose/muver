@@ -14,7 +14,6 @@ const Filme = () => {
     const{tendencia,setTendencia, TopMovie,pessoasTrending,filmesTendenciasDia,filmesTendenciasSemana,genrsMovie,filmesdiscover,loading}=useApiContext();
     const [filmBrev, setfilmBrev]=useState([]);
     useEffect(()=>{
-        
         async function Breve(){
             const film=await axios.get(`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&page=1&region=${getIdioma(idioma)==='en'?'us':getIdioma(idioma)}`)
             var end=film.data.dates.maximum;  
