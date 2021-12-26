@@ -90,8 +90,8 @@ const ActoresDetalhe = () => {
             </div> */}
 
             <div className="simi" style={{marginTop:'30px',marginBotton:'30px'}}>
-                {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} outher="similar" type="filme" title="Participação como actor"/>}
-                {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} outher="similar" type="filme" title="Participação na equipe técnica"/>}      
+                {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} gender={actor.gender}  outher="filme_actor" type="filme" title="Participação como actor"/>}
+                {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} gender={actor.gender} outher="filme_actor" type="filme" title="Participação na equipe técnica"/>}      
             </div>
 
             {actor.images.profiles.length!==0 && <Galery type="actor" data={actor.images}/>}

@@ -119,7 +119,7 @@ const TypeDetalhes = () => {
                 {
                     data.results.map((item, key)=>{
                             return <a href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} key={key} >
-                                <img  src={`https://image.tmdb.org/t/p/w300${item.poster_path===null?Poster:item.poster_path}`}/>
+                                <img  src={item.poster_path===null?Poster:`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
                                 <div className="info">
                                 <span>{item.title}</span>
                                 <span className="perc"><Star size="18" color="#cccc32" variant="Bulk"/> {item.vote_average}</span>
