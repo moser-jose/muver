@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Images from './Images';
 import Videos from './Videos';
 
-const Galery = ({data, vid}) => {
+const Galery = ({data, vid, type}) => {
     const [imagens, setImagens]=useState(true);
     const [posters, setPosters]=useState(false);
     const [videos, setVideos]=useState(false);
@@ -27,13 +27,16 @@ const Galery = ({data, vid}) => {
                 <p className="titulo">Galeria</p>
                 <div className="nav-home">
                     {
-                        data.backdrops.length!==0 && <span onClick={handleImagens}>Imagens</span>
+                        type==="actor" && data.profiles.length!==0 && <span onClick={handleImagens}>Imagens</span>
                     }
                     {
-                        data.posters.length!==0 && <span onClick={handlePosters}>Posters</span>
+                        type!=="actor" && data.backdrops.length!==0 && <span onClick={handleImagens}>Imagens</span>
                     }
                     {
-                        vid.results.length!==0 && <span onClick={handleVideos}>Videos</span>
+                        type!=="actor" && data.posters.length!==0 && <span onClick={handlePosters}>Posters</span>
+                    }
+                    {
+                        type!=="actor" && vid.results.length!==0 && <span onClick={handleVideos}>Videos</span>
                     }
                     
                     <div  className={
@@ -44,9 +47,11 @@ const Galery = ({data, vid}) => {
                 </div>
             </div>
             {
-                imagens===true ? <Images data={data.backdrops}/>:
+                type==="actor"? imagens===true && <Images data={data.profiles}/>:
+                <>
+                {imagens===true ? <Images data={data.backdrops}/>:
                 posters===true ? <Images data={data.posters}/>:
-                videos===true && <Videos data={vid}/>
+                videos===true && <Videos data={vid}/>}</>
             }
             
         </div>

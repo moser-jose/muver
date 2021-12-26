@@ -2,13 +2,16 @@ import React from 'react'
 import slugify from 'slugify'
 import Act from '../../assets/img/profile.jpg'
 
+import Men from '../../assets/img/user-act.jpg'
+import Fem from '../../assets/img/user-act-f.jpg'
 const DataActor = ({item, type}) => {
     return (
         <a href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="cast">
             {
-                item.profile_path===null?
-                    <img src={Act}/>:
-                    <img src={`https://image.tmdb.org/t/p/w200${item.profile_path}`}/>
+               <img src={item.gender===2 && item.profile_path===null ? Men : item.gender===1 && item.profile_path===null ? Fem:
+                item.gender===0 && item.profile_path===null ? Men:
+                `https://image.tmdb.org/t/p/original${item.profile_path}`}/>
+                    
             }
             {
                 

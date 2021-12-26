@@ -5,6 +5,11 @@ import { useParams } from 'react-router-dom';
 import OpenSource from '../components/OpenSource';
 import { Cake, ProfileDelete, UserOctagon } from 'iconsax-react';
 import { limita } from '../functions';
+import Type from '../components/Type';
+import Galery from '../components/Galery';
+import Loading from '../components/Loading';
+import Men from '../assets/img/user-act.jpg'
+import Fem from '../assets/img/user-act-f.jpg'
 var slugify = require('slugify')
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const ActoresDetalhe = () => {
@@ -54,16 +59,16 @@ const ActoresDetalhe = () => {
                     <div className="data">
                         <h2 className="_p">{actor.name}</h2>
                         <div className="mediaT">
-                            <span className="media-type-t"><Cake size="18" color="#fff" variant="Bulk"/> {actor.birthday}</span>
+                            {actor.birthday && <span className="media-type-t"><Cake size="18" color="#fff" variant="Bulk"/> {actor.birthday}</span>}
                             {
                                 actor.deathday!==null &&
                                 <span className="media-type-t"><ProfileDelete size="18" color="#fff" variant="Bulk"/> {actor.deathday}</span>
                             }
                         </div>
-                        <p className='biograf'>{limita(actor.biography,320)}...</p>
+                        {actor.biography && <p className='biograf'>{limita(actor.biography,320)}...</p>}
                         <div className="mediaT">
-                            <p className="birth">{actor.place_of_birth}</p>
-                            <span className="popul"><UserOctagon size="26" color="#fff " variant="Bulk"/>{actor.popularity}</span>
+                            {actor.place_of_birth && <p className="birth">{actor.place_of_birth}</p>}
+                            {actor.popularity && <span className="popul"><UserOctagon size="26" color="#fff " variant="Bulk"/>{actor.popularity}</span>}
                         </div>
                         {actor.also_known_as.slice(0,5).map((item, key)=>{
                             return <span key={key} href="/"className="ver gen">{item}</span>
@@ -72,10 +77,30 @@ const ActoresDetalhe = () => {
                     </div>
 
                     <div className="img">
-                                <img src={`https://image.tmdb.org/t/p/original${actor.profile_path}`}/>
-                            </div>
+                        <img src={actor.gender===2  && actor.profile_path===null ? Men : actor.gender===1 && actor.profile_path===null ? Fem:
+                        actor.gender===0 && actor.profile_path===null ? Men:
+                        `https://image.tmdb.org/t/p/original${actor.profile_path}`}/>
+                    </div>
                 </div>
-            </div>{/* 
+            </div>
+            {/* <div className="todos-actores">
+                <div className="titulo">
+                    <p>Participação como actor</p>
+                </div>
+            </div> */}
+
+            <div className="simi" style={{marginTop:'30px',marginBotton:'30px'}}>
+                {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} outher="similar" type="filme" title="Participação como actor"/>}
+                {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} outher="similar" type="filme" title="Participação na equipe técnica"/>}      
+            </div>
+
+            {actor.images.profiles.length!==0 && <Galery type="actor" data={actor.images}/>}
+
+
+
+
+            
+            {/* 
             <div className="todos-actores">
                 <div className="titulo">
                     <p>Actores</p>
@@ -120,7 +145,7 @@ const ActoresDetalhe = () => {
                     }
                 </div>
             </div> */}
-        </div>:<></>
+        </div>:<Loading/>
     )
 }
 

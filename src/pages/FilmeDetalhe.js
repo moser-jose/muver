@@ -210,7 +210,7 @@ const FilmeDetalhe = () => {
             
             <Keywords lang={filme.production_countries} companies={filme.production_companies} poster={filme.poster_path} back={filme.backdrop_path} data={filme.keywords}/>
              
-            <Galery vid={filme.videos} data={filme.images}/>
+            <Galery type="filme" vid={filme.videos} data={filme.images}/>
             {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
