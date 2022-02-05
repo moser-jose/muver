@@ -11,6 +11,8 @@ const Header = () => {
     const [clickIdioma, setClickIdioma]=useState(false);
     const {selectIdioma, setSelectIdioma}=useApiContext();
     const [themeButton, setThemeButton] = useState(true);
+    const [menu, setMenu]=useState(false);
+    
     const handleClick=()=>{
         setClickIdioma(!clickIdioma);
     }
@@ -20,9 +22,6 @@ const Header = () => {
         }
         else if(idioma==="EN"){
             localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"en-US");
-        }
-        else if(idioma==="FR"){
-            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"fr-FR");
         }
         else{
             localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
@@ -50,6 +49,7 @@ const Header = () => {
             document.querySelector('body').classList.add('dark');
         
     }, [])
+    console.log(menu)
     return (
             <div className="header">
                 <div className="logo">
@@ -70,6 +70,7 @@ const Header = () => {
                 <div className='search' title='Pesquisar'>
                     <SearchNormal  className='serc' size="22" color="#fff" variant="Bulk"/>
                 </div>
+                
                 <div className="user">
                     <div className="theme">
                         <input onClick={handleTheme} type="checkbox" className="checkbox" id="chk" />
@@ -89,8 +90,6 @@ const Header = () => {
                             <ul>
                                 <li onClick={()=>handleClickIdioma("PT")}><span>{i18n.t('header.pt')}</span> <img src={PT} alt="Português"></img> </li>
                                 <li onClick={()=>handleClickIdioma("EN")}><span>{i18n.t('header.en')}</span> <img src={US} alt="Inglês"></img></li>
-                                <li onClick={()=>handleClickIdioma("FR")}><span>{i18n.t('header.fr')}</span> <img src={FR} alt="Francês"></img></li>
-                            
                             </ul>
                         </div>
                         }
@@ -99,6 +98,10 @@ const Header = () => {
                     <div className="login">
                         <a href="/" >{i18n.t('header.login')}</a>
                     </div>
+                </div>
+                <div className={menu ===true ? 'hamb men':'hamb'} onClick={()=>setMenu(!menu)}>
+                    <span className='bar1'></span>
+                    <span className='bar2'></span>
                 </div>
             </div>
     )

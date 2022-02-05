@@ -23,20 +23,6 @@ const US ={
     filmesTop:`/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
 
 }
-const FR ={
-    tendenciasPT:`trending/all/week?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`,
-    filmesDiscover:`/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&sort_by=popularity.desc&include_adult=false&page=1&with_watch_monetization_types=flatrate`,
-    tvDiscover:`/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&sort_by=popularity.desc&include_adult=false&page=1&with_watch_monetization_types=flatrate`,
-    generosFilmes:`/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`,
-    pessoasTrending:`/trending/person/week?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`,
-    filmesTendenciasSemana:`/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`,
-    filmesTendenciasDia:`/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`,
-    
-    filmesBrevemente:`/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&page=1&region=FR`,
-    filmesTop:`/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&page=1`
-
-}
-
-export {PT,US,FR};
+export {PT,US};
 
 

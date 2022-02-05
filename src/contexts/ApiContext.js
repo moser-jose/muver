@@ -1,10 +1,9 @@
 import React, { createContext,useEffect, useState, useContext } from 'react';
 import axios from '../api';
-import {PT,US,FR} from '../api/url';
+import {PT,US} from '../api/url';
 import { i18n } from '../translate/i18n'
 import {getIdioma} from '../functions'
 export const StateContext = createContext();
-/* localStorage.setItem(process.env.REACT_APP_THEME,"dark"); */
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const theme_page= localStorage.getItem(process.env.REACT_APP_THEME);
 export const ApiContext = ({ children }) => {
@@ -40,8 +39,7 @@ export const ApiContext = ({ children }) => {
         }
         setSelectIdioma(getIdioma(idioma).toUpperCase());
         const language=getIdioma(idioma)==="en" ? US:
-                        getIdioma(idioma)==="pt" ? PT:
-                        getIdioma(idioma)==="fr" ? FR:PT
+                        getIdioma(idioma)==="pt" ? PT:PT
 
         const getTendencias = async (url)=> {
              const data= await Promise.all([

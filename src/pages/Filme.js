@@ -39,7 +39,7 @@ const Filme = () => {
                                     <Genrs data={genrsMovie}/>
                                 </div> */}
                                 <div className="direito">
-                                    <Row other="maispopular" type="filme" title="Filmes mais populares" data={filmesdiscover}/>
+                                    <Row other="maispopular" type="filme" title="Filmes populares" data={filmesdiscover}/>
                                   
                                   {
                                       tendencia===false ? <Row other="tendencias-dia" type="filme" title="Tendências" data={filmesTendenciasDia}/>:
@@ -49,8 +49,8 @@ const Filme = () => {
                                     
                                     
                                     <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
-                                    <Row other="pontuacao" type="filme" title="Filmes com maior pontuação" data={TopMovie}/>
-                                    <Row other="brevemente"   type="filme" title="Filmes a estrear em breve" data={filmBrev}/>
+                                    <Row other="pontuacao" type="filme" title="Maior pontuação" data={TopMovie}/>
+                                    <Row other="brevemente"   type="filme" title="A estrear" data={filmBrev}/>
                                     
                                 </div>
                             </div>

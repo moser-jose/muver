@@ -15,7 +15,7 @@ const Home = () => {
                 <div className="home">
                     <Header/>
                     <SlideHeader  data={tendencias}/>   
-                    <Row type="filme" title="Os Filmes mais populares" data={filmesdiscover}/>
+                    <Row type="filme" title="Os Filmes populares" data={filmesdiscover}/>
                     {/* <Genrs  data={genrsMovie}/> */}
                     <Row type="tv" title="As Séries mais populares" data={tvDiscover}/>
                     <Row type="actor" title="Os Actores mais populares" data={pessoasTrending}/>

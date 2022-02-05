@@ -8,7 +8,7 @@ import {limita} from '../functions'
 const properties = {
     indicators: true,
     arrows:false,
-    autoplay:true
+    autoplay:false
   };
 export const SlideHeader = ({data,type}) => {
     const [list, setList]=useState([])
@@ -35,7 +35,7 @@ export const SlideHeader = ({data,type}) => {
             {
                 list && list.slice(0,5).map((item,k) => (
                     <div className="each-slide" key={k} >
-                        <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path})`}}>
+                        <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path}) center center no-repeat`}}>
                             <div className="pr">
                                 {
                                     item.media_type==="tv" || type=="tv" ?
@@ -76,9 +76,6 @@ export const SlideHeader = ({data,type}) => {
                                         <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {item.release_date}</span>
                                     </div>
 
-
-
-
                                             <p className="titulo">{item.title}</p>
                                             
                                             <div className="media">
@@ -94,7 +91,7 @@ export const SlideHeader = ({data,type}) => {
                                                 </span>
                                                 
                                             </div>
-                                            <p className="texto">{limita(item.overview,300)}</p>
+                                            <p className="texto">{limita(item.overview,200)}</p>
                                             <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
                                         </>
