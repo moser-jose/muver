@@ -50,8 +50,6 @@ const Header = () => {
             document.querySelector('body').classList.add('dark');
         
     }, [])
-
-    console.log(theme)
     return (
             <div className="header">
                 <div className="logo">

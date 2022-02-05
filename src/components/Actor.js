@@ -10,13 +10,13 @@ const Actor = ({data, titulo, type, act}) => {
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
                         {
-                            type==="actores" && data.length > 8 && <a href={`/actores`}>Ver mais</a>
+                            type==="actores" && data.length > 9 && <a href={`/actores`}>Ver mais</a>
                         }
                     </div>
                     <div className="all-act">
                         {
                         type==="actores" && 
-                            data.slice(0,8).map((item, key)=>{
+                            data.slice(0,9).map((item, key)=>{
                                 return <DataActor key={key} item={item} type="act"/>
                             })
                         }

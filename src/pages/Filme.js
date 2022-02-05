@@ -8,6 +8,7 @@ import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
 import Loading from '../components/Loading';
+import { Loa } from '../components/Loa';
 
 const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
 const Filme = () => {
@@ -34,9 +35,9 @@ const Filme = () => {
                         <SlideHeader type="filme" data={filmesdiscover}/>   
                         <div className="all-gen">
                             <div className="gen-row">
-                                <div className="ge">
+                                {/* <div className="ge">
                                     <Genrs data={genrsMovie}/>
-                                </div>
+                                </div> */}
                                 <div className="direito">
                                     <Row other="maispopular" type="filme" title="Filmes mais populares" data={filmesdiscover}/>
                                   

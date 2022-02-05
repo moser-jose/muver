@@ -653,7 +653,170 @@ body{
                 }
             }
         }
+        
     }
+
+    &.hm{
+        height: 100vh;
+        background-color: #464646;
+        @keyframes pulse-bg {
+            /*  0%{
+                    background-color: #ccc;
+                }
+                50%{
+                    background-color: #dddddd;
+                }
+                100%{
+                    background-color: #ccc;
+                } */
+    
+                0%{
+                    background-position: -468px 0
+                }
+                100%{
+                    background-position: 468px 0
+                }
+    
+        }
+        span,p,.img,.header{
+            animation: pulse-bg 2s infinite linear forwards;
+            -webkit-animation:pulse-bg 2s infinite linear forwards;
+            background: #777777;
+            background: linear-gradient(to right, #777777 8%, #9e9e9e 18%, #777777 33%);
+            background-size: 800px 104px;
+        }
+       .header{
+            height: 70px;
+        }
+        .sl{
+            height: 100vh;
+        }
+        .pr{
+            height: 100vh;
+            .titulo,.texto{
+                height: 26.86px;
+                width: 320px;
+                margin-top: 10px;
+                background-color: #ffffff10;
+                backdrop-filter: blur(28px);
+                -webkit-backdrop-filter: blur(28px);
+            }
+            .texto{
+                width: 420px;
+                height: 36.86px;
+            }
+            .mediaT{
+                .media-type,.media-type-t{
+                    height: 30px;
+                    width: 90px;
+                }
+                .media-type-t{
+                    width: 120px;
+                }
+            }
+            .ver{
+                height: 46.86px;
+                background-color: #ffffff10;
+                backdrop-filter: blur(28px);
+                -webkit-backdrop-filter: blur(28px);
+                &:hover{
+                    background-color:  #ffffff10 ;
+                }
+            }
+        
+        }
+        .img{
+            height: 350px;
+            width: 250px;
+            background-color: #ffffff10;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+        }
+        .skel,.flx{
+            small,span{
+                animation: pulse-bg 2s infinite linear forwards;
+                -webkit-animation:pulse-bg 2s infinite linear forwards;
+                background: #ddd;
+                background: linear-gradient(to right, #ddd 8%, #ccc 18%, #dddd 33%);
+                background-size: 800px 104px;
+            }
+            .paci{
+    
+                h3{
+                    display: flex;
+                    small{
+                        /* animation: pulse-bg 2s infinite; */
+    
+                    }
+                    span{
+                        /* animation: pulse-bg 2s infinite; */
+                        width: 350px !important;
+                        height: 40px;
+                        border-radius: 2px;
+                    }
+                }
+                .ano{
+                    width: 80px;
+                    height: 40px;
+                    /* animation: pulse-bg 2s infinite; */
+                    border-radius: 2px;
+                }
+            }
+            .datos{
+                span{
+                    /* animation: pulse-bg 2s infinite; */
+                    height: 30px;
+                    width: 150px;
+                    border-radius: 2px;
+                }
+            }
+    
+            @keyframes pulse-bg {
+            /*  0%{
+                    background-color: #ccc;
+                }
+                50%{
+                    background-color: #dddddd;
+                }
+                100%{
+                    background-color: #ccc;
+                } */
+    
+                0%{
+                    background-position: -468px 0
+                }
+                100%{
+                    background-position: 468px 0
+                }
+    
+            }
+        }
+        .flx{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
+            span{
+                height: 40px;
+                width: 100%;
+            }
+            .text{
+                height: 80px;
+            }
+            .enf{
+                width:40%;
+            }
+            .fl{
+                span{
+                    width:140px;
+                    height: 45px;
+                }
+            }
+        }
+    }
+
+    
+    
 }
 
 .each-slide > div {
@@ -888,7 +1051,7 @@ body{
     .filmeR{
     
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             gap: 15px;
             justify-content: center;
             position: relative;
@@ -1695,7 +1858,7 @@ div[dir="ltr"] {
     margin: 0;
     width: 100%;
     .all-act{
-        grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+        grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
         .cast{
             h4{
                 font-weight: 500;
@@ -1732,7 +1895,7 @@ div[dir="ltr"] {
     margin: 30px auto;
     width: 90%;
     .gen-row{
-        display: flex;
+        //display: flex;
         .ge{
             width: 22%;
             background-color: #ffffff10;

@@ -9,6 +9,8 @@ import Filmes from './pages/Filme'
 import FilmesPage from './pages/FilmesPage'
 import ActoresDetalhe from './pages/ActoresDetalhe'
 import Series from './pages/Series'
+import { Loa } from './components/Loa'
+import { Genrs } from './pages/Genrs'
 const router = () => {
     return (
         <Router>
@@ -23,6 +25,7 @@ const router = () => {
                 <Route path="/actores/:slug/:id" element={<ActoresDetalhe/>} />
                 <Route path="/actores/:slug/:id/:type" element={<TypeDetalhesActores/>} />
                 <Route path="/filmes/:type" element={<TypeDetalhes/>} />
+                <Route path="/filmes/generos/:slug/:id" element={<Genrs/>} />
            </Routes>
         </Router>
     )

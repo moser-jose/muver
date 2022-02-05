@@ -1,4 +1,5 @@
 import React from 'react'
+import slugify from 'slugify'
 
 export const Genrs = ({data}) => {
     return (
@@ -8,7 +9,7 @@ export const Genrs = ({data}) => {
                 <div className="allG">
                    {
                         data && data.map((item, key)=>{
-                            return <a href="/" key={key}>{item.name}</a>
+                            return <a href={`/filmes/generos/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} key={key}>{item.name}</a>
                         })
                    }
                 </div>

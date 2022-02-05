@@ -36,17 +36,8 @@ const Actores = () => {
     return (
         loading===true ? 
         <div className='autores-detalhes'>
-            {/* <OpenSource/>
-            <Header/> */}
+
             <SlideHeaderActores data={data.results}/>
-            {/* <SlideHeader type="actores" data={data}/>  */}
-            {/* <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${data.results[0].profile_path} )`}}>
-                <div className="pr">
-                    <div className="data">
-                        <h2 className="_p">Actores</h2>
-                    </div>
-                </div>
-            </div> */}
 
             <div className="todos-actores">
                 <div className="titulo">
