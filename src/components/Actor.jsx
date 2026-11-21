@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import DataActor from './Dados/DataActor';
@@ -10,7 +11,7 @@ const Actor = ({data, titulo, type, act}) => {
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
                         {
-                            type==="actores" && data.length > 9 && <a href={`/actores`}>Ver mais</a>
+                            type==="actores" && data.length > 9 && <a href={`/actores`}>{t('ui.ver_mais')}</a>
                         }
                     </div>
                     <div className="all-act">
@@ -28,8 +29,8 @@ const Actor = ({data, titulo, type, act}) => {
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
                         {
-                            type==="actores" ? data.cast.length > 9 && <a href={`${params.id}/autores`}>Ver mais</a>:
-                            type==="equipe" && data.crew.length > 9 && <a href={`${params.id}/autores`}>Ver mais</a>
+                            type==="actores" ? data.cast.length > 9 && <a href={`${params.id}/autores`}>{t('ui.ver_mais')}</a>:
+                            type==="equipe" && data.crew.length > 9 && <a href={`${params.id}/autores`}>{t('ui.ver_mais')}</a>
                         }
                     </div>
                     <div className="all-act">

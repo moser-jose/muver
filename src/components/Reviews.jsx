@@ -1,3 +1,4 @@
+import { t, i18n } from '../translate/i18n'
 import { ArrowCircleDown, Star } from 'iconsax-react'
 import React from 'react'
 import User from '../assets/img/profile.jpg'
@@ -9,9 +10,9 @@ const Reviews = ({data}) => {
     return (
         data.length!==0 ? <div className="reviews">
         <div className="titulo">
-            <p>Avaliações</p>
+            <p>{t('ui.avaliacoes')}</p>
             {
-                data && data.length > 6 && <a href="/">Ver mais</a>
+                data && data.length > 6 && <a href="/">{t('ui.ver_mais')}</a>
             }
         </div>
         {
@@ -34,9 +35,9 @@ const Reviews = ({data}) => {
                   
                     <div className="re">
                         <div>
-                            <h3>Uma crítica de <span>{item.author}</span></h3>
-                            <h5>Escrito por <span>{item.author_details.username}</span> em {new Date(item.updated_at).toLocaleString('pt-PT',{dateStyle:'full',timeStyle:'short'})}</h5>
-                            <p>{limita(item.content,410)}... <a href={item.url}>ler mais</a></p>
+                            <h3>{t('ui.critica_de')} <span>{item.author}</span></h3>
+                            <h5>{t('ui.escrito_por')} <span>{item.author_details.username}</span> {t('ui.em')} {new Date(item.updated_at).toLocaleString(i18n.language,{dateStyle:'full',timeStyle:'short'})}</h5>
+                            <p>{limita(item.content,410)}... <a href={item.url}>{t('ui.ler_mais')}</a></p>
                         </div>
                     </div>
                     {

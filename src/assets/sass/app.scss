@@ -2874,6 +2874,25 @@ div[dir="ltr"] {
     height: auto !important;
     aspect-ratio: 16 / 9;
 }
+// filas de actores: tantas colunas quantas couberem e uma só linha
+// (as linhas extra ficam com altura 0 e escondidas, por isso nunca aparece um retrato cortado)
+.actores .all-act{
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    grid-template-rows: auto;
+    grid-auto-rows: 0;
+    row-gap: 0 !important;
+    overflow: hidden;
+    .cast{
+        justify-content: flex-start !important;
+        text-align: center;
+        img{
+            width: 100% !important;
+            max-width: 150px;
+            height: auto !important;
+            aspect-ratio: 1;
+        }
+    }
+}
 // espaço entre blocos do cabeçalho (150px deixava a pesquisa sem largura)
 .header{ gap: 50px !important; }
 .header .search{ min-width: 200px; }
@@ -3010,10 +3029,7 @@ div[dir="ltr"] {
         gap: 8px;
     }
     .tendenc{ margin-left: 0 !important; }
-    .actores .all-act .cast img{
-        width: 110px !important;
-        height: 110px !important;
-    }
+    .actores .all-act{ grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important; }
     .film-slide .filme-ho .pr{
         flex-direction: column !important;
         align-items: flex-start !important;

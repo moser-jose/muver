@@ -1,3 +1,4 @@
+import { t } from '../../translate/i18n'
 import React from 'react'
 import slugify from 'slugify'
 import Act from '../../assets/img/profile.jpg'
@@ -21,7 +22,7 @@ const DataActor = ({item, type}) => {
             {
                 type==="actores" ?
                 <>
-                    {item.character && <h6><span>como</span>{item.character}</h6>}
+                    {item.character && <h6><span>{t('ui.como')}</span>{item.character}</h6>}
                 </>:type==="equipe" &&
                 <>
                     {item.job && <h6>{item.job}</h6>}

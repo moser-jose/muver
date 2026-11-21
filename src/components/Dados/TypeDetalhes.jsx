@@ -1,3 +1,4 @@
+import { t } from '../../translate/i18n'
 import { ArrowLeft2, ArrowRight2, Play, Star } from 'iconsax-react';
 import React,{useState,useEffect} from 'react'
 import ReactPaginate from '../Paginate';
@@ -95,13 +96,13 @@ const TypeDetalhes = () => {
                     }
                    
                    <h2 className="_p">{
-                   params.type==="similares" ? "Filmes Similares" : 
-                   params.type==="recomendados" ? "Filmes Recomendados":
-                   params.type==="mais-populares" ? "Filmes mais populares":
-                   params.type==="tendecias-semana" ? "Tendências da Semana":
-                   params.type==="tendecias-dia" ? "Tendências do Dia":
-                   params.type==="brevemente" ? "Filmes a estrear em breve":
-                   params.type==="maior-pontuacao" && "Filmes com maior pontuação"
+                   params.type==="similares" ? t('ui.filmes_similares') : 
+                   params.type==="recomendados" ? t('ui.filmes_recomendados'):
+                   params.type==="mais-populares" ? t('ui.filmes_mais_populares'):
+                   params.type==="tendecias-semana" ? t('ui.tendencias_semana'):
+                   params.type==="tendecias-dia" ? t('ui.tendencias_dia'):
+                   params.type==="brevemente" ? t('ui.filmes_a_estrear'):
+                   params.type==="maior-pontuacao" && t('ui.filmes_maior_pontuacao')
                    
                    }</h2>
                </div>
@@ -109,7 +110,7 @@ const TypeDetalhes = () => {
        </div>
        <div className="todos-actores">
                 <div className="titulo">
-                    <p>Filmes</p>
+                    <p>{t('ui.filmes')}</p>
                 </div>
                 <div className="filmeR simil" >
                 {

@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
@@ -30,13 +31,13 @@ const Resultados = ({q}) => {
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.5),rgba(24, 24, 24, 0.5))${fundo ? `,url(https://image.tmdb.org/t/p/w1280${fundo.backdrop_path})` : ',#17171a'}`}}>
                 <div className="pr">
                     <div className="data">
-                        <h2 className="_p">Resultados para “{q}”</h2>
+                        <h2 className="_p">{t('ui.resultados_para')} “{q}”</h2>
                     </div>
                 </div>
             </div>
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>{data.total_results ? `${data.total_results} filmes` : 'Nenhum filme encontrado'}</p>
+                    <p>{data.total_results ? `${data.total_results} ${t('ui.n_filmes')}` : t('ui.nenhum')}</p>
                 </div>
                 <div className="filmeR simil">
                     {data.results.map((item) => <DataAll key={item.id} item={item} type="filme"/>)}

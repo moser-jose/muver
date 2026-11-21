@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useState } from 'react'
 import { Moon, NotificationBing, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
@@ -66,7 +67,7 @@ const Header = () => {
 
                 <div className="user">
                     <div className="theme">
-                        <input onChange={handleTheme} checked={theme==="light"} aria-label="Tema claro" type="checkbox" className="checkbox" id="chk" />
+                        <input onChange={handleTheme} checked={theme==="light"} aria-label={t('ui.tema_claro')} type="checkbox" className="checkbox" id="chk" />
                         <label className="label" htmlFor="chk">
                             <Moon size="11" color="#000" variant="Bulk"/>
                             <Sun1 size="11" color="#ad6d08" variant="Bulk"/>

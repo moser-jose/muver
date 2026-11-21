@@ -1,3 +1,4 @@
+import { t } from '../../translate/i18n'
 import { Star, UserOctagon } from 'iconsax-react';
 import React,{useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
@@ -32,7 +33,7 @@ const TypeDetalhesActores = () => {
                     }
                    
                    <h2 className="_p">{
-                    params.type==="filmes" && "Filmes Realizados"                    
+                    params.type==="filmes" && t('ui.filmes_realizados')                    
                    }</h2>
                </div>
            </div>
@@ -40,8 +41,8 @@ const TypeDetalhesActores = () => {
         <div className="todos-actores">
                 <div className="titulo">
                     {
-                        actor.gender===1?<p>Filmes como actriz</p>:
-                        <p>Filmes como actor</p>
+                        actor.gender===1?<p>{t('ui.filmes_actriz')}</p>:
+                        <p>{t('ui.filmes_actor')}</p>
                     }
                 </div>
                 <div className="filmeR simil" >
@@ -53,7 +54,7 @@ const TypeDetalhesActores = () => {
                 }
                 </div>
                 <div className="titulo" style={{marginTop:'30px'}}>
-                    <p>Equipe Técnica</p>
+                    <p>{t('ui.equipa_tecnica')}</p>
                 </div>
                 <div className="filmeR simil" >
                 {
