@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactPlayer from 'react-player'
 import { useApiContext } from '../contexts/ApiContext'
 
 const VideoModal = () => {
@@ -12,14 +11,14 @@ const VideoModal = () => {
     return (
         <div className="modal">
             <div className="corpo">
-                <span className="close" onClick={closeModal}>+</span>
+                <button type="button" aria-label="Fechar" className="close" onClick={closeModal}>+</button>
                 
-                <ReactPlayer
+                <iframe
                     className="video"
-                    width="100%" 
-                    height="100%" 
-                    url={`https://www.youtube.com/watch?v=${url}`}
-                    playing={true}
+                    title="Trailer"
+                    src={`https://www.youtube.com/embed/${url}?autoplay=1`}
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
                     />
             </div>
         </div>

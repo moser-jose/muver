@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import 'react-slideshow-image/dist/styles.css';
 import './assets/sass/app.scss';
 import Github from './components/Github';
 import Up from './components/Up';
@@ -8,11 +9,9 @@ import Router from './router';
 
 function App() {
   const {modal}=useApiContext();
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
+  // booleano: só re-renderiza quando cruza o limite, não a cada pixel de scroll
+  const [scrolled, setScrolled] = useState(false);
+  const handleScroll = () => setScrolled(window.scrollY > 70);
   useEffect(() => {
       window.addEventListener('scroll', handleScroll, { passive: true });
       return () => {
@@ -23,7 +22,7 @@ function App() {
     <div className="App">
       {modal === true && <VideoModal/>}
       <Router/>
-      {scrollPosition > 70 && <><Up/><Github/></>}      
+      {scrolled && <><Up/><Github/></>}      
     </div>
   );
 }

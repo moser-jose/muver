@@ -8,7 +8,6 @@ export const Genrs = () => {
 
         const fil = filmesdiscover.filter((item) => item.genre_ids.find(e => e === 28))
 
-        console.log(fil);
 
   return <div className="autores-detalhes">
     <OpenSource/>

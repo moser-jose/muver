@@ -8,9 +8,9 @@ const DataActor = ({item, type}) => {
     return (
         <a href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="cast">
             {
-               <img src={item.gender===2 && item.profile_path===null ? Men : item.gender===1 && item.profile_path===null ? Fem:
+               <img loading="lazy" alt={item.name} src={item.gender===2 && item.profile_path===null ? Men : item.gender===1 && item.profile_path===null ? Fem:
                 item.gender===0 && item.profile_path===null ? Men:
-                `https://image.tmdb.org/t/p/original${item.profile_path}`}/>
+                `https://image.tmdb.org/t/p/w500${item.profile_path}`}/>
                     
             }
             {

@@ -35,7 +35,7 @@ export const SlideHeader = ({data,type}) => {
             {
                 list && list.slice(0,5).map((item,k) => (
                     <div className="each-slide" key={k} >
-                        <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${item.backdrop_path}) center center no-repeat`}}>
+                        <div className="sl" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/w1280${item.backdrop_path}) center center no-repeat`}}>
                             <div className="pr">
                                 {
                                     item.media_type==="tv" || type=="tv" ?
@@ -98,7 +98,7 @@ export const SlideHeader = ({data,type}) => {
                                 }
                             </div>
                             <div className="img">
-                                <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`}/>
+                                <img alt={item.title || item.name} src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}/>
                             </div>
                         </div>
                     </div>

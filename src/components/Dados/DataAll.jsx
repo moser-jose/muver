@@ -4,8 +4,8 @@ import slugify from 'slugify'
 import Poster from '../../assets/img/poster.jpg'
 export const DataAll = ({item, type}) => {
     return (
-        <a href={`/filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} >
-            <img  src={item.poster_path===null?Poster:`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
+        <a href={`/filme/${slugify(item.title || item.name || '',{lower:true,strict: true})}/${item.id}`} >
+            <img loading="lazy" alt={item.title || item.name} src={item.poster_path===null?Poster:`https://image.tmdb.org/t/p/w300${item.poster_path}`}/>
             <div className="info">
                 {
                     type==="filme" ? 

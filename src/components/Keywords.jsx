@@ -5,7 +5,7 @@ const Keywords = ({data, back,lang, companies}) => {
     return (
         <div className="colecao" 
         style={{'background': 
-        `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.6)),url(https://image.tmdb.org/t/p/original${back})`}}>
+        `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.6)),url(https://image.tmdb.org/t/p/w1280${back})`}}>
             
             <div className="data">
                 <div className="colect">
@@ -29,7 +29,7 @@ const Keywords = ({data, back,lang, companies}) => {
                         <div className="img-k">
                             {
                                 companies.slice(0,6).map((item, key)=>{
-                                    return item.logo_path && <img key={key} src={`https://image.tmdb.org/t/p/original${item.logo_path}`}/>
+                                    return item.logo_path && <img key={key} loading="lazy" alt={item.name} src={`https://image.tmdb.org/t/p/original${item.logo_path}`}/>
                                 })
                             }
                         </div>

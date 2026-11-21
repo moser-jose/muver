@@ -10,8 +10,8 @@ import Galery from '../components/Galery';
 import Loading from '../components/Loading';
 import Men from '../assets/img/user-act.jpg'
 import Fem from '../assets/img/user-act-f.jpg'
-var slugify = require('slugify')
-const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
+import slugify from 'slugify'
+const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const ActoresDetalhe = () => {
     const params = useParams();
     const [actor, setActor]=useState([]);
@@ -29,7 +29,7 @@ const ActoresDetalhe = () => {
             else{
                 id="pt"
             }
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/person/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/person/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
             setActor(f.data);
             function groupBy(list, keyGetter) {
                 const map = new Map();
@@ -54,7 +54,7 @@ const ActoresDetalhe = () => {
         <div className="autores-detalhes">
             <OpenSource/>
             <Header/>
-            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${actor.profile_path} )`,'height':'100vh'}}>
+            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${actor.profile_path} )`,'height':'100vh'}}>
                 <div className="pr">
                     <div className="data">
                         <h2 className="_p">{actor.name}</h2>
@@ -77,9 +77,9 @@ const ActoresDetalhe = () => {
                     </div>
 
                     <div className="img">
-                        <img src={actor.gender===2  && actor.profile_path===null ? Men : actor.gender===1 && actor.profile_path===null ? Fem:
+                        <img alt={actor.name} src={actor.gender===2  && actor.profile_path===null ? Men : actor.gender===1 && actor.profile_path===null ? Fem:
                         actor.gender===0 && actor.profile_path===null ? Men:
-                        `https://image.tmdb.org/t/p/original${actor.profile_path}`}/>
+                        `https://image.tmdb.org/t/p/w500${actor.profile_path}`}/>
                     </div>
                 </div>
             </div>

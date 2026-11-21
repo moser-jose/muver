@@ -6,8 +6,8 @@ import OpenSource from '../OpenSource';
 import userMale from '../../assets/img/user-act.jpg'
 import userFemale from '../../assets/img/user-act-f.jpg'
 import { Play } from 'iconsax-react';
-var slugify = require('slugify')
-const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
+import slugify from 'slugify'
+const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const AllActores = () => {
     const params = useParams();
     const [filme, setFilme]=useState([]);
@@ -25,7 +25,7 @@ const AllActores = () => {
             else{
                 id="pt"
             }
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
             setFilme(f.data);
             function groupBy(list, keyGetter) {
                 const map = new Map();
@@ -50,7 +50,7 @@ const AllActores = () => {
         <div className="autores-detalhes">
             <OpenSource/>
             <Header/>
-            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/original${filme.backdrop_path} )`}}>
+            <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path} )`}}>
                 <div className="pr">
                     <div className="data">
                         <a href={`/filme/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
@@ -66,7 +66,7 @@ const AllActores = () => {
                     {
                         filme.credits.cast.map((item, key)=>(
                             <a key={key} href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="todos-a">
-                            <img src={
+                            <img loading="lazy" alt={item.name} src={
                                  item.profile_path===null && item.gender===0 ? userMale: 
                                  item.profile_path===null && item.gender===1 ? userFemale:
                                  item.profile_path===null && item.gender===2 ? userMale:
@@ -86,7 +86,7 @@ const AllActores = () => {
                     {
                         Array.from(crew).map((i, key)=>{
                             return <a key={key} href={`/actores/${slugify(i[1][0].name,{lower:true,strict: true})}/${i[1][0].id}`} className="todos-a">
-                            <img src={
+                            <img loading="lazy" alt={i[1][0].name} src={
                                 i[1][0].profile_path===null && i[1][0].gender===0 ? userMale: 
                                 i[1][0].profile_path===null && i[1][0].gender===1 ? userFemale:
                                 i[1][0].profile_path===null && i[1][0].gender===2 ? userMale:

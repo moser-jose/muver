@@ -5,18 +5,18 @@ import OpenSource from '../components/OpenSource';
 import userMale from '../assets/img/user-act.jpg'
 import userFemale from '../assets/img/user-act-f.jpg'
 import slugify from 'slugify';
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from '../components/Paginate';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 import Loading from '../components/Loading';
 import { SlideHeaderActores } from '../components/SlideHeaderActores';
-const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
+const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const Actores = () => {
     const [data, setData]=useState([]);
     const [page, setPage]=useState(1);
     const [loading, setLoading]=useState(1);
     useEffect(()=>{
         async function getActores() {
-            const data= await axios.get(`${process.env.REACT_APP_APP_URL}/trending/person/week?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
+            const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/trending/person/week?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
             setData(data.data)
             setLoading(true);
         }
@@ -47,7 +47,7 @@ const Actores = () => {
                     {
                         data.results.map((item, key)=>(
                             <a key={key} href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="todos-a">
-                            <img src={
+                            <img loading="lazy" alt={item.name} src={
                                  item.profile_path===null && item.gender===0 ? userMale: 
                                  item.profile_path===null && item.gender===1 ? userFemale:
                                  item.profile_path===null && item.gender===2 ? userMale:

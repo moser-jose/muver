@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ReactPlayer from 'react-player/youtube'
 import { useApiContext } from '../contexts/ApiContext'; 
 import { ArrowRight3, Calendar, Crown, Flash, Hex, Play, PlayCircle, Profile, Star } from 'iconsax-react';
 import OpenSource from './OpenSource';
@@ -38,10 +37,10 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
         <div className="film-slide">
            <OpenSource/>
            <Header/>
-           <div className="filme-ho" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${data.backdrop_path})`}}>
+           <div className="filme-ho" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/w1280${data.backdrop_path})`}}>
                 <div className="pr">
                     <div className="cap">
-                        <img src={`https://image.tmdb.org/t/p/original${data.poster_path}`}/>
+                        <img alt={data.title || data.name} src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}/>
                     </div>
                     <div className="data">
                         {
@@ -92,7 +91,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     </div>
                                     <p className="texto">{limita(data.overview,300)}</p>
                                     {data.genres.map((item, key)=>{
-                                        return <a key={key} href={`/filmes/genero/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="ver gen">{item.name}</a>
+                                        return <a key={key} href={`/filmes/generos/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="ver gen">{item.name}</a>
                                     })}
 
                                     <div className="eq">
@@ -135,13 +134,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                             
                         }).slice(0,3).map(function (item, key) {
                             return <div key={key} className="trail">
-                                <ReactPlayer
-                                    width="100%" 
-                                    height="100%" 
-                                    url={`https://www.youtube.com/watch?v=${item.key}`}
-                                    light={true}
-                                    playIcon={<></>}
-                                  />
+                                <img loading="lazy" alt={item.name} src={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}/>
                                 <div className="v-c" onClick={()=>Modal(item.key)} title={item.type+ " - "+item.name}>
                                     <div className="pla" onClick={()=>Modal(item.key)}>
                                         <PlayCircle onClick={()=>Modal(item.key)} size="38" color="#fff" variant="Bulk"/>

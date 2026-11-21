@@ -4,8 +4,8 @@ import {PT,US} from '../api/url';
 import { i18n } from '../translate/i18n'
 import {getIdioma} from '../functions'
 export const StateContext = createContext();
-const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
-const theme_page= localStorage.getItem(process.env.REACT_APP_THEME);
+const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
+const theme_page= localStorage.getItem(import.meta.env.REACT_APP_THEME);
 export const ApiContext = ({ children }) => {
     const [selectIdioma, setSelectIdioma]=useState("PT");
     const [tendencias, setTendencias]=useState([]);
@@ -23,7 +23,7 @@ export const ApiContext = ({ children }) => {
     const [tendencia, setTendencia]=useState(false);
     const [theme, setTheme]=useState("dark");
     useEffect(() => {
-        const th=localStorage.getItem(process.env.REACT_APP_THEME)
+        const th=localStorage.getItem(import.meta.env.REACT_APP_THEME)
         if(th==="light"){
             setTheme("light")
             document.querySelector('body').classList.add('light');
@@ -34,7 +34,7 @@ export const ApiContext = ({ children }) => {
         }
         else{
             setTheme("dark")
-            localStorage.setItem(process.env.REACT_APP_THEME,"dark")
+            localStorage.setItem(import.meta.env.REACT_APP_THEME,"dark")
             document.querySelector('body').classList.add('dark');
         }
         setSelectIdioma(getIdioma(idioma).toUpperCase());
@@ -43,15 +43,15 @@ export const ApiContext = ({ children }) => {
 
         const getTendencias = async (url)=> {
              const data= await Promise.all([
-                await axios.get(url.tendenciasPT),
-                await axios.get(url.filmesDiscover),
-                await axios.get(url.tvDiscover),
-                await axios.get(url.generosFilmes),
-                await axios.get(url.pessoasTrending),
-                await axios.get(url.filmesTendenciasSemana),
-                await axios.get(url.filmesTendenciasDia),
-                await axios.get(url.filmesBrevemente),
-                await axios.get(url.filmesTop)
+                axios.get(url.tendenciasPT),
+                axios.get(url.filmesDiscover),
+                axios.get(url.tvDiscover),
+                axios.get(url.generosFilmes),
+                axios.get(url.pessoasTrending),
+                axios.get(url.filmesTendenciasSemana),
+                axios.get(url.filmesTendenciasDia),
+                axios.get(url.filmesBrevemente),
+                axios.get(url.filmesTop)
             ])
             setTendencias(data[0].data.results);
             setFilmesDiscover(data[1].data.results);

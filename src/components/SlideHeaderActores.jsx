@@ -29,7 +29,6 @@ export const SlideHeaderActores = ({data,type}) => {
         }
         setList(randomList(data))
     },[])
-   console.log(list)
     return (
         <div>
             <OpenSource/>
@@ -38,7 +37,7 @@ export const SlideHeaderActores = ({data,type}) => {
             {
                 list && list.slice(0,5).map((actor,k) => (
                     <div className="each-slide"  key={k} >
-                        <div className="sl" style={{'height':'670px','background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/original${actor.profile_path})`}}>
+                        <div className="sl" style={{'height':'670px','background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/w1280${actor.profile_path})`}}>
                             
                             <div className="pr">
                                 <div className="data">
@@ -46,9 +45,9 @@ export const SlideHeaderActores = ({data,type}) => {
                                 </div>
 
                                 <div className="img">
-                                    <img src={actor.gender===2  && actor.profile_path===null ? Men : actor.gender===1 && actor.profile_path===null ? Fem:
+                                    <img alt={actor.name} src={actor.gender===2  && actor.profile_path===null ? Men : actor.gender===1 && actor.profile_path===null ? Fem:
                                     actor.gender===0 && actor.profile_path===null ? Men:
-                                    `https://image.tmdb.org/t/p/original${actor.profile_path}`}/>
+                                    `https://image.tmdb.org/t/p/w500${actor.profile_path}`}/>
                                 </div>
                                 <a style={{color:'#fff !important'}} href={`actores/${slugify(actor.name,{lower:true,strict: true})}/${actor.id}`} className="ver acto"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             ver mais</a>

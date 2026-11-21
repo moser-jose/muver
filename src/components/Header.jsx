@@ -18,13 +18,13 @@ const Header = () => {
     }
     const handleClickIdioma=(idioma)=>{
         if(idioma==="PT"){
-            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
+            localStorage.setItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
         }
         else if(idioma==="EN"){
-            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"en-US");
+            localStorage.setItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY,"en-US");
         }
         else{
-            localStorage.setItem(process.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
+            localStorage.setItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY,"pt-PT");
         }
         setSelectIdioma(idioma)
         window.location = window.location
@@ -32,12 +32,12 @@ const Header = () => {
     const handleTheme=()=>{
         if (theme==="light") {
             document.querySelector('body').classList.remove('light');
-            localStorage.setItem(process.env.REACT_APP_THEME,"dark");
+            localStorage.setItem(import.meta.env.REACT_APP_THEME,"dark");
             setTheme("dark")
         }
         else {
             document.querySelector('body').classList.add('light');
-            localStorage.setItem(process.env.REACT_APP_THEME,"light");
+            localStorage.setItem(import.meta.env.REACT_APP_THEME,"light");
             setTheme("light")
         }
        
@@ -49,12 +49,11 @@ const Header = () => {
             document.querySelector('body').classList.add('dark');
         
     }, [])
-    console.log(menu)
     return (
             <div className="header">
                 <div className="logo">
                     <a href="/">
-                        <img src={Logo}></img>
+                        <img src={Logo} alt="Muver"/>
                     </a>
                 </div>
                 <div className="menu">

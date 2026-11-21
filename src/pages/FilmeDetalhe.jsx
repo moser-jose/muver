@@ -10,7 +10,7 @@ import Reviews from '../components/Reviews';
 import { SlideDetalhe } from '../components/SlideDetalhe';
 import Type from '../components/Type';
 import Loading from '../components/Loading';
-const idioma= localStorage.getItem(process.env.REACT_APP_I18N_STORAGE_KEY);
+const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const FilmeDetalhe = () => {
     const params = useParams();
     const [filme, setFilme]=useState([]);
@@ -20,13 +20,13 @@ const FilmeDetalhe = () => {
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
         async function getFilmes() {
-            const f= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
-            const cert= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
-            const recomend= await axios.get(`${process.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
+            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
+            const cert= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${import.meta.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
+            const recomend= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${import.meta.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
             setFilme(f.data);
             setRecomendation(recomend);
             if(f.data.belongs_to_collection!==null){
-               const col= await axios.get(`${process.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${process.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
+               const col= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
                 setColection(col)
             }
             cert.data.results.filter((item)=>{

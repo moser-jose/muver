@@ -1,52 +1,38 @@
-import React from 'react';
-import { LightBox } from 'react-lightbox-pack';
-import "react-lightbox-pack/dist/index.css";
+import React, { useRef, useState } from 'react';
+
+const src = (item, size) => `https://image.tmdb.org/t/p/${size}${item.file_path}`;
+
+// Galeria com lightbox no <dialog> nativo (Esc fecha, setas navegam)
 const Images = ({data}) => {
-    var i=0;
-    var list=[];
-    var ilist=[];
-    const [toggle, setToggle] =  React.useState(false);
-	const [sIndex, setSIndex] =  React.useState("");
-    const  lightBoxHandler  = (state, sIndex) => {
-		setToggle(state);
-		setSIndex(sIndex);
-	};
-    data.map((item)=>(
-        i=i+1,
-        list.push({
-            'id':i,
-            'image':`https://image.tmdb.org/t/p/w780/${item.file_path}`
-        }),
-        ilist.push({
-            'id':i,
-            'image':`https://image.tmdb.org/t/p/w780/${item.file_path}`
-        })
-    ))
+    const [index, setIndex] = useState(null);
+    const dialog = useRef(null);
+    const open = (i) => { setIndex(i); dialog.current.showModal(); };
+    const step = (d) => setIndex((i) => (i + d + data.length) % data.length);
     return (
         <div className="imagens">
-			{
-                list.slice(0,8).map((item, index) => {
-                    return <div key={item.id}>
-                        <span><img
-                            key={item.id}
-                            src={item.image}
-                            onClick={() => {
-                                lightBoxHandler(true, index);
-                            }}/>
-                        </span>
+            {
+                data.slice(0,8).map((item, i) => (
+                    <div key={item.file_path}>
+                        <span><img alt="" loading="lazy" src={src(item,'w780')} onClick={() => open(i)}/></span>
                     </div>
-                    })
+                ))
             }
-			<LightBox
-				state={toggle}
-                event={lightBoxHandler}
-                data={ilist}
-                thumbnailHeight={0}
-                thumbnailWidth={0}
-                setImageIndex={setSIndex}
-                imageIndex={sIndex}
-			/>
-		</div>
+            <dialog
+                ref={dialog}
+                className="lightbox"
+                onClose={() => setIndex(null)}
+                onClick={(e) => e.target === dialog.current && dialog.current.close()}
+                onKeyDown={(e) => e.key === 'ArrowLeft' ? step(-1) : e.key === 'ArrowRight' && step(1)}>
+                {
+                    index !== null && <>
+                        <button type="button" aria-label="Anterior" onClick={() => step(-1)}>‹</button>
+                        <img alt="" src={src(data[index],'w1280')}/>
+                        <button type="button" aria-label="Seguinte" onClick={() => step(1)}>›</button>
+                        <button type="button" aria-label="Fechar" className="close" onClick={() => dialog.current.close()}>×</button>
+                    </>
+                }
+            </dialog>
+        </div>
     )
 }
 

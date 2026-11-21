@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useApiContext } from '../contexts/ApiContext'
 import { DataAll } from './Dados/DataAll'
-var slugify = require('slugify')
+import slugify from 'slugify'
 const Row = ({data,title, type,other}) => {
     const{tendencia, setTendencia}=useApiContext();
     return (
@@ -13,8 +13,8 @@ const Row = ({data,title, type,other}) => {
                     other==="maispopular" ? title:
                     other==="tendencias-semana" ? <>{title} 
                         <div className='tendenc'>
-                            <span  className={tendencia===false ? 'active':<></>} onClick={()=>setTendencia(false)}>Dia</span>
-                            <span className={tendencia===true ? 'active':<></>} onClick={()=>setTendencia(true)}>Semana</span>
+                            <span  className={tendencia===false ? 'active':''} onClick={()=>setTendencia(false)}>Dia</span>
+                            <span className={tendencia===true ? 'active':''} onClick={()=>setTendencia(true)}>Semana</span>
                             <div  className={
                                 tendencia === false ? 'animacao s-dia' :'animacao s-semana'
                             }></div>
@@ -22,8 +22,8 @@ const Row = ({data,title, type,other}) => {
                     </>:
                     other==="tendencias-dia" ? <>{title} 
                         <div className='tendenc'>
-                            <span  className={tendencia===false ? 'active':<></>} onClick={()=>setTendencia(false)}>Dia</span>
-                            <span className={tendencia===true ? 'active':<></>} onClick={()=>setTendencia(true)}>Semana</span>
+                            <span  className={tendencia===false ? 'active':''} onClick={()=>setTendencia(false)}>Dia</span>
+                            <span className={tendencia===true ? 'active':''} onClick={()=>setTendencia(true)}>Semana</span>
                             <div  className={
                                 tendencia === false ? 'animacao s-dia' :'animacao s-semana'
                             }></div>

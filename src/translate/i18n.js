@@ -7,7 +7,7 @@ i18n
     .use(LanguageDetector)
     .init({
         debug: false,
-        defaultNS: ['translations'],
+        defaultNS: 'translations',
         fallbackLng: 'pt',
         ns: ['translations'],
         resources: messages
