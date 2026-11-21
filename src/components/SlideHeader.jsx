@@ -52,7 +52,7 @@ export const SlideHeader = ({data,type}) => {
                                             <h5 className="original">{item.original_name}</h5>
                                                 <span>
                                                     <Star size="24" color="#cccc32" variant="Bulk"/>
-                                                    {item.vote_average}/10
+                                                    {Number(item.vote_average).toFixed(1)}/10
                                                 </span>
                                                 <span>
                                                     
@@ -82,7 +82,7 @@ export const SlideHeader = ({data,type}) => {
                                                 <h5 className="original">{item.original_title}</h5>
                                                 <span>
                                                     <Star size="24" color="#cccc32" variant="Bulk"/>
-                                                    {item.vote_average}/10
+                                                    {Number(item.vote_average).toFixed(1)}/10
                                                 </span>
                                                 <span>
                                                     

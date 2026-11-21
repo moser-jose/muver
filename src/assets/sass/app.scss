@@ -20,6 +20,47 @@ $light-border: #e1e4e9;
 $light-text: #16181d;
 $light-muted: #5b6470;
 
+// Descrição dos cartões de filme: sempre visível sobre um degradé (antes só aparecia com o rato por cima)
+@mixin card-info{
+    .info{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 56px 10px 10px;
+        background: linear-gradient(transparent, #000000c4 48%, #000000f2);
+        color: #fff;
+        .nome{
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.25;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .meta{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: #ffffffc7;
+        }
+        .perc{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    }
+    &:hover img{
+        transform: scale(1.06);
+    }
+}
+
 body{
     background-color: $dark-bg;
     color: #fff;
@@ -1106,47 +1147,7 @@ body{
                     object-fit: cover;
                     transition:  all .5s ease;
                 }
-                .info{
-                    position: absolute;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 100%;
-                    height: 60px;
-                    bottom: 0px;
-                    border-bottom-left-radius: 15px;
-                    border-bottom-right-radius: 15px;
-                    padding: 10px;
-                    background-color: #ffffff10;
-                    opacity: 0;
-                    backdrop-filter: blur(8px);
-                    -webkit-backdrop-filter: blur(8px);
-                    transition:  all .5s ease;
-                    span{
-                        font-weight: 500;
-                        max-width: 10ch;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        display: block;
-                    }
-                    .perc{
-                        font-size: 12px;
-                        display: flex; 
-                        align-items: center;
-                        svg{
-                            margin-right: 4px;
-                        }
-                    }
-                }
-                img:hover{
-                    transform: scale(1.1);
-                    transition:  all .5s ease;
-                }
-                img:hover ~ .info{
-                    opacity: 1;
-                    transition:  all .5s ease;
-                }
+                @include card-info;
                 
                  
                 
@@ -1724,47 +1725,7 @@ div[dir="ltr"] {
                     object-fit: cover;
                     transition:  all .5s ease;
                 }
-                .info{
-                    position: absolute;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 100%;
-                    height: 60px;
-                    bottom: 0px;
-                    border-bottom-left-radius: 15px;
-                    border-bottom-right-radius: 15px;
-                    padding: 10px;
-                    background-color: #ffffff10;
-                    opacity: 0;
-                    backdrop-filter: blur(8px);
-                    -webkit-backdrop-filter: blur(8px);
-                    transition:  all .5s ease;
-                    span{
-                        font-weight: 500;
-                        max-width: 10ch;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        display: block;
-                    }
-                    .perc{
-                        font-size: 12px;
-                        display: flex; 
-                        align-items: center;
-                        svg{
-                            margin-right: 4px;
-                        }
-                    }
-                }
-                img:hover{
-                    transform: scale(1.1);
-                    transition:  all .5s ease;
-                }
-                img:hover ~ .info{
-                    opacity: 1;
-                    transition:  all .5s ease;
-                }
+                @include card-info;
                 
                  
                 

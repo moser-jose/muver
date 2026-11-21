@@ -21,12 +21,10 @@ const DataActor = ({item, type}) => {
             {
                 type==="actores" ?
                 <>
-                    {item.character!== "" && 
-                    <h6><span>como</span>{item.character}</h6>}
+                    {item.character && <h6><span>como</span>{item.character}</h6>}
                 </>:type==="equipe" &&
                 <>
-                    {item.character!== "" && 
-                    <h6><span>como</span>{item.job}</h6>}
+                    {item.job && <h6>{item.job}</h6>}
                 </>
             }
             

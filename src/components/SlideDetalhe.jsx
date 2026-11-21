@@ -54,7 +54,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     <h5 className="original">{data.original_name}</h5>
                                         <span>
                                             <Star size="24" color="#cccc32" variant="Bulk"/>
-                                            {data.vote_average}/10
+                                            {Number(data.vote_average).toFixed(1)}/10
                                         </span>
                                         <span>
                                             <Profile size="24" color="#1a1a1a" variant="Bulk"/>
@@ -80,7 +80,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                         </div>
                                         <span>
                                             <Star size="24" color="#cccc32" variant="Bulk"/>
-                                            {data.vote_average}/10
+                                            {Number(data.vote_average).toFixed(1)}/10
                                         </span>
                                         <span>
                                             
