@@ -1,3 +1,4 @@
+import Seo from './Seo'
 import React, { useState, useEffect } from 'react'
 import { useApiContext } from '../contexts/ApiContext'; 
 import { ArrowRight3, Calendar, Crown, Flash, Hex, Play, PlayCircle, Profile, Star } from 'iconsax-react';
@@ -38,6 +39,14 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
         <div className="film-slide">
            <OpenSource/>
            <Header/>
+           <Seo titulo={`${data.title}${data.release_date ? ` (${data.release_date.slice(0,4)})` : ''}`} descricao={data.overview} tipo={tv ? 'video.tv_show' : 'video.movie'}
+                imagem={data.backdrop_path && `https://image.tmdb.org/t/p/w780${data.backdrop_path}`}
+                dados={{'@type': tv ? 'TVSeries' : 'Movie', name: data.title, description: data.overview || undefined,
+                    image: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : undefined,
+                    datePublished: data.release_date || undefined, genre: data.genres.map((g) => g.name),
+                    actor: data.credits.cast.slice(0, 5).map((a) => ({'@type': 'Person', name: a.name})),
+                    sameAs: data.imdb_id ? `https://www.imdb.com/title/${data.imdb_id}` : undefined,
+                    aggregateRating: data.vote_count > 0 ? {'@type': 'AggregateRating', ratingValue: Number(data.vote_average).toFixed(1), bestRating: 10, ratingCount: data.vote_count} : undefined}}/>
            <div className="filme-ho" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.3),rgba(24, 24, 24, 0.2)),url(https://image.tmdb.org/t/p/w1280${data.backdrop_path})`}}>
                 <div className="pr">
                     <div className="cap">

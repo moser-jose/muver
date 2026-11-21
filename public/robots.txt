@@ -1,3 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /pesquisa/
+
+Sitemap: https://muver.vercel.app/sitemap.xml

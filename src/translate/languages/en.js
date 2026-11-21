@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Clear search'
             },
             ui:{
+                seo_titulo:'Everything about movies and TV shows',
+                seo_descricao:'Popular movies, TV shows and people, with trailers, cast, galleries, reviews and where to watch.',
+                seo_filmes:'Popular, now playing, trending and top rated movies, with trailers, cast and where to watch.',
+                seo_series:'Popular, trending and on-the-air TV shows, with seasons, episodes, cast and where to watch.',
+                seo_actores:'The most popular actors and actresses right now, with biography, movies and TV shows.',
                 canal:'Network',
                 filmografia:'Filmography',
                 idioma_original:'Original language',

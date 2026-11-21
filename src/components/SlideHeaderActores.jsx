@@ -1,3 +1,4 @@
+import Seo from './Seo'
 import { t } from '../translate/i18n'
 import React, { useState, useEffect } from 'react'
 import { useApiContext } from '../contexts/ApiContext'; 
@@ -34,6 +35,7 @@ export const SlideHeaderActores = ({data,type}) => {
         <div>
             <OpenSource/>
             <Header/>
+            <Seo titulo={t('ui.actores_populares')} descricao={t('ui.seo_actores')}/>
             <Slide  easing="ease" {...properties}>
             {
                 list && list.slice(0,5).map((actor,k) => (

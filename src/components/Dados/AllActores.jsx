@@ -1,3 +1,4 @@
+import Seo from '../Seo'
 import { t } from '../../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
@@ -54,6 +55,7 @@ const AllActores = ({media="movie"}) => {
         <div className="autores-detalhes">
             <OpenSource/>
             <Header/>
+            <Seo titulo={`${filme.title} · ${t('ui.elenco_equipa')}`}/>
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path} )`}}>
                 <div className="pr">
                     <div className="data">
