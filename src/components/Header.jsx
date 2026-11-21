@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Moon, NotificationBing, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
 import PT from '../assets/img/pt.png'
@@ -10,7 +10,6 @@ const Header = () => {
     const {i18n,theme,setTheme}=useApiContext();
     const [clickIdioma, setClickIdioma]=useState(false);
     const {selectIdioma, setSelectIdioma}=useApiContext();
-    const [themeButton, setThemeButton] = useState(true);
     const [menu, setMenu]=useState(false);
     
     const handleClick=()=>{
@@ -30,25 +29,10 @@ const Header = () => {
         window.location = window.location
     }
     const handleTheme=()=>{
-        if (theme==="light") {
-            document.querySelector('body').classList.remove('light');
-            localStorage.setItem(import.meta.env.REACT_APP_THEME,"dark");
-            setTheme("dark")
-        }
-        else {
-            document.querySelector('body').classList.add('light');
-            localStorage.setItem(import.meta.env.REACT_APP_THEME,"light");
-            setTheme("light")
-        }
-       
+        const novo = theme==="light" ? "dark" : "light";
+        localStorage.setItem(import.meta.env.REACT_APP_THEME, novo);
+        setTheme(novo);
     }
-    useEffect(() => {
-        if(theme ==="light")
-            document.querySelector('body').classList.add('light');
-        else
-            document.querySelector('body').classList.add('dark');
-        
-    }, [])
     return (
             <div className="header">
                 <div className="logo">
@@ -72,7 +56,7 @@ const Header = () => {
                 
                 <div className="user">
                     <div className="theme">
-                        <input onClick={handleTheme} type="checkbox" className="checkbox" id="chk" />
+                        <input onChange={handleTheme} checked={theme==="light"} aria-label="Tema claro" type="checkbox" className="checkbox" id="chk" />
                         <label className="label" htmlFor="chk">
                             <Moon size="11" color="#000" variant="Bulk"/>
                             <Sun1 size="11" color="#ad6d08" variant="Bulk"/>

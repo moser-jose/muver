@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0a0a0b" />
     <meta name="description"
       content="Muver é um projecto opensource que trás todos os filmes, series,actores populares com todos os dados possíveis 😅">
     <meta name="keywords" content="filmes, séries, actores, trailers, cinema, TMDB, Muver" />
@@ -26,6 +26,10 @@
     <title>Muver - Saiba tudo sobre filmes e series</title>
   </head>
   <body>
+    <script>
+      // aplica o tema antes do primeiro paint: escolha guardada ou, na 1.ª visita, a preferência do sistema
+      document.body.classList.add(localStorage.getItem('%REACT_APP_THEME%') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+    </script>
     <noscript>Precisa de activar o JavaScript para usar esta aplicação.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/index.jsx"></script>

@@ -5,7 +5,6 @@ import { i18n } from '../translate/i18n'
 import {getIdioma} from '../functions'
 export const StateContext = createContext();
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
-const theme_page= localStorage.getItem(import.meta.env.REACT_APP_THEME);
 export const ApiContext = ({ children }) => {
     const [selectIdioma, setSelectIdioma]=useState("PT");
     const [tendencias, setTendencias]=useState([]);
@@ -21,22 +20,14 @@ export const ApiContext = ({ children }) => {
     const [filmesTendenciasDia, setfilmesTendenciasDia]=useState([]);
     const [filmesBrevemente, setfilmesBrevemente]=useState([]);
     const [tendencia, setTendencia]=useState(false);
-    const [theme, setTheme]=useState("dark");
+    // a classe inicial é posta no <body> pelo script do index.html
+    const [theme, setTheme]=useState(()=>document.body.classList.contains("light") ? "light" : "dark");
     useEffect(() => {
-        const th=localStorage.getItem(import.meta.env.REACT_APP_THEME)
-        if(th==="light"){
-            setTheme("light")
-            document.querySelector('body').classList.add('light');
-        }
-        else if(th==="dark"){
-            setTheme("dark")
-            document.querySelector('body').classList.add('dark');
-        }
-        else{
-            setTheme("dark")
-            localStorage.setItem(import.meta.env.REACT_APP_THEME,"dark")
-            document.querySelector('body').classList.add('dark');
-        }
+        document.body.classList.toggle("light", theme==="light");
+        document.body.classList.toggle("dark", theme!=="light");
+        document.querySelector('meta[name="theme-color"]').content = theme==="light" ? "#f3f4f6" : "#0a0a0b";
+    }, [theme])
+    useEffect(() => {
         setSelectIdioma(getIdioma(idioma).toUpperCase());
         const language=getIdioma(idioma)==="en" ? US:
                         getIdioma(idioma)==="pt" ? PT:PT
