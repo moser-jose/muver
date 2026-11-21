@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Limpar pesquisa'
             },
             ui:{
+                series_populares:'Séries populares',
+                no_ar:'No ar',
+                series_mais_populares:'Séries mais populares',
+                series_no_ar:'Séries no ar',
+                series_maior_pontuacao:'Séries com maior pontuação',
                 n_series:'séries',
                 rodape_sobre:'Filmes, séries e actores populares, com trailers, elenco, galerias e avaliações.',
                 navegar:'Navegar',

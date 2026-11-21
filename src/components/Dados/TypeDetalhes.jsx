@@ -10,7 +10,8 @@ import OpenSource from '../OpenSource'
 import { useApiContext } from '../../contexts/ApiContext';
 import { DataAll } from './DataAll'
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
-const TypeDetalhes = () => {
+const TypeDetalhes = ({media="movie"}) => {
+    const tv = media==="tv";
     const {filmesdiscover}=useApiContext();
     const params = useParams();
     const [filme, setFilme]=useState([]);
@@ -20,47 +21,23 @@ const TypeDetalhes = () => {
     useEffect(()=>{
         async function getFilmes() {
 
-            if(params.type!=="mais-populares" && params.type!=="maior-pontuacao" && params.type!=="brevemente" && params.type !=="tendecias-dia" && params.type!=="tendecias-semana"){
+            const listas = {
+                "mais-populares": `/${media}/popular`,
+                "tendecias-semana": `/trending/${media}/week`,
+                "tendecias-dia": `/trending/${media}/day`,
+                "brevemente": tv ? "/tv/on_the_air" : "/movie/upcoming",
+                "maior-pontuacao": `/${media}/top_rated`,
+            };
+            if(listas[params.type]){
+                const data= await axios.get(listas[params.type], {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, include_adult: false, page}});
+                setFilme(data.data.results[0] || {});
+                setData(data.data);
+            }
+            else{
                 const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
                 setFilme(f.data);
             }
-            else if(params.type==="mais-populares"){
-                const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/popular?api_key=${import.meta.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
-                data.data.results.slice(0,1).map((item)=>{
-                    setFilme(item);
-                })
-                setData(data.data);
-            }
-            
-            else if(params.type==="tendecias-semana"){
-                const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/trending/movie/week?api_key=${import.meta.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
-                data.data.results.slice(0,1).map((item)=>{
-                    setFilme(item);
-                })
-                setData(data.data);
-            }
-            else if(params.type==="tendecias-dia"){
-                const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/trending/movie/day?api_key=${import.meta.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
-                data.data.results.slice(0,1).map((item)=>{
-                    setFilme(item);
-                })
-                setData(data.data);
-            }
-            else if(params.type==="brevemente"){
-                const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/upcoming?api_key=${import.meta.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
-                data.data.results.slice(0,1).map((item)=>{
-                    setFilme(item);
-                })
-                setData(data.data);
-            }
-            else if(params.type==="maior-pontuacao"){
-                const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/top_rated?api_key=${import.meta.env.REACT_APP_API_KEY}&sort_by=popularity.desc&include_video=false&with_watch_monetization_types=flatrate&language=${idioma}&include_adult=false&page=${page}`);
-                data.data.results.slice(0,1).map((item)=>{
-                    setFilme(item);
-                })
-                setData(data.data);
-            }
-            
+
             if(params.type==="similares"){
                 const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}/similar?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
                 setData(data.data)
@@ -98,11 +75,11 @@ const TypeDetalhes = () => {
                    <h2 className="_p">{
                    params.type==="similares" ? t('ui.filmes_similares') : 
                    params.type==="recomendados" ? t('ui.filmes_recomendados'):
-                   params.type==="mais-populares" ? t('ui.filmes_mais_populares'):
+                   params.type==="mais-populares" ? t(tv ? 'ui.series_mais_populares' : 'ui.filmes_mais_populares'):
                    params.type==="tendecias-semana" ? t('ui.tendencias_semana'):
                    params.type==="tendecias-dia" ? t('ui.tendencias_dia'):
-                   params.type==="brevemente" ? t('ui.filmes_a_estrear'):
-                   params.type==="maior-pontuacao" && t('ui.filmes_maior_pontuacao')
+                   params.type==="brevemente" ? t(tv ? 'ui.series_no_ar' : 'ui.filmes_a_estrear'):
+                   params.type==="maior-pontuacao" && t(tv ? 'ui.series_maior_pontuacao' : 'ui.filmes_maior_pontuacao')
                    
                    }</h2>
                </div>
@@ -110,12 +87,12 @@ const TypeDetalhes = () => {
        </div>
        <div className="todos-actores">
                 <div className="titulo">
-                    <p>{t('ui.filmes')}</p>
+                    <p>{tv ? t('header.series') : t('ui.filmes')}</p>
                 </div>
                 <div className="filmeR simil" >
                 {
                     data.results.map((item, key)=>{
-                            return <DataAll key={key} item={item} type="filme"/>
+                            return <DataAll key={key} item={item} type={tv ? "tv" : "filme"}/>
                     })
                 }
                 </div>
