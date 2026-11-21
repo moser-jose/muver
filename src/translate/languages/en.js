@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Clear search'
             },
             ui:{
+                nao_encontrada:'This page does not exist or was removed.',
+                erro_titulo:'Something went wrong',
+                erro_texto:'The data could not be loaded. Check your connection and try again.',
+                tentar:'Try again',
+                inicio:'Go to home',
                 seo_titulo:'Everything about movies and TV shows',
                 seo_descricao:'Popular movies, TV shows and people, with trailers, cast, galleries, reviews and where to watch.',
                 seo_filmes:'Popular, now playing, trending and top rated movies, with trailers, cast and where to watch.',

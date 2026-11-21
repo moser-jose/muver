@@ -34,17 +34,15 @@ export const serieComoFilme = (s) => ({
 
 const Conteudo = ({id}) => {
     const [serie, setSerie] = useState(null);
-    const [erro, setErro] = useState(false);
     useEffect(() => {
         axios.get(`/tv/${id}`, {params: {
             api_key: import.meta.env.REACT_APP_API_KEY, language: idioma,
             append_to_response: 'videos,images,reviews,aggregate_credits,similar,recommendations,keywords,content_ratings,watch/providers,external_ids',
             include_image_language: `null,${getIdioma(idioma)}`,
             include_video_language: `${getIdioma(idioma)},en`,
-        }}).then((r) => setSerie(serieComoFilme(r.data))).catch(() => setErro(true));
+        }}).then((r) => setSerie(serieComoFilme(r.data))).catch(() => {}); // o <Loading/> mostra o erro
     }, [])
 
-    if (erro) return <div className="center"><span>{t('ui.nenhum')}</span></div>
     if (!serie) return <Loading/>
     const pais = idioma==="en-US" ? "US" : "PT";
     const classificacao = serie.content_ratings.results.find((c) => c.iso_3166_1===pais)?.rating;

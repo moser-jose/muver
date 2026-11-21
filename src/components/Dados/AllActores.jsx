@@ -9,6 +9,7 @@ import userMale from '../../assets/img/user-act.jpg'
 import userFemale from '../../assets/img/user-act-f.jpg'
 import { Play } from 'iconsax-react';
 import slugify from 'slugify'
+import Loading from '../Loading'
 import { serieComoFilme } from '../../pages/SerieDetalhe'
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const AllActores = ({media="movie"}) => {
@@ -108,7 +109,7 @@ const AllActores = ({media="movie"}) => {
                     }
                 </div>
             </div>
-        </div>:<></>
+        </div>:<Loading/>
     )
 }
 

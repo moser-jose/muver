@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Limpar pesquisa'
             },
             ui:{
+                nao_encontrada:'Esta página não existe ou foi removida.',
+                erro_titulo:'Algo correu mal',
+                erro_texto:'Não foi possível carregar os dados. Verifique a ligação e tente outra vez.',
+                tentar:'Tentar de novo',
+                inicio:'Ir para o início',
                 seo_titulo:'Saiba tudo sobre filmes e séries',
                 seo_descricao:'Filmes, séries e actores populares, com trailers, elenco, galerias, avaliações e onde assistir.',
                 seo_filmes:'Filmes populares, em cartaz, em tendência e com maior pontuação, com trailers, elenco e onde assistir.',
