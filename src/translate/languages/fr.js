@@ -10,7 +10,8 @@ const messages = {
                 en:'Inglês',
                 fr:'Francês',
                 projecto:'Projecto Open Source',
-                github:'Projecto no Github'
+                github:'Projecto no Github',
+                pesquisar:'Rechercher des films'
             },
             home:{
                 ver_mais:'Ver mais',

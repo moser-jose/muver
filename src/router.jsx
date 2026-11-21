@@ -11,6 +11,7 @@ import ActoresDetalhe from './pages/ActoresDetalhe'
 import Series from './pages/Series'
 import { Loa } from './components/Loa'
 import { Genrs } from './pages/Genrs'
+import Pesquisa from './pages/Pesquisa'
 const router = () => {
     return (
         <Router>
@@ -21,6 +22,7 @@ const router = () => {
                 <Route path="/filme/:slug/:id" element={<FilmeDetalhe/>} />
                 <Route path="/filme/:slug/:id/autores" element={<AllActores/>} />
                 <Route path="/filme/:slug/:id/:type" element={<TypeDetalhes/>} />
+                <Route path="/pesquisa/:q" element={<Pesquisa/>} />
                 <Route path="/actores" element={<Actores/>} />
                 <Route path="/actores/:slug/:id" element={<ActoresDetalhe/>} />
                 <Route path="/actores/:slug/:id/:type" element={<TypeDetalhesActores/>} />
