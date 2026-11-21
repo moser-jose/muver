@@ -61,7 +61,7 @@ export const SlideHeader = ({data,type}) => {
                                                 </span>
                                             </div>
                                             <p className="texto">{item.overview}</p>
-                                            <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                            <a href={`https://www.themoviedb.org/tv/${item.id}`} target="_blank" rel="noreferrer" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
 
                                         </>:

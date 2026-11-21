@@ -19,6 +19,7 @@ const router = () => {
                 <Route path="/" element={<Filmes/>} />
                 <Route path="/filmes" element={<Filmes/>} />
                 <Route path="/series" element={<Series/>} />
+                <Route path="/series/:type" element={<TypeDetalhes media="tv"/>} />
                 <Route path="/filme/:slug/:id" element={<FilmeDetalhe/>} />
                 <Route path="/filme/:slug/:id/autores" element={<AllActores/>} />
                 <Route path="/filme/:slug/:id/:type" element={<TypeDetalhes/>} />

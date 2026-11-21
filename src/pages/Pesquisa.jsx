@@ -1,5 +1,5 @@
 import { t } from '../translate/i18n'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
 import axios from '../api'
@@ -11,45 +11,75 @@ import { DataAll } from '../components/Dados/DataAll'
 import Actor from '../components/Actor'
 
 const idioma = localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
+const api_key = import.meta.env.REACT_APP_API_KEY;
+const VAZIO = {results: [], total_pages: 0, total_results: 0};
+
+const Paginacao = ({total, onChange}) => total > 1 &&
+    <ReactPaginate
+        previousLabel={<ArrowLeft2 size="18" color="#fff" variant="Outline"/>}
+        nextLabel={<ArrowRight2 size="18" color="#fff" variant="Outline"/>}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={Math.min(total, 500)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={(e) => onChange(e.selected + 1)}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+    />
 
 const Resultados = ({q}) => {
-    const [data, setData] = useState(null);
-    const [page, setPage] = useState(1);
-    const [pessoas, setPessoas] = useState([]);
-    const [series, setSeries] = useState(null); // null = ainda a carregar
+    const params = {api_key, language: idioma, query: q, include_adult: false};
+    const [filmes, setFilmes] = useState(null);
+    const [series, setSeries] = useState(null);
+    const [pessoas, setPessoas] = useState(null);
+    const [pagFilmes, setPagFilmes] = useState(1);
+    const [pagSeries, setPagSeries] = useState(1);
+    const topoFilmes = useRef(null);
+    const topoSeries = useRef(null);
+
+    // cada lista tem a sua paginação; `activo` ignora respostas de pedidos antigos
     useEffect(() => {
-        let activo = true; // ignora respostas de pedidos antigos
-        const params = {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, query: q, include_adult: false};
-        axios.get('/search/movie', {params: {...params, page}})
-            .then(async (r) => {
-                if (!activo) return;
-                setData(r.data);
-                if (page !== 1) return;
-                // actores: quem tem o nome pesquisado + o elenco do filme mais relevante
-                const topo = r.data.results[0];
-                const [nomes, tv, creditos] = await Promise.all([
-                    axios.get('/search/person', {params}),
-                    axios.get('/search/tv', {params}),
-                    topo ? axios.get(`/movie/${topo.id}/credits`, {params: {api_key: params.api_key, language: idioma}}) : {data: {cast: []}},
-                ]);
+        let activo = true;
+        axios.get('/search/movie', {params: {...params, page: pagFilmes}})
+            .then((r) => activo && setFilmes(r.data))
+            .catch(() => activo && setFilmes((v) => v || VAZIO));
+        return () => { activo = false };
+    }, [pagFilmes])
+    useEffect(() => {
+        let activo = true;
+        axios.get('/search/tv', {params: {...params, page: pagSeries}})
+            .then((r) => activo && setSeries(r.data))
+            .catch(() => activo && setSeries((v) => v || VAZIO));
+        return () => { activo = false };
+    }, [pagSeries])
+
+    // actores: elenco principal dos filmes e séries mais relevantes para o título pesquisado
+    useEffect(() => {
+        let activo = true;
+        const TITULOS = 5, POR_TITULO = 6; // shortcut: só os 5 primeiros filmes e séries (10 pedidos de elenco); aumentar se for preciso mais cobertura
+        Promise.all([axios.get('/search/movie', {params}), axios.get('/search/tv', {params})])
+            .then(([f, s]) => Promise.all([
+                ...f.data.results.slice(0, TITULOS).map((x) => axios.get(`/movie/${x.id}/credits`, {params: {api_key, language: idioma}})),
+                ...s.data.results.slice(0, TITULOS).map((x) => axios.get(`/tv/${x.id}/aggregate_credits`, {params: {api_key, language: idioma}})),
+            ]))
+            .then((elencos) => {
                 const vistos = new Set();
-                const lista = [...nomes.data.results, ...creditos.data.cast]
+                const lista = elencos.flatMap((r) => r.data.cast.slice(0, POR_TITULO))
                     .filter((a) => !vistos.has(a.id) && vistos.add(a.id))
                     .sort((a, b) => b.popularity - a.popularity); // os mais conhecidos primeiro
-                if (!activo) return;
-                setPessoas(lista.slice(0, 9));
-                setSeries(tv.data);
+                if (activo) setPessoas(lista.slice(0, 9));
             })
-            .catch(() => {
-                if (!activo) return;
-                setData((d) => d || {results: [], total_pages: 0, total_results: 0});
-                setSeries((v) => v || {results: [], total_results: 0});
-            });
+            .catch(() => activo && setPessoas([]));
         return () => { activo = false };
-    }, [q, page])
+    }, [])
 
-    if (!data) return <Loading/>
-    const fundo = data.results.find((f) => f.backdrop_path);
+    if (!filmes || !series) return <Loading/>
+    const fundo = [...filmes.results, ...series.results].find((f) => f.backdrop_path);
+    const mudar = (setPagina, topo) => (pagina) => {
+        setPagina(pagina);
+        topo.current.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
     return (
         <div className='simi-detalhe'>
             <OpenSource/>
@@ -62,38 +92,26 @@ const Resultados = ({q}) => {
                 </div>
             </div>
             <div className="todos-actores">
-                {pessoas.length > 0 && <Actor act={true} data={pessoas} titulo={t('ui.pessoas')} type="actores"/>}
-                {data.total_results > 0 && <>
-                    <div className="titulo" style={{marginTop:'30px'}}>
-                        <p>{data.total_results} {t('ui.n_filmes')}</p>
+                {pessoas?.length > 0 && <Actor act={true} data={pessoas} titulo={t('ui.pessoas')} type="actores"/>}
+                {filmes.total_results > 0 && <>
+                    <div className="titulo" ref={topoFilmes} style={{marginTop:'30px', scrollMarginTop:'20px'}}>
+                        <p>{filmes.total_results} {t('ui.n_filmes')}</p>
                     </div>
                     <div className="filmeR simil">
-                        {data.results.map((item) => <DataAll key={item.id} item={item} type="filme"/>)}
+                        {filmes.results.map((item) => <DataAll key={item.id} item={item} type="filme"/>)}
                     </div>
+                    <Paginacao total={filmes.total_pages} onChange={mudar(setPagFilmes, topoFilmes)}/>
                 </>}
-                {data.total_pages > 1 &&
-                    <ReactPaginate
-                        previousLabel={<ArrowLeft2 size="18" color="#fff" variant="Outline"/>}
-                        nextLabel={<ArrowRight2 size="18" color="#fff" variant="Outline"/>}
-                        breakLabel={"..."}
-                        breakClassName={"break-me"}
-                        pageCount={Math.min(data.total_pages, 500)}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={(e) => { setPage(e.selected + 1); window.scrollTo({top: 0}); }}
-                        containerClassName={"pagination"}
-                        activeClassName={"active"}
-                    />
-                }
-                {series?.total_results > 0 && <>
-                    <div className="titulo" style={{marginTop:'40px'}}>
+                {series.total_results > 0 && <>
+                    <div className="titulo" ref={topoSeries} style={{marginTop:'40px', scrollMarginTop:'20px'}}>
                         <p>{series.total_results} {t('ui.n_series')}</p>
                     </div>
                     <div className="filmeR simil">
                         {series.results.map((item) => <DataAll key={item.id} item={item} type="tv"/>)}
                     </div>
+                    <Paginacao total={series.total_pages} onChange={mudar(setPagSeries, topoSeries)}/>
                 </>}
-                {series && !data.total_results && !series.total_results && !pessoas.length &&
+                {!filmes.total_results && !series.total_results &&
                     <div className="titulo"><p>{t('ui.nenhum')}</p></div>
                 }
             </div>
@@ -101,7 +119,7 @@ const Resultados = ({q}) => {
     )
 }
 
-// a key reinicia a página e os resultados quando o termo muda
+// a key reinicia páginas e resultados quando o termo muda
 const Pesquisa = () => {
     const {q} = useParams();
     return <Resultados key={q} q={q}/>

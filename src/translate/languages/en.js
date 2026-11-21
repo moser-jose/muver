@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Clear search'
             },
             ui:{
+                series_populares:'Popular TV shows',
+                no_ar:'On the air',
+                series_mais_populares:'Most popular TV shows',
+                series_no_ar:'TV shows on the air',
+                series_maior_pontuacao:'Top rated TV shows',
                 n_series:'TV shows',
                 rodape_sobre:'Popular movies, TV shows and people, with trailers, cast, galleries and reviews.',
                 navegar:'Browse',
