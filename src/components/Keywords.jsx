@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React from 'react'
 import slugify from 'slugify'
 
@@ -9,7 +10,7 @@ const Keywords = ({data, back,lang, companies}) => {
             
             <div className="data">
                 <div className="colect">
-                    <h2>Palavras Chave</h2>
+                    <h2>{t('ui.palavras_chave')}</h2>
                         {
                             data.keywords.slice(0,18).map((item, key)=>{
                                 return <a key={key} className="fi" href={`/keywords/${slugify(item.name,{lower:true,strict: true})}/${item.id}`}>{item.name}</a>

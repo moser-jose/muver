@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useState, useEffect } from 'react'
 import { useApiContext } from '../contexts/ApiContext'; 
 import { ArrowRight3} from 'iconsax-react';
@@ -50,7 +51,7 @@ export const SlideHeaderActores = ({data,type}) => {
                                     `https://image.tmdb.org/t/p/w500${actor.profile_path}`}/>
                                 </div>
                                 <a style={{color:'#fff !important'}} href={`actores/${slugify(actor.name,{lower:true,strict: true})}/${actor.id}`} className="ver acto"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
-                                            ver mais</a>
+                                            {t('ui.ver_mais')}</a>
                             </div>
                         </div>
                     </div>

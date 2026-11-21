@@ -1,10 +1,11 @@
+import { t } from '../translate/i18n'
 import React from 'react'
 import slugify from 'slugify'
 
 export const Genrs = ({data}) => {
     return (
         <div className="generos">
-            <p>Todos os Géneros</p>
+            <p>{t('ui.generos')}</p>
             
                 <div className="allG">
                    {

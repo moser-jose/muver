@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from '../api'
@@ -205,8 +206,8 @@ const FilmeDetalhe = () => {
         loading===true ? 
         <>
             <SlideDetalhe certificacao={certificacao} data={filme} type="filme" />
-            <Actor data={filme.credits} titulo="Actores" type="actores"/>
-            <Actor data={filme.credits} titulo="Equipe técnica" type="equipe"/>
+            <Actor data={filme.credits} titulo={t('ui.elenco')} type="actores"/>
+            <Actor data={filme.credits} titulo={t('ui.equipa_tecnica')} type="equipe"/>
             
             <Keywords lang={filme.production_countries} companies={filme.production_companies} poster={filme.poster_path} back={filme.backdrop_path} data={filme.keywords}/>
              
@@ -215,9 +216,9 @@ const FilmeDetalhe = () => {
                 filme.belongs_to_collection && <Collection colection={colection} poster={filme.poster_path} back={filme.backdrop_path} data={filme.belongs_to_collection}/>
             } 
             <div className="simi">
-                {filme.similar.results.length!==0 && <Type data={filme.similar.results} outher="similar" type="filme" title="Filmes similares"/>}
+                {filme.similar.results.length!==0 && <Type data={filme.similar.results} outher="similar" type="filme" title={t('ui.filmes_similares')}/>}
                 <Reviews data={filme.reviews.results}  />
-                {recomendation.data.results.length!==0 && <Type data={recomendation.data.results} outher="recomendations" type="filme" title="Filmes Recomendados"/>}
+                {recomendation.data.results.length!==0 && <Type data={recomendation.data.results} outher="recomendations" type="filme" title={t('ui.filmes_recomendados')}/>}
                 
             </div>
         </>:

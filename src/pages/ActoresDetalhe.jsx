@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import axios from '../api'
@@ -85,13 +86,13 @@ const ActoresDetalhe = () => {
             </div>
             {/* <div className="todos-actores">
                 <div className="titulo">
-                    <p>Participação como actor</p>
+                    <p>{t('ui.part_actor')}</p>
                 </div>
             </div> */}
 
             <div className="simi" style={{marginTop:'30px',marginBotton:'30px'}}>
-                {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} gender={actor.gender}  outher="filme_actor" type="filme" title="Participação como actor"/>}
-                {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} gender={actor.gender} outher="filme_actor" type="filme" title="Participação na equipe técnica"/>}      
+                {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} gender={actor.gender}  outher="filme_actor" type="filme" title={t('ui.part_actor')}/>}
+                {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} gender={actor.gender} outher="filme_actor" type="filme" title={t('ui.part_equipa')}/>}      
             </div>
 
             {actor.images.profiles.length!==0 && <Galery type="actor" data={actor.images}/>}
@@ -103,7 +104,7 @@ const ActoresDetalhe = () => {
             {/* 
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>Actores</p>
+                    <p>{t('ui.elenco')}</p>
                 </div>
                 <div className="todos" id="actores">
                     {
@@ -115,7 +116,7 @@ const ActoresDetalhe = () => {
                                     item.profile_path===null && item.gender===2 ? userMale:
                                     `https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
                                 <h3>{item.name}</h3>
-                                <h4><span>como</span> {item.character}</h4>
+                                <h4><span>{t('ui.como')}</span> {item.character}</h4>
                             </a>
                         ))
                     }
@@ -123,7 +124,7 @@ const ActoresDetalhe = () => {
             </div>
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>Equipe Técnica</p>
+                    <p>{t('ui.equipa_tecnica')}</p>
                 </div>
                 <div className="todos" id="equipe">
                     {

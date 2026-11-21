@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useState } from 'react'
 import Images from './Images';
 import Videos from './Videos';
@@ -24,13 +25,13 @@ const Galery = ({data, vid, type}) => {
     return (
         <div className="galeira">
             <div className="gal">
-                <p className="titulo">Galeria</p>
+                <p className="titulo">{t('ui.galeria')}</p>
                 <div className="nav-home">
                     {
-                        type==="actor" && data.profiles.length!==0 && <span onClick={handleImagens}>Imagens</span>
+                        type==="actor" && data.profiles.length!==0 && <span onClick={handleImagens}>{t('ui.imagens')}</span>
                     }
                     {
-                        type!=="actor" && data.backdrops.length!==0 && <span onClick={handleImagens}>Imagens</span>
+                        type!=="actor" && data.backdrops.length!==0 && <span onClick={handleImagens}>{t('ui.imagens')}</span>
                     }
                     {
                         type!=="actor" && data.posters.length!==0 && <span onClick={handlePosters}>Posters</span>

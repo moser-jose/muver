@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React from 'react'
 import { useApiContext } from '../contexts/ApiContext'
 
@@ -11,7 +12,7 @@ const VideoModal = () => {
     return (
         <div className="modal">
             <div className="corpo">
-                <button type="button" aria-label="Fechar" className="close" onClick={closeModal}>+</button>
+                <button type="button" aria-label={t('ui.fechar')} className="close" onClick={closeModal}>+</button>
                 
                 <iframe
                     className="video"

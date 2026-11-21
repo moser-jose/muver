@@ -1,3 +1,4 @@
+import { t } from '../../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import axios from '../../api'
@@ -54,13 +55,13 @@ const AllActores = () => {
                 <div className="pr">
                     <div className="data">
                         <a href={`/filme/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
-                        <h2 className="_p">Actores e Equipe Técnica</h2>
+                        <h2 className="_p">{t('ui.elenco_equipa')}</h2>
                     </div>
                 </div>
             </div>
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>Actores</p>
+                    <p>{t('ui.elenco')}</p>
                 </div>
                 <div className="todos" id="actores">
                     {
@@ -72,7 +73,7 @@ const AllActores = () => {
                                  item.profile_path===null && item.gender===2 ? userMale:
                                  `https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
                             <h3>{item.name}</h3>
-                            <h4><span>como</span> {item.character}</h4>
+                            <h4><span>{t('ui.como')}</span> {item.character}</h4>
                         </a>
                         ))
                     }
@@ -80,7 +81,7 @@ const AllActores = () => {
             </div>
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>Equipe Técnica</p>
+                    <p>{t('ui.equipa_tecnica')}</p>
                 </div>
                 <div className="todos" id="equipe">
                     {

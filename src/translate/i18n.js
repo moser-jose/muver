@@ -13,4 +13,6 @@ i18n
         resources: messages
     })
 
-export { i18n }
+const t = (chave) => i18n.t(chave)
+
+export { i18n, t }

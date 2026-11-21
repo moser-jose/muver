@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import axios from '../api'
 import Header from '../components/Header';
@@ -41,7 +42,7 @@ const Actores = () => {
 
             <div className="todos-actores">
                 <div className="titulo">
-                    <p>Actores</p>
+                    <p>{t('ui.pessoas')}</p>
                 </div>
                 <div className="todos" id="actores">
                     {

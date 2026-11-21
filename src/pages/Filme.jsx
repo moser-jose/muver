@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import axios from '../api'
 import {getIdioma,getData} from '../functions'
@@ -39,18 +40,18 @@ const Filme = () => {
                                     <Genrs data={genrsMovie}/>
                                 </div> */}
                                 <div className="direito">
-                                    <Row other="maispopular" type="filme" title="Filmes populares" data={filmesdiscover}/>
+                                    <Row other="maispopular" type="filme" title={t('ui.filmes_populares')} data={filmesdiscover}/>
                                   
                                   {
-                                      tendencia===false ? <Row other="tendencias-dia" type="filme" title="Tendências" data={filmesTendenciasDia}/>:
-                                        <Row other="tendencias-semana" type="filme" title="Tendências" data={filmesTendenciasSemana}/>
+                                      tendencia===false ? <Row other="tendencias-dia" type="filme" title={t('ui.tendencias')} data={filmesTendenciasDia}/>:
+                                        <Row other="tendencias-semana" type="filme" title={t('ui.tendencias')} data={filmesTendenciasSemana}/>
                                   }
                                     
                                     
                                     
-                                    <Actor act={true} data={pessoasTrending} titulo="Actores Populares" type="actores"/>
-                                    <Row other="pontuacao" type="filme" title="Maior pontuação" data={TopMovie}/>
-                                    <Row other="brevemente"   type="filme" title="A estrear" data={filmBrev}/>
+                                    <Actor act={true} data={pessoasTrending} titulo={t('ui.actores_populares')} type="actores"/>
+                                    <Row other="pontuacao" type="filme" title={t('ui.maior_pontuacao')} data={TopMovie}/>
+                                    <Row other="brevemente"   type="filme" title={t('ui.a_estrear')} data={filmBrev}/>
                                     
                                 </div>
                             </div>

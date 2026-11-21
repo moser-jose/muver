@@ -1,3 +1,4 @@
+import { t } from '../translate/i18n'
 import React, { useRef, useState } from 'react';
 
 const src = (item, size) => `https://image.tmdb.org/t/p/${size}${item.file_path}`;
@@ -25,10 +26,10 @@ const Images = ({data}) => {
                 onKeyDown={(e) => e.key === 'ArrowLeft' ? step(-1) : e.key === 'ArrowRight' && step(1)}>
                 {
                     index !== null && <>
-                        <button type="button" aria-label="Anterior" onClick={() => step(-1)}>‹</button>
+                        <button type="button" aria-label={t('ui.anterior')} onClick={() => step(-1)}>‹</button>
                         <img alt="" src={src(data[index],'w1280')}/>
-                        <button type="button" aria-label="Seguinte" onClick={() => step(1)}>›</button>
-                        <button type="button" aria-label="Fechar" className="close" onClick={() => dialog.current.close()}>×</button>
+                        <button type="button" aria-label={t('ui.seguinte')} onClick={() => step(1)}>›</button>
+                        <button type="button" aria-label={t('ui.fechar')} className="close" onClick={() => dialog.current.close()}>×</button>
                     </>
                 }
             </dialog>
