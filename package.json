@@ -15,7 +15,7 @@
     "slugify": "^1.6.9"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
