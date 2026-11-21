@@ -11,18 +11,31 @@ a{
     color: #fff;
 }
 
+// Paleta: fundo e superfície do tema escuro, depois o tema claro
+$dark-bg: #0a0a0b;
+$dark-surface: #17171a;
+$light-bg: #f3f4f6;
+$light-surface: #ffffff;
+$light-border: #e1e4e9;
+$light-text: #16181d;
+$light-muted: #5b6470;
+
 body{
-    background-color: #1a1a1a;
+    background-color: $dark-bg;
     color: #fff;
+    color-scheme: dark;
+    transition: background-color .25s ease, color .25s ease;
 }
 
  
  //Theme - Light
  .light{
-    background-color: #fff !important;
-    //color: #0d141f !important;
+    background-color: $light-bg !important;
+    // sem `color` aqui: o texto sobre as imagens de capa tem de continuar branco
+    color-scheme: light;
+    //color: $light-text !important;
     a{
-        color: #0d141f !important 
+        color: $light-text !important 
     }
     .sl{
         .acto{
@@ -44,25 +57,26 @@ body{
         }
         .open{
             .pro{
-                color: #0d141f !important;
+                color: $light-text !important;
             }
             .iconspeck{
-                color: #0d141f !important;
+                color: $light-text !important;
             }
         }
     }
     .populares{
-        color: #1a1a1a;
+        color: $light-text;
         a{
-            color: #1a1a1a !important;
+            color: $light-text !important;
         }
         .mais{
             a{
                 
-                background-color: #b6b5b5cf;
-                color: #4c4c4cbf !important;
+                background-color: $light-surface;
+                border: 1px solid $light-border;
+                color: $light-text !important;
                 &:hover{
-                    background-color: #b6b5b5f3;
+                    background-color: $light-border;
                 }
             }
         }
@@ -79,15 +93,18 @@ body{
     .all-gen{
         .gen-row{
             .ge{
-                .generos{p{color: #4c4c4cbf !important;}}
-                background-color: #b6b5b5cf;
+                .generos{p{color: $light-muted !important;}}
+                background-color: $light-surface;
             }
         }
     }
     .tendenc{
-        background-color: #b6b5b5cf !important;
+        background-color: $light-border !important;
         span{
-            color: #fff !important;
+            color: $light-muted !important;
+            &.active{
+                color: #fff !important;
+            }
         }
     }
     .actores{
@@ -97,14 +114,15 @@ body{
         }
         .mais{
             a{
-                background-color: #b6b5b5cf;
-                color: #4c4c4cbf !important;
+                background-color: $light-surface;
+                border: 1px solid $light-border;
+                color: $light-text !important;
                 &:hover{
-                    background-color: #b6b5b5f3;
+                    background-color: $light-border;
                 }
             }
             p{
-                color: #1a1a1a !important;
+                color: $light-text !important;
             }
         }
         .all-act{
@@ -115,12 +133,12 @@ body{
                 justify-content: center;
                 flex-direction: column;
                 h4{
-                    color: #1a1a1a !important;
+                    color: $light-text !important;
                 }
                 h6{
                     span{
                         font-weight: 500;
-                        color: #1a1a1a !important;
+                        color: $light-text !important;
                         font-size: 10px;
                         padding: 1px 4px;
                         color: #fff !important;
@@ -182,7 +200,7 @@ body{
         }
         .open{
             .pro{
-                color: #1a1a1a;
+                color: $light-text;
             }
         }
         .aut{
@@ -198,7 +216,7 @@ body{
         .todos-actores{
             .titulo{
                 p{
-                    color: #1a1a1a;
+                    color: $light-text;
                 }
             }
             .todos{
@@ -224,21 +242,29 @@ body{
     }
     .pagination{
         li{
-            background-color: #adadad94;
+            background-color: $light-surface;
+            border: 1px solid $light-border;
             &.next,&.previous,a{
-                color: #5c5c5ced !important;
+                color: $light-text !important;
                 path{
-                    fill: #5c5c5ced !important;
+                    fill: $light-text !important;
                 }
             }
-            &.active,&.disabled{
+            &.active{
+                border-color: #ee344c;
+            }
+            &.disabled{
+                background-color: $light-border;
+                opacity: .6;
+            }
+            &.active{
                 a{
                     color: #fff !important;
                     cursor: default !important;
                 }
-                path{
-                    fill: #fff !important;
-                }
+            }
+            &.disabled a{
+                cursor: default !important;
             }
         }
     
@@ -265,12 +291,13 @@ body{
                 align-items: center;
                 p{
                     font-size: 1.6rem;
-                    color: #1a1a1a;
+                    color: $light-text;
                 }
                 a{
                     padding: 6px 14px;
                     border-radius: 4px;
-                    background-color: #ffffff10;
+                    border: 1px solid $light-border;
+                    background-color: $light-surface;
                     backdrop-filter: blur(28px);
                     -webkit-backdrop-filter: blur(28px);
                     font-size: 14px;
@@ -280,17 +307,20 @@ body{
                 }
             }
             .rev{
-                background-color: #303030;
+                background-color: $light-surface;
+                border: 1px solid $light-border;
+                border-radius: 12px;
+                color: $light-text;
                 .img{
                     img{
-                        border: 2px solid #fff;
+                        border: 2px solid $light-border;
                     }
                 }
                 .re{
                     div{
                         p{
                             a{
-                                color: #b4afaf !important;
+                                color: $light-muted !important;
                             }
                         }
                     }
@@ -300,12 +330,12 @@ body{
     }
     .galeira{
         .titulo{
-            color: #1a1a1a;
+            color: $light-text;
         }
         .gal{
             div{
                 span{
-                    color: #1a1a1a;
+                    color: $light-text;
                 }
             }
         }
@@ -335,9 +365,10 @@ body{
         }
     }
     .btn-top{
-        background-color: #b6b5b5cf !important ;
+        background-color: $light-surface !important ;
+        border: 1px solid $light-border;
         path {
-            fill: #1a1a1ace;
+            fill: $light-text;
         }
     }
     .center{
@@ -346,7 +377,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #fff !important;
+    background-color: $light-bg !important;
     .ring{
         position: absolute;
         width: 140px;
@@ -645,7 +676,7 @@ body{
                 }
             }
             .login{
-                background-color: #1a1a1a;
+                background-color: $dark-surface;
                 border-radius: 12px;
                 a{
                     display: block;
@@ -1197,7 +1228,7 @@ div[dir="ltr"] {
        /* 
         &::-webkit-scrollbar {
             height: 6px;
-            background: #0d141f;
+            background: $dark-surface;
             margin-top: 5px;
             border-radius: 2px;
             }
@@ -1438,7 +1469,7 @@ div[dir="ltr"] {
                 }
             }
             .login{
-                background-color: #1a1a1a;
+                background-color: $dark-surface;
                 border-radius: 12px;
                 a{
                     display: block;
@@ -1760,7 +1791,7 @@ div[dir="ltr"] {
 
 .modal{
     position: fixed;
-    background-color: #0d141f7a;
+    background-color: #000000b3;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -2107,7 +2138,7 @@ div[dir="ltr"] {
         gap: 10px;
         &::-webkit-scrollbar {
             height: 6px;
-            background: #0d141f;
+            background: $dark-surface;
             margin-top: 5px;
             border-radius: 2px;
             }
@@ -2546,7 +2577,7 @@ div[dir="ltr"] {
                 }
                 .login{
                     display: none;
-                    background-color: #1a1a1a;
+                    background-color: $dark-surface;
                     border-radius: 12px;
                     
                     a{
