@@ -5,12 +5,19 @@ import PT from '../assets/img/pt.png'
 import US from '../assets/img/us.png'
 import FR from '../assets/img/fr.png'
 import {useApiContext} from '../contexts/ApiContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 const Header = () => {
     const {i18n,theme,setTheme}=useApiContext();
     const [clickIdioma, setClickIdioma]=useState(false);
     const {selectIdioma, setSelectIdioma}=useApiContext();
     const [menu, setMenu]=useState(false);
+    const navigate = useNavigate();
+    const [busca, setBusca]=useState(useParams().q || '');
+    const pesquisar=(e)=>{
+        e.preventDefault();
+        const termo = busca.trim();
+        if(termo) navigate(`/pesquisa/${encodeURIComponent(termo)}`);
+    }
     
     const handleClick=()=>{
         setClickIdioma(!clickIdioma);
@@ -34,13 +41,13 @@ const Header = () => {
         setTheme(novo);
     }
     return (
-            <div className="header">
+            <div className={menu ? "header aberto" : "header"}>
                 <div className="logo">
                     <a href="/">
                         <img src={Logo} alt="Muver"/>
                     </a>
                 </div>
-                <div className="menu">
+                <div className="menu" onClick={()=>setMenu(false)}>
                     <nav>
                         <ul>
                             {/* <li><a href="/">Home</a></li> */}
@@ -50,10 +57,13 @@ const Header = () => {
                         </ul>
                     </nav>
                 </div>
-                <div className='search' title='Pesquisar'>
-                    <SearchNormal  className='serc' size="22" color="#fff" variant="Bulk"/>
-                </div>
-                
+                <form className='search' role="search" onSubmit={pesquisar}>
+                    <input type="search" value={busca} onChange={(e)=>setBusca(e.target.value)} placeholder={i18n.t('header.pesquisar')} aria-label={i18n.t('header.pesquisar')}/>
+                    <button type="submit" aria-label={i18n.t('header.pesquisar')}>
+                        <SearchNormal size="20" color="#fff" variant="Bulk"/>
+                    </button>
+                </form>
+
                 <div className="user">
                     <div className="theme">
                         <input onChange={handleTheme} checked={theme==="light"} aria-label="Tema claro" type="checkbox" className="checkbox" id="chk" />
@@ -82,10 +92,10 @@ const Header = () => {
                         <a href="/" >{i18n.t('header.login')}</a>
                     </div>
                 </div>
-                <div className={menu ===true ? 'hamb men':'hamb'} onClick={()=>setMenu(!menu)}>
+                <button type="button" aria-label="Menu" aria-expanded={menu} className={menu ===true ? 'hamb men':'hamb'} onClick={()=>setMenu(!menu)}>
                     <span className='bar1'></span>
                     <span className='bar2'></span>
-                </div>
+                </button>
             </div>
     )
 }

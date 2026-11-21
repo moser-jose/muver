@@ -1006,7 +1006,9 @@ body{
     }
 
     .ver{
-        background-color:  #4a4545 ;
+        background-color: #ffffff10;
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
         border-radius: 12px;
         display: flex;
         align-items: center;
@@ -2270,7 +2272,32 @@ div[dir="ltr"] {
 .search{
     display: flex;
     align-items: center;
-    .serc{
+    flex: 1;
+    min-width: 0;
+    max-width: 320px;
+    padding: 0 4px 0 12px;
+    border-radius: 8px;
+    background-color: #ffffff14;
+    &:focus-within{
+        outline: 2px solid #ee344c;
+    }
+    input{
+        flex: 1;
+        min-width: 0;
+        height: 38px;
+        border: 0;
+        outline: 0;
+        background: none;
+        color: #fff;
+        font-size: 14px;
+        &::placeholder{ color: #ffffffb3; }
+        &::-webkit-search-cancel-button{ display: none; }
+    }
+    button{
+        display: flex;
+        padding: 6px;
+        border: 0;
+        background: none;
         cursor: pointer;
     }
 }
@@ -2831,5 +2858,233 @@ div[dir="ltr"] {
         position: fixed;
         top: 16px;
         right: 16px;
+    }
+}
+
+// ───────────── Responsivo ─────────────
+// Secção única que sobrepõe os tamanhos fixos definidos acima (daí os !important).
+
+// os cartões mantêm a proporção do poster em qualquer largura de ecrã
+.filmeR a{
+    height: auto !important;
+    aspect-ratio: 2 / 3;
+}
+.modal .corpo{
+    width: min(800px, 94vw) !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+}
+// espaço entre blocos do cabeçalho (150px deixava a pesquisa sem largura)
+.header{ gap: 50px !important; }
+.header .search{ min-width: 200px; }
+// interruptor de tema sem as legendas "Dark"/"Light"
+.header .user .theme{
+    margin-right: 14px !important;
+    .label::before, .label::after{ content: none !important; }
+}
+.hamb{
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background: none;
+    span{
+        height: 2.5px;
+        width: 26px;
+        background-color: #fff;
+        display: block;
+        margin: 5px 0;
+        border-radius: 30px;
+        transition: all .3s ease;
+    }
+    &.men{
+        .bar1{ transform: translateY(4px) rotateZ(-45deg); }
+        .bar2{ transform: translateY(-4px) rotateZ(45deg); }
+    }
+}
+
+@media only screen and (max-width: 1250px){
+    .header{
+        gap: 30px !important;
+        .user{
+            gap: 16px !important;
+        }
+    }
+}
+
+// tablet e telemóvel
+@media only screen and (max-width: 999px){
+    .header{
+        gap: 12px !important;
+        padding: 10px 14px !important;
+        .logo img{ width: 90px; }
+        .menu{ display: none !important; }
+        .user{
+            gap: 14px !important;
+            margin-left: auto;
+            .theme{ display: block !important; }
+            > svg, .login{ display: none !important; }
+        }
+        .hamb{ display: block !important; }
+        // menu aberto pelo hambúrguer
+        &.aberto .menu{
+            display: block !important;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 8px;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: $dark-surface;
+            box-shadow: 0 8px 24px #00000066;
+            z-index: 20;
+            ul{ display: block !important; }
+            li{
+                display: block !important;
+                padding: 0 !important;
+            }
+            a{
+                display: block;
+                padding: 12px 14px;
+                text-decoration: none;
+            }
+        }
+    }
+    // no tablet o poster do destaque tapava o título e a sinopse
+    .each-slide > div > .img{ display: none !important; }
+    // filas de filmes: carrossel com deslize horizontal em vez de 7 colunas espremidas
+    .populares .filmeR{
+        grid-template-columns: none !important;
+        grid-auto-flow: column;
+        grid-auto-columns: 150px;
+        justify-content: start !important; // centrado cortava o início da fila
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        &::-webkit-scrollbar{ display: none; }
+        a{ scroll-snap-align: start; }
+    }
+    // listas completas: tantas colunas quantas couberem
+    .todos-actores .filmeR, .todos-actores .todos{
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+    }
+    .todos-actores .todos .todos-a img{
+        height: auto !important;
+        aspect-ratio: 2 / 3;
+    }
+    .film-slide .filme-ho{
+        height: auto !important;
+        min-height: 560px;
+        padding-top: 120px;
+        .pr{ padding-bottom: 30px !important; }
+        > .img{ display: none !important; }
+    }
+    .populares .mais{
+        gap: 10px;
+        a{
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+    }
+}
+
+// telemóvel
+@media only screen and (max-width: 600px){
+    // a pesquisa passa para uma segunda linha do cabeçalho
+    .header{
+        flex-wrap: wrap;
+        .search{
+            min-width: 0;
+            order: 5;
+            flex-basis: 100%;
+            max-width: none;
+        }
+    }
+    .populares .filmeR{ grid-auto-columns: 130px; }
+    .populares .mais .p, .actores .mais .titulo, .galeira .titulo, .simi .reviews .titulo p, .todos-actores .titulo p{
+        font-size: 1.25rem !important;
+    }
+    .populares .mais .p{
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+    .tendenc{ margin-left: 0 !important; }
+    .actores .all-act .cast img{
+        width: 110px !important;
+        height: 110px !important;
+    }
+    .film-slide .filme-ho .pr{
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+        .cap{
+            width: 120px !important;
+            height: 180px !important;
+        }
+        .titulo{ font-size: 1.6rem !important; }
+    }
+    .eq{
+        flex-wrap: wrap;
+        gap: 10px !important;
+    }
+    // página do actor: a foto já é o fundo, o retrato por cima tapava o texto
+    .autores-detalhes .filme-ho .pr{
+        width: 90%;
+        .img{ display: none !important; }
+        ._p{ font-size: 1.8rem !important; }
+    }
+    .colecao{
+        height: auto !important;
+        padding: 30px 0;
+        .data{
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 20px;
+            > img{ display: none; }
+        }
+        .colect{
+            max-width: 100% !important;
+            h2{ font-size: 1.4rem; }
+            p{ margin: 16px 0 !important; }
+            .pais{ margin-top: 20px !important; }
+            .img-k{
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+        }
+    }
+    .imagens{ grid-template-columns: 1fr 1fr !important; }
+    .videos .v{
+        height: auto !important;
+        .vid{
+            width: 80vw !important;
+            height: 45vw !important;
+        }
+    }
+    .simi .reviews .rev{
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .pagination{
+        gap: 6px !important;
+        flex-wrap: wrap;
+        li{
+            height: 36px !important;
+            width: 36px !important;
+            border-radius: 10px !important;
+        }
+    }
+    .project-github p{ font-size: 14px !important; }
+    .lightbox{
+        img{ max-width: 96vw; }
+        button:not(.close){
+            position: fixed;
+            bottom: 24px;
+            left: calc(50% - 52px);
+        }
+        button:not(.close):nth-of-type(2){ left: calc(50% + 10px); }
     }
 }
