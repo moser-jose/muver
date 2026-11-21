@@ -3,18 +3,17 @@ import React, { useEffect, useState } from 'react'
 import axios from '../api'
 import {getIdioma,getData} from '../functions'
 import Actor from '../components/Actor';
-import { Genrs } from '../components/Genrs';
 import Header from '../components/Header'
 import Row from '../components/Row';
 import { SlideHeader } from '../components/SlideHeader';
 import { useApiContext } from '../contexts/ApiContext';
 import Loading from '../components/Loading';
-import { Loa } from '../components/Loa';
 
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const Filme = () => {
     const{tendencia,setTendencia, TopMovie,pessoasTrending,filmesTendenciasDia,filmesTendenciasSemana,genrsMovie,filmesdiscover,loading}=useApiContext();
     const [filmBrev, setfilmBrev]=useState([]);
+    const [emCartaz, setEmCartaz]=useState([]);
     useEffect(()=>{
         async function Breve(){
             const film=await axios.get(`/movie/upcoming?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&page=1&region=${getIdioma(idioma)==='en'?'us':getIdioma(idioma)}`)
@@ -25,6 +24,8 @@ const Filme = () => {
             setfilmBrev(resultProductData);
         }
         Breve();
+        axios.get('/movie/now_playing', {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, region: getIdioma(idioma)==='en' ? 'US' : 'PT'}})
+            .then((r) => setEmCartaz(r.data.results)).catch(() => {});
     },[])
     
     return (
@@ -41,6 +42,7 @@ const Filme = () => {
                                 </div> */}
                                 <div className="direito">
                                     <Row other="maispopular" type="filme" title={t('ui.filmes_populares')} data={filmesdiscover}/>
+                                    <Row other="emcartaz" type="filme" title={t('ui.em_cartaz')} data={emCartaz}/>
                                   
                                   {
                                       tendencia===false ? <Row other="tendencias-dia" type="filme" title={t('ui.tendencias')} data={filmesTendenciasDia}/>:

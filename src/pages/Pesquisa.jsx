@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react'
 import axios from '../api'
+import slugify from 'slugify'
 import Header from '../components/Header'
 import OpenSource from '../components/OpenSource'
 import Loading from '../components/Loading'
@@ -33,6 +34,7 @@ const Resultados = ({q}) => {
     const [filmes, setFilmes] = useState(null);
     const [series, setSeries] = useState(null);
     const [pessoas, setPessoas] = useState(null);
+    const [extras, setExtras] = useState([]);
     const [pagFilmes, setPagFilmes] = useState(1);
     const [pagSeries, setPagSeries] = useState(1);
     const topoFilmes = useRef(null);
@@ -74,6 +76,16 @@ const Resultados = ({q}) => {
         return () => { activo = false };
     }, [])
 
+    // colecções, produtoras e palavras-chave com o termo pesquisado
+    useEffect(() => {
+        let activo = true;
+        const grupos = [['collection', 'coleccao', 'coleccoes'], ['company', 'produtora', 'produtoras'], ['keyword', 'keywords', 'palavras_chave']];
+        Promise.all(grupos.map(([api]) => axios.get(`/search/${api}`, {params})))
+            .then((r) => activo && setExtras(grupos.map(([, rota, rotulo], i) => ({rota, rotulo, itens: r[i].data.results.slice(0, 8)})).filter((g) => g.itens.length)))
+            .catch(() => {});
+        return () => { activo = false };
+    }, [])
+
     if (!filmes || !series) return <Loading/>
     const fundo = [...filmes.results, ...series.results].find((f) => f.backdrop_path);
     const mudar = (setPagina, topo) => (pagina) => {
@@ -111,7 +123,13 @@ const Resultados = ({q}) => {
                     </div>
                     <Paginacao total={series.total_pages} onChange={mudar(setPagSeries, topoSeries)}/>
                 </>}
-                {!filmes.total_results && !series.total_results &&
+                {extras.map((g) => (
+                    <div className="chips" key={g.rota}>
+                        <p>{t('ui.'+g.rotulo)}</p>
+                        {g.itens.map((x) => <a key={x.id} href={`/${g.rota}/${slugify(x.name,{lower:true,strict: true}) || 'x'}/${x.id}`}>{x.name}</a>)}
+                    </div>
+                ))}
+                {!filmes.total_results && !series.total_results && !extras.length &&
                     <div className="titulo"><p>{t('ui.nenhum')}</p></div>
                 }
             </div>

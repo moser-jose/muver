@@ -41,11 +41,7 @@ export const SlideHeader = ({data,type}) => {
                                     item.media_type==="tv" || type=="tv" ?
                                         <>
                                             <span className="media-type">
-                                            {
-                                            item.media_type  ?
-                                            item.media_type:
-                                            i18n.t('home.tv')
-                                            }
+                                            {i18n.t('home.tv')}
                                             </span>
                                             <p className="titulo">{item.name}</p>
                                             <div className="media">
@@ -60,19 +56,15 @@ export const SlideHeader = ({data,type}) => {
                                                     {item.vote_count}
                                                 </span>
                                             </div>
-                                            <p className="texto">{item.overview}</p>
-                                            <a href={`https://www.themoviedb.org/tv/${item.id}`} target="_blank" rel="noreferrer" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                            <p className="texto">{limita(item.overview || '',200)}</p>
+                                            <a href={`/serie/${slugify(item.name || '',{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
 
                                         </>:
                                         <>
 
                                     <div className="mediaT">
-                                        <span className="media-type">{
-                                            item.media_type  ?
-                                            item.media_type:
-                                            i18n.t('home.filme')
-                                            }</span>
+                                        <span className="media-type">{i18n.t('home.filme')}</span>
                                         <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {item.release_date}</span>
                                     </div>
 
@@ -92,7 +84,7 @@ export const SlideHeader = ({data,type}) => {
                                                 
                                             </div>
                                             <p className="texto">{limita(item.overview,200)}</p>
-                                            <a href={`filme/${slugify(item.title,{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
+                                            <a href={`/filme/${slugify(item.title || '',{lower:true,strict: true})}/${item.id}`} className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
                                             {i18n.t('home.ver_mais')}</a>
                                         </>
                                 }

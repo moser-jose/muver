@@ -7,6 +7,7 @@ import {limita} from '../functions'
 import slugify from 'slugify';
 
 export const SlideDetalhe = ({data,type,certificacao}) => {
+    const tv = type==="tv";
     const {setModal, setUrl}=useApiContext();
     const [productor, setProductor]=useState([]);
     const [director, setDirector]=useState([]);
@@ -23,7 +24,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
             return el.job =="Producer";
         });
         const filterDirect=data.credits.crew.find(function (el) {
-            return el.job =="Director";
+            return el.job =="Director" || el.job =="Creator";
         });
         const filterWriter=data.credits.crew.find(function (el) {
             return el.job =="Writer";
@@ -44,38 +45,16 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                     </div>
                     <div className="data">
                         {
-                            type==="tv"?
-                                <>
-                                    <span className="media-type">
-                                    {i18n.t('home.tv')}
-                                    </span>
-                                    <p className="titulo">{data.name}</p>
-                                    <div className="media">
-                                    <h5 className="original">{data.original_name}</h5>
-                                        <span>
-                                            <Star size="24" color="#cccc32" variant="Bulk"/>
-                                            {Number(data.vote_average).toFixed(1)}/10
-                                        </span>
-                                        <span>
-                                            <Profile size="24" color="#1a1a1a" variant="Bulk"/>
-                                            {data.vote_count}
-                                        </span>
-                                    </div>
-                                    <p className="texto">{data.overview}</p>
-                                    <a href="/" className="ver"><ArrowRight3 size="26" color="#fff" variant="Bulk"/>
-                                    {i18n.t('home.ver_mais')}</a>
-
-                                </>: type==="filme" ?
                                 <>
                                     <div className="mediaT">
-                                        <span className="media-type">{i18n.t('home.filme')}</span>
+                                        <span className="media-type">{i18n.t(tv ? 'home.tv' : 'home.filme')}</span>
                                         <span className="media-type-t"><Play size="16" color="#fff" variant="Bulk"/> {data.status}</span>
                                         <span className="media-type-t"><Calendar size="16" color="#fff" variant="Bulk"/> {data.release_date}</span>
                                     </div>
                                     <p className="titulo">{data.title}</p>
                                     <div className="media">
                                         <div className="tit">
-                                            <span>{certificacao.certification}</span>
+                                            {certificacao.certification && <span>{certificacao.certification}</span>}
                                             <h5 className="original">{data.original_title}</h5>
                                         </div>
                                         <span>
@@ -91,8 +70,9 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
                                     </div>
                                     <p className="texto">{limita(data.overview,300)}</p>
                                     {data.genres.map((item, key)=>{
-                                        return <a key={key} href={`/filmes/generos/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="ver gen">{item.name}</a>
+                                        return <a key={key} href={`/${tv ? 'series' : 'filmes'}/generos/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="ver gen">{item.name}</a>
                                     })}
+                                    {data.imdb_id && <a href={`https://www.imdb.com/title/${data.imdb_id}`} target="_blank" rel="noreferrer" className="ver gen">IMDb ↗</a>}
 
                                     <div className="eq">
 
@@ -121,7 +101,7 @@ export const SlideDetalhe = ({data,type,certificacao}) => {
 
                                     </div>
                                     
-                                </>:<></>
+                                </>
                         }
                     </div>
                 </div>

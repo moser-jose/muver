@@ -9,20 +9,22 @@ import slugify from 'slugify';
 import ReactPaginate from '../components/Paginate';
 import { ArrowLeft2, ArrowRight2 } from 'iconsax-react';
 import Loading from '../components/Loading';
+import { useApiContext } from '../contexts/ApiContext';
 import { SlideHeaderActores } from '../components/SlideHeaderActores';
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const Actores = () => {
     const [data, setData]=useState([]);
     const [page, setPage]=useState(1);
     const [loading, setLoading]=useState(1);
+    const {tendencia, setTendencia}=useApiContext();
     useEffect(()=>{
         async function getActores() {
-            const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/trending/person/week?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
+            const data= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/trending/person/${tendencia ? 'week' : 'day'}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&page=${page}`);
             setData(data.data)
             setLoading(true);
         }
         getActores()
-    },[page])
+    },[page, tendencia])
 
     const handlePageClick=(e)=>{
         if(e.selected===0){
@@ -41,8 +43,12 @@ const Actores = () => {
             <SlideHeaderActores data={data.results}/>
 
             <div className="todos-actores">
-                <div className="titulo">
+                <div className="titulo com-tendenc">
                     <p>{t('ui.pessoas')}</p>
+                    <div className='tendenc'>
+                        <span className={tendencia===false ? 'active':''} onClick={()=>{setTendencia(false);setPage(1)}}>{t('ui.dia')}</span>
+                        <span className={tendencia===true ? 'active':''} onClick={()=>{setTendencia(true);setPage(1)}}>{t('ui.semana')}</span>
+                    </div>
                 </div>
                 <div className="todos" id="actores">
                     {
@@ -60,6 +66,7 @@ const Actores = () => {
                 </div>
 
                 <ReactPaginate
+                    key={String(tendencia)}
                     previousLabel={<ArrowLeft2 size="18" color="#fff" variant="Outline"/>}
                     nextLabel={<ArrowRight2 size="18" color="#fff" variant="Outline"/>}
                     breakLabel={"..."}

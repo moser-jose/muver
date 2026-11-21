@@ -11,6 +11,8 @@ import Reviews from '../components/Reviews';
 import { SlideDetalhe } from '../components/SlideDetalhe';
 import Type from '../components/Type';
 import Loading from '../components/Loading';
+import OndeAssistir from '../components/OndeAssistir';
+import InfoExtra from '../components/InfoExtra';
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const FilmeDetalhe = () => {
     const params = useParams();
@@ -21,183 +23,22 @@ const FilmeDetalhe = () => {
     const [loading, setLoading]=useState(false);
     useEffect(()=>{
         async function getFilmes() {
-            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
-            const cert= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}/release_dates?api_key=${import.meta.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
-            const recomend= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}/recommendations?api_key=${import.meta.env.REACT_APP_API_KEY}&include_adult=false&language=${idioma}`);
+            const f= await axios.get(`/movie/${params.id}`, {params: {
+                api_key: import.meta.env.REACT_APP_API_KEY, language: idioma,
+                append_to_response: 'videos,images,reviews,credits,similar,keywords,watch/providers,release_dates,alternative_titles,recommendations',
+                include_image_language: `null,${getIdioma(idioma)}`,
+                include_video_language: `${getIdioma(idioma)},en`, // trailers, clips e bastidores também em inglês
+            }});
             setFilme(f.data);
-            setRecomendation(recomend);
+            setRecomendation({data: f.data.recommendations});
             if(f.data.belongs_to_collection!==null){
-               const col= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/collection/${f.data.belongs_to_collection.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${getIdioma(idioma)}`);
+                const col= await axios.get(`/collection/${f.data.belongs_to_collection.id}`, {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma}});
                 setColection(col)
             }
-            cert.data.results.filter((item)=>{
-                if(idioma==="pt-PT")
-                {
-                    if(item.iso_3166_1==="PT"){
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.type === 3 && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X")
-                            {setCertificacao(el)}
-                            else{
-                                item.release_dates.filter((el)=>{
-                                    if(el.type === 3 
-                                        && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X"                                        
-                                         )
-                                    setCertificacao(el)
-                                })
-                            }
-                        })
-                    }
-                    else{
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.certification!==""
-                            && el.certification!=="M18"
-                            && el.certification!=="18+"
-                            && el.certification!=="M/18"
-                            && el.certification!=="K-18"
-                            && el.certification!=="R18+"
-                            && el.certification!=="X18+"
-                            && el.certification!=="18"
-                            && el.certification!=="18SX"
-                            && el.certification!=="R-18"
-                            && el.certification!=="N-18"
-                            && el.certification!=="X")
-                            setCertificacao(el)
-                        })
-                    }
-                }
-                else if(idioma==="en-US"){
-                    if(item.iso_3166_1==="US"){
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.type === 3 && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X")
-                            {setCertificacao(el)}
-                            else{
-                                item.release_dates.filter((el)=>{
-                                    if(el.type === 3 
-                                        && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X"                                        
-                                         )
-                                    setCertificacao(el)
-                                })
-                            }
-                        })
-                    }
-                    else{
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.certification!==""
-                            && el.certification!=="M18"
-                            && el.certification!=="18+"
-                            && el.certification!=="M/18"
-                            && el.certification!=="K-18"
-                            && el.certification!=="R18+"
-                            && el.certification!=="X18+"
-                            && el.certification!=="18"
-                            && el.certification!=="18SX"
-                            && el.certification!=="R-18"
-                            && el.certification!=="N-18"
-                            && el.certification!=="X")
-                            setCertificacao(el)
-                        })
-                    }
-                }
-                else if(idioma==="fr-FR"){
-                    if(item.iso_3166_1==="FR"){
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.type === 3 && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X")
-                            {setCertificacao(el)}
-                            else{
-                                item.release_dates.filter((el)=>{
-                                    if(el.type === 3 
-                                        && el.certification!==""
-                                        && el.certification!=="M18"
-                                        && el.certification!=="18+"
-                                        && el.certification!=="M/18"
-                                        && el.certification!=="K-18"
-                                        && el.certification!=="R18+"
-                                        && el.certification!=="X18+"
-                                        && el.certification!=="18"
-                                        && el.certification!=="18SX"
-                                        && el.certification!=="R-18"
-                                        && el.certification!=="N-18"
-                                        && el.certification!=="X"                                        
-                                         )
-                                    setCertificacao(el)
-                                })
-                            }
-                        })
-                    }
-                    else{
-                        item.release_dates.slice(0,1).filter((el)=>{
-                            if(el.certification!==""
-                            && el.certification!=="M18"
-                            && el.certification!=="18+"
-                            && el.certification!=="M/18"
-                            && el.certification!=="K-18"
-                            && el.certification!=="R18+"
-                            && el.certification!=="X18+"
-                            && el.certification!=="18"
-                            && el.certification!=="18SX"
-                            && el.certification!=="R-18"
-                            && el.certification!=="N-18"
-                            && el.certification!=="X")
-                            setCertificacao(el)
-                        })
-                    }
-                }
-            })
+            // classificação etária do país do idioma escolhido; se não houver, a dos EUA
+            const paises=[idioma==="en-US" ? "US" : idioma==="fr-FR" ? "FR" : "PT", "US"];
+            const cert=paises.map((p)=>f.data.release_dates.results.find((d)=>d.iso_3166_1===p)?.release_dates.find((r)=>r.certification)).find(Boolean);
+            setCertificacao(cert || {});
             setLoading(true);
         }
         getFilmes()
@@ -206,6 +47,8 @@ const FilmeDetalhe = () => {
         loading===true ? 
         <>
             <SlideDetalhe certificacao={certificacao} data={filme} type="filme" />
+            <OndeAssistir data={filme['watch/providers']}/>
+            <InfoExtra titulos={filme.alternative_titles.titles} datas={filme.release_dates.results}/>
             <Actor data={filme.credits} titulo={t('ui.elenco')} type="actores"/>
             <Actor data={filme.credits} titulo={t('ui.equipa_tecnica')} type="equipe"/>
             

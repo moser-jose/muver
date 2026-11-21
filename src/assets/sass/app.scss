@@ -1179,15 +1179,16 @@ body{
         border-radius: 8px;
         cursor: pointer;
     }
-    .s-dia,
-    span:nth-child(1):hover ~ .animacao {
-        width: 38px;
-        left: 8px;
-    }
-    .s-semana,
-    span:nth-child(2):hover ~ .animacao {
-        width: 69.16px;
-        left: 64px;
+    // o destaque é o fundo da própria opção activa: a "pílula" deslizante tinha larguras fixas
+    // medidas para "Dia"/"Semana" e ficava desalinhada noutros idiomas ("Day"/"Week")
+    .animacao{ display: none; }
+    span{
+        transition: background-color .25s ease, color .25s ease;
+        &.active{
+            background-color: #ee344c;
+            color: #fff;
+        }
+        &:not(.active):hover{ background-color: #ffffff1f; }
     }
 }
 
@@ -3139,5 +3140,301 @@ div[dir="ltr"] {
             gap: 26px;
             padding: 32px 0 24px;
         }
+    }
+}
+
+// ───────────── Onde assistir e temporadas ─────────────
+.onde, .temporadas{
+    width: 90%;
+    margin: 30px auto;
+    .titulo{
+        font-size: 1.6rem;
+        small{
+            font-size: .9rem;
+            opacity: .6;
+        }
+    }
+}
+.onde{
+    padding: 18px 20px;
+    border-radius: 12px;
+    background-color: #ffffff10;
+    .onde-topo{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 12px;
+        a{
+            font-size: 12px;
+            opacity: .75;
+            text-decoration: none;
+        }
+    }
+    .onde-grupo{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        span{
+            min-width: 90px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: .8;
+        }
+        img{
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+        }
+    }
+}
+.temporadas{
+    .temp-lista{
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 130px;
+        justify-content: start;
+        gap: 12px;
+        margin: 20px 0;
+        padding-bottom: 6px;
+        overflow-x: auto;
+        scrollbar-width: thin;
+    }
+    .temp{
+        padding: 0 0 8px;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        background-color: #ffffff10;
+        color: inherit;
+        text-align: left;
+        cursor: pointer;
+        overflow: hidden;
+        img{
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            display: block;
+        }
+        strong, small{
+            display: block;
+            padding: 0 8px;
+            font-size: 13px;
+        }
+        strong{ margin-top: 8px; }
+        small{
+            font-size: 11px;
+            opacity: .7;
+        }
+        &.activa{ border-color: #ee344c; }
+    }
+    .ep{
+        display: flex;
+        gap: 16px;
+        padding: 14px 0;
+        border-top: 1px solid #ffffff1f;
+        img{
+            width: 200px;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+        h4{ font-weight: 600; }
+        small{ opacity: .7; }
+        p{
+            margin-top: 6px;
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: .9;
+            max-width: 90ch;
+        }
+    }
+    .ep-vazio{ opacity: .7; }
+    @media only screen and (max-width: 600px){
+        .ep{
+            flex-direction: column;
+            gap: 10px;
+            img{ width: 100%; }
+        }
+    }
+}
+.light{
+    .onde, .temporadas{ color: $light-text; }
+    .onde, .temporadas .temp{
+        background-color: $light-surface;
+        border-color: $light-border;
+    }
+    .onde{ border: 1px solid $light-border; }
+    .temporadas .temp.activa{ border-color: #ee344c; }
+    .temporadas .ep{ border-top-color: $light-border; }
+}
+.colecao .img-k a{ display: flex; }
+
+// ───────────── Cantos arredondados ─────────────
+// Um só raio para botões, etiquetas e controlos; outro para painéis.
+$raio-botao: 12px;
+$raio-painel: 16px;
+.populares .mais a, .actores .mais a, .simi .reviews .titulo a, .ver, .header .login, .header .login a,
+.tendenc, .pagination li, .eq-p, .btn-top, .media-type, .media-type-t, .rodape .git, .search{
+    border-radius: $raio-botao !important;
+}
+.tendenc span, .header .idioma .pt{ border-radius: 8px !important; }
+.header, .header.aberto .menu, .search{ border-radius: $raio-botao !important; }
+.simi .reviews .rev, .onde, .temporadas .temp{ border-radius: $raio-painel !important; }
+
+// ───────────── Filtros, streaming, extras ─────────────
+.filtros{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-bottom: 26px;
+    label{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        opacity: .9;
+    }
+    label{
+        font-weight: 500;
+        letter-spacing: .2px;
+    }
+    select{
+        // seta própria em vez da do sistema, igual em todos os browsers
+        appearance: none;
+        -webkit-appearance: none;
+        min-width: 150px;
+        height: 42px;
+        padding: 0 38px 0 14px;
+        border: 1px solid #ffffff1f;
+        border-radius: $raio-botao;
+        background: #ffffff10 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+        &:hover{
+            background-color: #ffffff1c;
+            border-color: #ffffff40;
+        }
+        &:focus-visible{
+            outline: none;
+            border-color: #ee344c;
+            box-shadow: 0 0 0 3px #ee344c40;
+        }
+        option{
+            background-color: $dark-surface;
+            color: #fff;
+        }
+    }
+    @media only screen and (max-width: 600px){
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        select{
+            min-width: 0;
+            width: 100%;
+        }
+    }
+}
+.prov-lista{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    a{ display: flex; }
+    img{
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        transition: transform .2s ease;
+        &:hover{ transform: scale(1.08); }
+    }
+}
+.onde .onde-grupo a{ display: flex; }
+.colecao .pais a.imgK{ display: inline-flex; }
+.titulo.com-tendenc{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    p{ margin-bottom: 0 !important; }
+}
+.chips{
+    margin-top: 34px;
+    p{
+        margin-bottom: 12px;
+        font-size: 1.2rem;
+    }
+    a{
+        display: inline-block;
+        margin: 0 8px 8px 0;
+        padding: 6px 12px;
+        border-radius: $raio-botao;
+        background-color: #ffffff14;
+        font-size: 14px;
+        text-decoration: none;
+        &:hover{ background-color: #ffffff29; }
+    }
+}
+.info-extra{
+    summary{
+        cursor: pointer;
+        font-weight: 500;
+    }
+    h4{
+        margin: 18px 0 10px;
+        font-weight: 600;
+    }
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        font-size: 13px;
+    }
+    li{
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    img{
+        width: 22px;
+        border-radius: 3px;
+    }
+    small{ opacity: .65; }
+}
+.convidados{
+    margin-top: 8px;
+    font-size: 13px;
+    summary{
+        cursor: pointer;
+        opacity: .85;
+    }
+    ul{ margin-top: 6px; }
+    li{ padding: 2px 0; }
+    small{ opacity: .7; }
+}
+.light{
+    .filtros, .chips p, .info-extra, .convidados{ color: $light-text; }
+    .filtros select{
+        background-color: $light-surface;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2316181d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+        border-color: $light-border;
+        color: $light-text;
+        &:hover{
+            background-color: $light-surface;
+            border-color: $light-muted;
+        }
+        &:focus-visible{ border-color: #ee344c; }
+        option{
+            background-color: $light-surface;
+            color: $light-text;
+        }
+    }
+    .chips a{
+        background-color: $light-surface;
+        border: 1px solid $light-border;
     }
 }

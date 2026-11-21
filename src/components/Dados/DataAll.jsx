@@ -14,9 +14,6 @@ export const DataAll = ({item, type}) => {
             </div>
     </>
     return (
-        // shortcut: ainda não existe página de detalhe de série, por isso as séries abrem na TMDB; trocar pelo link interno quando existir
-        type==="tv" ?
-        <a href={`https://www.themoviedb.org/tv/${item.id}`} target="_blank" rel="noreferrer">{conteudo}</a> :
-        <a href={`/filme/${slugify(item.title || item.name || '',{lower:true,strict: true})}/${item.id}`} >{conteudo}</a>
+        <a href={`/${type==="tv" ? 'serie' : 'filme'}/${slugify(item.title || item.name || '',{lower:true,strict: true})}/${item.id}`} >{conteudo}</a>
     )
 }
