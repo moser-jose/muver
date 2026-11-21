@@ -1,6 +1,6 @@
-# [Muver](https://muver.vercel.app/)
+# [Muver](https://muver.moserjose.com/)
 
-Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais. [https://muver.vercel.app/](https://muver.vercel.app/)
+Projecto que usa a api [themoviedb](https://www.themoviedb.org/) para criar um site de filmes e series mais populares actualmente com todas as informações relevantes sobre os actores, trailers, director e muito mais. [https://muver.moserjose.com/](https://muver.moserjose.com/)
 
 
 <p align="center" >
