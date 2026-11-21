@@ -1,21 +1,19 @@
 import React from 'react'
-import { BrowserRouter as Router,Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import AllActores from './components/Dados/AllActores'
 import TypeDetalhes from './components/Dados/TypeDetalhes'
 import Actores from './pages/Actores'
 import FilmeDetalhe from './pages/FilmeDetalhe'
 import Filmes from './pages/Filme'
-import FilmesPage from './pages/FilmesPage'
 import ActoresDetalhe from './pages/ActoresDetalhe'
 import Series from './pages/Series'
 import Home from './pages/Home'
-import { Loa } from './components/Loa'
+import NaoEncontrada from './pages/NaoEncontrada'
 import Descobrir from './pages/Descobrir'
 import SerieDetalhe from './pages/SerieDetalhe'
 import Pesquisa from './pages/Pesquisa'
 const router = () => {
     return (
-        <Router>
            <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/filmes" element={<Filmes/>} />
@@ -42,8 +40,8 @@ const router = () => {
                 <Route path="/coleccao/:slug/:id" element={<Descobrir tipo="coleccao"/>} />
                 <Route path="/serie/:slug/:id" element={<SerieDetalhe/>} />
                 <Route path="/serie/:slug/:id/autores" element={<AllActores media="tv"/>} />
+                <Route path="*" element={<NaoEncontrada/>} />
            </Routes>
-        </Router>
     )
 }
 

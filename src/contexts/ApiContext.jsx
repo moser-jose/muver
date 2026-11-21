@@ -14,6 +14,12 @@ export const ApiContext = ({ children }) => {
     const [TopMovie, setTopMovie]=useState([]);
     const [pessoasTrending, setPessoasTreding]=useState([]);
     const [loading,setLoading ]=useState(false)
+    const [erro, setErro]=useState(null); // estado HTTP do último pedido falhado (0 = sem rede)
+    useEffect(() => {
+        const ouvir = (e) => setErro(e.detail);
+        window.addEventListener('api-erro', ouvir);
+        return () => window.removeEventListener('api-erro', ouvir);
+    }, [])
     const [modal, setModal]=useState(false);
     const [url, setUrl]=useState("");
     const [filmesTendenciasSemana, setfilmesTendenciasSemana]=useState([]);
@@ -55,12 +61,12 @@ export const ApiContext = ({ children }) => {
             setTopMovie(data[8].data.results);
             setLoading(true);
         }
-        getTendencias(language);
+        getTendencias(language).catch(() => {}); // o erro já foi comunicado pelo interceptor do axios
     }, [])
     
     return (
         <StateContext.Provider
-            value={{theme, setTheme,tendencia, setTendencia,TopMovie,filmesBrevemente,filmesTendenciasDia,filmesTendenciasSemana,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
+            value={{erro, setErro, theme, setTheme,tendencia, setTendencia,TopMovie,filmesBrevemente,filmesTendenciasDia,filmesTendenciasSemana,url, setUrl,modal, setModal, i18n,loading,setLoading,pessoasTrending,tendencias,filmesdiscover,tvDiscover,genrsMovie,selectIdioma, setSelectIdioma }}>
             {children}
         </StateContext.Provider>
     );

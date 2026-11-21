@@ -65,7 +65,8 @@ const Lista = ({tipo, mediaInicial, id}) => {
                 watch_region: tipo==="provedor" ? regiao : undefined,
                 ...(CAMPO[tipo] ? {[CAMPO[tipo]]: tipo==="pais" ? id.toUpperCase() : id} : {}),
             }}).then((r) => r.data);
-        pedido.then((d) => activo && setData(d)).catch(() => activo && setData((v) => v || vazio));
+        // uma colecção que não existe fica no <Loading/>, que mostra o 404; as listas mostram "nenhum resultado"
+        pedido.then((d) => activo && setData(d)).catch(() => activo && tipo!=="coleccao" && setData((v) => v || vazio));
         return () => { activo = false };
     }, [page, media, filtros])
 

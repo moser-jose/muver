@@ -4,7 +4,6 @@ import { Moon, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
 import PT from '../assets/img/pt.png'
 import US from '../assets/img/us.png'
-import FR from '../assets/img/fr.png'
 import {useApiContext} from '../contexts/ApiContext'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 const Header = () => {

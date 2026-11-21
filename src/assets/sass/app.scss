@@ -3438,3 +3438,49 @@ $raio-painel: 16px;
         border: 1px solid $light-border;
     }
 }
+
+// ───────────── Avisos (404 e erros) ─────────────
+.aviso{
+    position: relative;
+    min-height: 70vh;
+    .aviso-corpo{
+        width: 90%;
+        margin: 0 auto;
+        padding: 180px 0 60px;
+        text-align: center;
+        h1{
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ee344c;
+        }
+        p{
+            margin: 10px 0 26px;
+            font-size: 1.1rem;
+        }
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .ver{
+            padding: 10px 20px;
+            border: 0;
+            background-color: #ffffff14;
+            color: #fff;
+            font: inherit;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover{ background-color: #ffffff29; }
+        }
+    }
+}
+.light .aviso{
+    color: $light-text;
+    .aviso-corpo .ver{
+        background-color: $light-surface;
+        border: 1px solid $light-border;
+        color: $light-text !important;
+    }
+}

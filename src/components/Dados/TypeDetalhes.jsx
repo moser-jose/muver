@@ -10,6 +10,7 @@ import Header from '../Header'
 import OpenSource from '../OpenSource'
 import { useApiContext } from '../../contexts/ApiContext';
 import { DataAll } from './DataAll'
+import Loading from '../Loading'
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 const TypeDetalhes = ({media="movie"}) => {
     const tv = media==="tv";
@@ -115,7 +116,7 @@ const TypeDetalhes = ({media="movie"}) => {
                     activeClassName={"active"}
                 />
             </div>
-   </div>:<></>
+   </div>:<Loading/>
     )
 }
 
