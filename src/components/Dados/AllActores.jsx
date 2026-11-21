@@ -8,8 +8,10 @@ import userMale from '../../assets/img/user-act.jpg'
 import userFemale from '../../assets/img/user-act-f.jpg'
 import { Play } from 'iconsax-react';
 import slugify from 'slugify'
+import { serieComoFilme } from '../../pages/SerieDetalhe'
 const idioma= localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
-const AllActores = () => {
+const AllActores = ({media="movie"}) => {
+    const tv = media==="tv";
     const params = useParams();
     const [filme, setFilme]=useState([]);
     const [crew, setCrew]=useState([]);
@@ -26,7 +28,8 @@ const AllActores = () => {
             else{
                 id="pt"
             }
-            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/movie/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            const f= await axios.get(`/${media}/${params.id}`, {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, append_to_response: tv ? 'aggregate_credits' : 'credits'}});
+            if(tv) f.data = serieComoFilme(f.data);
             setFilme(f.data);
             function groupBy(list, keyGetter) {
                 const map = new Map();
@@ -54,7 +57,7 @@ const AllActores = () => {
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path} )`}}>
                 <div className="pr">
                     <div className="data">
-                        <a href={`/filme/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
+                        <a href={`/${tv ? 'serie' : 'filme'}/${slugify(filme.title,{lower:true,strict: true})}/${filme.id}`} className="title" ><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</a>
                         <h2 className="_p">{t('ui.elenco_equipa')}</h2>
                     </div>
                 </div>

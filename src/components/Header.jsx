@@ -1,6 +1,6 @@
 import { t } from '../translate/i18n'
 import React, { useState } from 'react'
-import { Moon, NotificationBing, SearchNormal, Sun1 } from 'iconsax-react'
+import { Moon, SearchNormal, Sun1 } from 'iconsax-react'
 import Logo from '../assets/img/muver.svg'
 import PT from '../assets/img/pt.png'
 import US from '../assets/img/us.png'
@@ -96,10 +96,6 @@ const Header = () => {
                             </ul>
                         </div>
                         }
-                    </div>
-                    <NotificationBing size="22" color="#ffffff" variant="Bulk"/>
-                    <div className="login">
-                        <a href="/" >{i18n.t('header.login')}</a>
                     </div>
                 </div>
                 <button type="button" aria-label="Menu" aria-expanded={menu} className={menu ===true ? 'hamb men':'hamb'} onClick={()=>setMenu(!menu)}>

@@ -30,7 +30,7 @@ const ActoresDetalhe = () => {
             else{
                 id="pt"
             }
-            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/person/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=videos,images,reviews,credits,similar,keywords&include_image_language=null,${id}`);
+            const f= await axios.get(`${import.meta.env.REACT_APP_APP_URL}/person/${params.id}?api_key=${import.meta.env.REACT_APP_API_KEY}&language=${idioma}&include_adult=false&append_to_response=images,credits,tv_credits,external_ids&include_image_language=null,${id}`);
             setActor(f.data);
             function groupBy(list, keyGetter) {
                 const map = new Map();
@@ -72,8 +72,9 @@ const ActoresDetalhe = () => {
                             {actor.popularity && <span className="popul"><UserOctagon size="26" color="#fff " variant="Bulk"/>{actor.popularity}</span>}
                         </div>
                         {actor.also_known_as.slice(0,5).map((item, key)=>{
-                            return <span key={key} href="/"className="ver gen">{item}</span>
+                            return <span key={key} className="ver gen">{item}</span>
                         })}
+                        {actor.external_ids?.imdb_id && <a href={`https://www.imdb.com/name/${actor.external_ids.imdb_id}`} target="_blank" rel="noreferrer" className="ver gen">IMDb ↗</a>}
                         
                     </div>
 
@@ -92,6 +93,7 @@ const ActoresDetalhe = () => {
 
             <div className="simi" style={{marginTop:'30px',marginBotton:'30px'}}>
                 {actor.credits.cast.length!==0 && <Type data={actor.credits.cast} gender={actor.gender}  outher="filme_actor" type="filme" title={t('ui.part_actor')}/>}
+                {actor.tv_credits?.cast.length > 0 && <Type data={[...actor.tv_credits.cast].sort((a,b)=>b.popularity-a.popularity)} type="tv" title={t('ui.part_series')}/>}
                 {actor.credits.crew.length!==0 && <Type data={actor.credits.crew} gender={actor.gender} outher="filme_actor" type="filme" title={t('ui.part_equipa')}/>}      
             </div>
 

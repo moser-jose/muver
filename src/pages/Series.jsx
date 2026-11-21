@@ -13,11 +13,11 @@ const idioma = localStorage.getItem(import.meta.env.REACT_APP_I18N_STORAGE_KEY);
 // Mesma estrutura da página de filmes, com os dados de séries
 const Series = () => {
     const {tendencia, tvDiscover, pessoasTrending, loading} = useApiContext();
-    const [listas, setListas] = useState({dia: [], semana: [], top: [], noAr: []});
+    const [listas, setListas] = useState({dia: [], semana: [], top: [], noAr: [], hoje: []});
     useEffect(() => {
         const params = {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma};
-        Promise.all(['/trending/tv/day', '/trending/tv/week', '/tv/top_rated', '/tv/on_the_air'].map((url) => axios.get(url, {params})))
-            .then(([dia, semana, top, noAr]) => setListas({dia: dia.data.results, semana: semana.data.results, top: top.data.results, noAr: noAr.data.results}))
+        Promise.all(['/trending/tv/day', '/trending/tv/week', '/tv/top_rated', '/tv/on_the_air', '/tv/airing_today'].map((url) => axios.get(url, {params})))
+            .then(([dia, semana, top, noAr, hoje]) => setListas({dia: dia.data.results, semana: semana.data.results, top: top.data.results, noAr: noAr.data.results, hoje: hoje.data.results}))
             .catch(() => {}); // as filas ficam vazias; o resto da página continua a funcionar
     }, [])
 
@@ -31,6 +31,7 @@ const Series = () => {
                         <div className="gen-row">
                             <div className="direito">
                                 <Row base="/series" other="maispopular" type="tv" title={t('ui.series_populares')} data={tvDiscover}/>
+                                <Row base="/series" other="emcartaz" type="tv" title={t('ui.hoje_na_tv')} data={listas.hoje}/>
                                 {
                                     tendencia===false ? <Row base="/series" other="tendencias-dia" type="tv" title={t('ui.tendencias')} data={listas.dia}/>:
                                         <Row base="/series" other="tendencias-semana" type="tv" title={t('ui.tendencias')} data={listas.semana}/>

@@ -27,6 +27,7 @@ const TypeDetalhes = ({media="movie"}) => {
                 "tendecias-dia": `/trending/${media}/day`,
                 "brevemente": tv ? "/tv/on_the_air" : "/movie/upcoming",
                 "maior-pontuacao": `/${media}/top_rated`,
+                "em-cartaz": tv ? "/tv/airing_today" : "/movie/now_playing",
             };
             if(listas[params.type]){
                 const data= await axios.get(listas[params.type], {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, include_adult: false, page}});
@@ -69,7 +70,7 @@ const TypeDetalhes = ({media="movie"}) => {
            <div className="pr">
                <div className="data">
                     {
-                        params.type==="mais-populares"||params.type==="maior-pontuacao"||params.type==="brevemente"||params.type==="tendecias-dia" ||params.type==="tendecias-semana" ?<></>: <h2 className="title"><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
+                        params.type==="mais-populares"||params.type==="maior-pontuacao"||params.type==="brevemente"||params.type==="tendecias-dia" ||params.type==="tendecias-semana"||params.type==="em-cartaz" ?<></>: <h2 className="title"><Play size="32" color="#fff" variant="Bulk"/> {filme.title}</h2>
                     }
                    
                    <h2 className="_p">{
@@ -79,6 +80,7 @@ const TypeDetalhes = ({media="movie"}) => {
                    params.type==="tendecias-semana" ? t('ui.tendencias_semana'):
                    params.type==="tendecias-dia" ? t('ui.tendencias_dia'):
                    params.type==="brevemente" ? t(tv ? 'ui.series_no_ar' : 'ui.filmes_a_estrear'):
+                   params.type==="em-cartaz" ? t(tv ? 'ui.series_hoje' : 'ui.filmes_em_cartaz'):
                    params.type==="maior-pontuacao" && t(tv ? 'ui.series_maior_pontuacao' : 'ui.filmes_maior_pontuacao')
                    
                    }</h2>

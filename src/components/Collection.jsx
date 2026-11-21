@@ -19,7 +19,7 @@ const Collection = ({data, colection, back, poster}) => {
                         })
                     }
                     <p>{limita(colection.data.overview,300)}</p>
-                    <a  className="ver" href="/">{t('ui.ver_coleccao')}</a>
+                    <a  className="ver" href={`/coleccao/${slugify(data.name,{lower:true,strict: true})}/${data.id}`}>{t('ui.ver_coleccao')}</a>
                 </div>
                 <img loading="lazy" alt={data.name} src={`https://image.tmdb.org/t/p/w300${data.poster_path===null ? poster:data.poster_path}`}/>
             </div>
