@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: /pesquisa/
 
-Sitemap: https://muver.vercel.app/sitemap.xml
+Sitemap: https://muver.moserjose.com/sitemap.xml
