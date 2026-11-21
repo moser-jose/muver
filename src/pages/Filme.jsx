@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import axios from '../api'
@@ -34,6 +35,7 @@ const Filme = () => {
                 <div className="container">
                     <div className="home">
                         <Header/>
+                        <Seo titulo={t('ui.filmes')} descricao={t('ui.seo_filmes')}/>
                         <SlideHeader type="filme" data={filmesdiscover}/>   
                         <div className="all-gen">
                             <div className="gen-row">

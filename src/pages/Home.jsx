@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import axios from '../api'
@@ -29,6 +30,7 @@ const Home = () => {
         <div className="container">
             <div className="home">
                 <Header/>
+                <Seo/>
                 <SlideHeader data={destaque}/>
                 <div className="all-gen">
                     <div className="gen-row">

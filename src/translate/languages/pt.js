@@ -15,6 +15,11 @@ const messages = {
                 limpar:'Limpar pesquisa'
             },
             ui:{
+                seo_titulo:'Saiba tudo sobre filmes e séries',
+                seo_descricao:'Filmes, séries e actores populares, com trailers, elenco, galerias, avaliações e onde assistir.',
+                seo_filmes:'Filmes populares, em cartaz, em tendência e com maior pontuação, com trailers, elenco e onde assistir.',
+                seo_series:'Séries populares, em tendência e no ar, com temporadas, episódios, elenco e onde assistir.',
+                seo_actores:'Os actores e actrizes mais populares do momento, com biografia, filmes e séries.',
                 canal:'Canal',
                 filmografia:'Filmografia',
                 idioma_original:'Idioma original',

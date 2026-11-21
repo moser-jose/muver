@@ -1,3 +1,4 @@
+import Seo from '../Seo'
 import { t } from '../../translate/i18n'
 import { ArrowLeft2, ArrowRight2, Play, Star } from 'iconsax-react';
 import React,{useState,useEffect} from 'react'
@@ -66,6 +67,7 @@ const TypeDetalhes = ({media="movie"}) => {
         loading===true ? <div className='simi-detalhe'>
         <OpenSource/>
         <Header/>
+        <Seo titulo={[filme.title && params.id ? filme.title : null, tv ? t('header.series') : t('ui.filmes')].filter(Boolean).join(' · ')}/>
         <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path} )`}}>
            <div className="pr">
                <div className="data">

@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import { t, i18n } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -76,6 +77,7 @@ const Lista = ({tipo, mediaInicial, id}) => {
         <div className='simi-detalhe'>
             <OpenSource/>
             <Header/>
+            <Seo titulo={[tipo==="tudo" ? (tv ? t('header.series') : t('ui.filmes')) : nome, rotulo].filter(Boolean).join(' · ')} descricao={texto}/>
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.5),rgba(24, 24, 24, 0.5))${fundo ? `,url(https://image.tmdb.org/t/p/w1280${fundo})` : ',#17171a'}`}}>
                 <div className="pr">
                     <div className="data">

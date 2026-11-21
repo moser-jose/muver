@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import { t } from '../translate/i18n'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -96,6 +97,7 @@ const Resultados = ({q}) => {
         <div className='simi-detalhe'>
             <OpenSource/>
             <Header/>
+            <Seo titulo={`${t('ui.resultados_para')} “${q}”`} indexar={false}/>
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.5),rgba(24, 24, 24, 0.5))${fundo ? `,url(https://image.tmdb.org/t/p/w1280${fundo.backdrop_path})` : ',#17171a'}`}}>
                 <div className="pr">
                     <div className="data">

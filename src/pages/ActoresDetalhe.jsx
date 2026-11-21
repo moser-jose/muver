@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import { t } from '../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
@@ -55,6 +56,11 @@ const ActoresDetalhe = () => {
         <div className="autores-detalhes">
             <OpenSource/>
             <Header/>
+            <Seo titulo={actor.name} descricao={actor.biography} tipo="profile"
+                imagem={actor.profile_path && `https://image.tmdb.org/t/p/w780${actor.profile_path}`}
+                dados={{'@type': 'Person', name: actor.name, birthDate: actor.birthday || undefined, birthPlace: actor.place_of_birth || undefined,
+                    image: actor.profile_path ? `https://image.tmdb.org/t/p/w780${actor.profile_path}` : undefined,
+                    sameAs: actor.external_ids?.imdb_id ? `https://www.imdb.com/name/${actor.external_ids.imdb_id}` : undefined}}/>
             <div className="filme-ho aut" style={{'background': `linear-gradient(rgba(24, 24, 24, 0.4),rgba(24, 24, 24, 0.3)),url(https://image.tmdb.org/t/p/w1280${actor.profile_path} )`,'height':'100vh'}}>
                 <div className="pr">
                     <div className="data">
