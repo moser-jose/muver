@@ -381,30 +381,6 @@ body{
             }
         }
     }
-    .project-github{
-        background-color: #000;
-        .git-h{
-            a{font-weight: 500;color: #fff !important;}
-        }
-        p{
-            span{
-                background-color:#ee344c;
-                padding: 1px 8px;
-                border-radius: 10px;
-                font-size: 12px;
-            }
-            
-            .mo{
-                color: #fff !important;
-                background-color: #6c6c6cbd;
-            }
-        }
-        .dir{
-            a{
-                color: #fff !important;
-            }
-        }
-    }
     .btn-top{
         background-color: $light-surface !important ;
         border: 1px solid $light-border;
@@ -2300,57 +2276,13 @@ div[dir="ltr"] {
         background: none;
         cursor: pointer;
     }
-}
-.project-github{
-    background-color: #ffffff10;
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    padding: 30px 0 15px; 
-    margin: 40px 0 0;
-    
-    p{
-        font-family: "Rubik";
-        font-size: 17px;
-        letter-spacing: .5px;
-        text-align: center;
-        width: 90%;
-        margin: 0 auto;
-        span{
-            background-color:#ee344c;
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 12px;
-        }
-        .mo{
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 300;
-            background-color: #000000e6;
-            padding: 4px 8px;
-            border-radius: 14px;
-            display: inline-flex;
-            gap: 8px;
-            align-items: center;
-            justify-content: space-between;
-            &:hover{
-                background-color: #00000088;
-            }
-        }
-    }
-    .dir{
-        margin-top: 20px;
-        font-size: 12px;
-        a{
-            color: #ee344c;
-            text-decoration: none;
-            font-weight: 500;
-        }
+    .limpar{
+        color: #ffffffcc;
+        font-size: 22px;
+        line-height: 1;
+        &:hover{ color: #fff; }
     }
 }
-
 .center{
     display: flex;
     text-align: center;
@@ -2893,6 +2825,23 @@ div[dir="ltr"] {
         }
     }
 }
+// o vidro da barra fica num ::before: se estivesse na própria .header, o menu aberto
+// (filho dela) não conseguia desfocar a página por trás
+.header{
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    &::before{
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        background-color: #ffffff10;
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+    }
+}
 // espaço entre blocos do cabeçalho (150px deixava a pesquisa sem largura)
 .header{ gap: 50px !important; }
 .header .search{ min-width: 200px; }
@@ -2954,8 +2903,9 @@ div[dir="ltr"] {
             margin-top: 8px;
             padding: 8px;
             border-radius: 8px;
-            background-color: $dark-surface;
-            box-shadow: 0 8px 24px #00000066;
+            background-color: #ffffff10;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             z-index: 20;
             ul{ display: block !important; }
             li{
@@ -2982,6 +2932,19 @@ div[dir="ltr"] {
         scrollbar-width: none;
         &::-webkit-scrollbar{ display: none; }
         a{ scroll-snap-align: start; }
+    }
+    // filas de actores: o mesmo carrossel das filas de filmes
+    .actores .all-act{
+        grid-template-columns: none !important;
+        grid-auto-flow: column;
+        grid-auto-columns: 130px;
+        grid-auto-rows: auto;
+        justify-content: start;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        &::-webkit-scrollbar{ display: none; }
+        .cast{ scroll-snap-align: start; }
     }
     // listas completas: tantas colunas quantas couberem
     .todos-actores .filmeR, .todos-actores .todos{
@@ -3029,7 +2992,7 @@ div[dir="ltr"] {
         gap: 8px;
     }
     .tendenc{ margin-left: 0 !important; }
-    .actores .all-act{ grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important; }
+    .actores .all-act{ grid-auto-columns: 96px; } // deixa o 4.º retrato à espreita, para se ver que há mais
     .film-slide .filme-ho .pr{
         flex-direction: column !important;
         align-items: flex-start !important;
@@ -3093,7 +3056,6 @@ div[dir="ltr"] {
             border-radius: 10px !important;
         }
     }
-    .project-github p{ font-size: 14px !important; }
     .lightbox{
         img{ max-width: 96vw; }
         button:not(.close){
@@ -3102,5 +3064,80 @@ div[dir="ltr"] {
             left: calc(50% - 52px);
         }
         button:not(.close):nth-of-type(2){ left: calc(50% + 10px); }
+    }
+}
+
+// ───────────── Rodapé ─────────────
+.rodape{
+    margin-top: 60px;
+    background-color: $dark-surface;
+    border-top: 1px solid #ffffff14;
+    color: #ffffffc7;
+    font-size: 14px;
+    a{
+        color: #fff !important;
+        text-decoration: none;
+        &:hover{ color: #ee344c !important; }
+    }
+    .rodape-topo{
+        width: 90%;
+        margin: 0 auto;
+        padding: 44px 0 32px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1.5fr;
+        gap: 40px;
+    }
+    .marca{
+        img{
+            width: 110px;
+            margin-bottom: 14px;
+        }
+        p{
+            max-width: 38ch;
+            line-height: 1.6;
+        }
+    }
+    h3{
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+    }
+    nav a{
+        display: block;
+        padding: 4px 0;
+    }
+    .git{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        background-color: #ffffff14;
+        font-weight: 500;
+        &:hover{
+            background-color: #ffffff29;
+            color: #fff !important;
+        }
+    }
+    .rodape-base{
+        width: 90%;
+        margin: 0 auto;
+        padding: 18px 0 26px;
+        border-top: 1px solid #ffffff14;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        font-size: 12px;
+        color: #ffffff99;
+    }
+    @media only screen and (max-width: 757px){
+        .rodape-topo{
+            grid-template-columns: 1fr;
+            gap: 26px;
+            padding: 32px 0 24px;
+        }
     }
 }

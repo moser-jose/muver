@@ -22,7 +22,8 @@ function App() {
     <div className="App">
       {modal === true && <VideoModal/>}
       <Router/>
-      {scrolled && <><Up/><Github/></>}      
+      <Github/>
+      {scrolled && <Up/>}
     </div>
   );
 }
