@@ -11,7 +11,8 @@ const messages = {
                 fr:'Francês',
                 projecto:'Projecto Open Source',
                 github:'Projecto no Github',
-                pesquisar:'Rechercher des films'
+                pesquisar:'Rechercher films et acteurs',
+                limpar:'Effacer la recherche'
             },
             home:{
                 ver_mais:'Ver mais',
