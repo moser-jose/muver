@@ -15,6 +15,7 @@ const messages = {
                 limpar:'Limpar pesquisa'
             },
             ui:{
+                privacidade:'Política de Privacidade',
                 nao_encontrada:'Esta página não existe ou foi removida.',
                 erro_titulo:'Algo correu mal',
                 erro_texto:'Não foi possível carregar os dados. Verifique a ligação e tente outra vez.',

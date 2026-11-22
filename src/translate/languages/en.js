@@ -15,6 +15,7 @@ const messages = {
                 limpar:'Clear search'
             },
             ui:{
+                privacidade:'Privacy Policy',
                 nao_encontrada:'This page does not exist or was removed.',
                 erro_titulo:'Something went wrong',
                 erro_texto:'The data could not be loaded. Check your connection and try again.',
