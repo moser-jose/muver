@@ -3484,3 +3484,36 @@ $raio-painel: 16px;
         color: $light-text !important;
     }
 }
+
+// ───────────── Páginas de texto (privacidade) ─────────────
+.legal{
+    width: 90%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 150px 0 40px;
+    line-height: 1.7;
+    h1{
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    .data{
+        margin-bottom: 24px;
+        font-size: 14px;
+        opacity: .7;
+    }
+    h2{
+        margin: 34px 0 10px;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    p{ margin-bottom: 12px; }
+    ul{
+        margin: 0 0 12px 20px;
+        li{
+            list-style: disc;
+            margin-bottom: 8px;
+        }
+    }
+    a{ color: #ee344c !important; }
+}
+.light .legal{ color: $light-text; }

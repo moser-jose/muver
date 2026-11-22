@@ -19,6 +19,7 @@ const Github = () => {
                     <a href="/filmes/explorar">{t('ui.explorar_filmes')}</a>
                     <a href="/series/explorar">{t('ui.explorar_series')}</a>
                     <a href="/idioma/pt">{t('ui.cinema_pt')}</a>
+                    <a href="/privacidade">{t('ui.privacidade')}</a>
                 </nav>
                 <div>
                     <h3>{t('header.projecto')}</h3>

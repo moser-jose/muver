@@ -9,6 +9,7 @@ import ActoresDetalhe from './pages/ActoresDetalhe'
 import Series from './pages/Series'
 import Home from './pages/Home'
 import NaoEncontrada from './pages/NaoEncontrada'
+import Privacidade from './pages/Privacidade'
 import Descobrir from './pages/Descobrir'
 import SerieDetalhe from './pages/SerieDetalhe'
 import Pesquisa from './pages/Pesquisa'
@@ -40,6 +41,7 @@ const router = () => {
                 <Route path="/coleccao/:slug/:id" element={<Descobrir tipo="coleccao"/>} />
                 <Route path="/serie/:slug/:id" element={<SerieDetalhe/>} />
                 <Route path="/serie/:slug/:id/autores" element={<AllActores media="tv"/>} />
+                <Route path="/privacidade" element={<Privacidade/>} />
                 <Route path="*" element={<NaoEncontrada/>} />
            </Routes>
     )

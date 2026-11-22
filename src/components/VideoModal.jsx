@@ -17,7 +17,7 @@ const VideoModal = () => {
                 <iframe
                     className="video"
                     title="Trailer"
-                    src={`https://www.youtube.com/embed/${url}?autoplay=1`}
+                    src={`https://www.youtube-nocookie.com/embed/${url}?autoplay=1`}
                     allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                     allowFullScreen
                     />
