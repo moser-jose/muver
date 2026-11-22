@@ -2,8 +2,10 @@ import { t } from '../translate/i18n'
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import DataActor from './Dados/DataActor';
+import { agrupar } from '../api';
 const Actor = ({data, titulo, type, act}) => {
     const params = useParams();
+    const lista = act===true ? data : type==="actores" ? agrupar(data.cast, 'character') : agrupar(data.crew, 'job');
     return (
         <div className={`actores ${act===true && 'act-f'}`}>
             {
@@ -28,22 +30,10 @@ const Actor = ({data, titulo, type, act}) => {
                 <>
                     <div className="mais">
                         <p className="titulo">{titulo}</p>
-                        {
-                            type==="actores" ? data.cast.length > 9 && <a href={`${params.id}/autores`}>{t('ui.ver_mais')}</a>:
-                            type==="equipe" && data.crew.length > 9 && <a href={`${params.id}/autores`}>{t('ui.ver_mais')}</a>
-                        }
+                        {lista.length > 9 && <a href={`${params.id}/autores`}>{t('ui.ver_mais')}</a>}
                     </div>
                     <div className="all-act">
-                        {
-                            type==="actores" ?
-                                data.cast.slice(0,9).map((item, key)=>{
-                                    return <DataActor key={key} item={item} type={type}/>
-                                }):
-                            type==="equipe" &&
-                                data.crew.slice(0,9).map((item, key)=>{
-                                    return <DataActor key={key} item={item} type={type}/>
-                                })
-                        }
+                        {lista.slice(0,9).map((item, key)=> <DataActor key={key} item={item} type={type}/>)}
                     </div>
                 </>
             }

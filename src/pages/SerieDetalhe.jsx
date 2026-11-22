@@ -24,10 +24,11 @@ export const serieComoFilme = (s) => ({
     imdb_id: s.external_ids?.imdb_id,
     keywords: {keywords: s.keywords?.results || []},
     credits: {
-        cast: s.aggregate_credits.cast.map((a) => ({...a, character: a.roles?.[0]?.character || ''})),
+        cast: s.aggregate_credits.cast.map((a) => ({...a, character: (a.roles || []).map((r) => r.character).filter(Boolean).join(', ')})),
         crew: [
             ...(s.created_by || []).map((c) => ({...c, original_name: c.name, job: 'Creator'})),
-            ...s.aggregate_credits.crew.map((a) => ({...a, job: a.jobs?.[0]?.job || a.department})),
+            // uma entrada por cargo, como nos filmes; quem mostra a lista agrupa por pessoa
+            ...s.aggregate_credits.crew.flatMap((a) => (a.jobs?.length ? a.jobs : [{job: a.department}]).map((j) => ({...a, job: j.job}))),
         ],
     },
 });
