@@ -2,7 +2,7 @@ import Seo from '../Seo'
 import { t } from '../../translate/i18n'
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
-import axios from '../../api'
+import axios, { agrupar } from '../../api'
 import { useParams } from 'react-router-dom';
 import OpenSource from '../OpenSource';
 import userMale from '../../assets/img/user-act.jpg'
@@ -32,21 +32,9 @@ const AllActores = ({media="movie"}) => {
             }
             const f= await axios.get(`/${media}/${params.id}`, {params: {api_key: import.meta.env.REACT_APP_API_KEY, language: idioma, append_to_response: tv ? 'aggregate_credits' : 'credits'}});
             if(tv) f.data = serieComoFilme(f.data);
+            f.data.credits.cast = agrupar(f.data.credits.cast, 'character');
             setFilme(f.data);
-            function groupBy(list, keyGetter) {
-                const map = new Map();
-                list.forEach((item) => {
-                     const key = keyGetter(item);
-                     const collection = map.get(key);
-                     if (!collection) {
-                         map.set(key, [item]);
-                     } else {
-                         collection.push(item);
-                     }
-                });
-                return map;
-            }
-            setCrew(groupBy(f.data.credits.crew, act => act.name))
+            setCrew(agrupar(f.data.credits.crew, 'job'))
             setLoading(true);
         }
         getFilmes()
@@ -91,21 +79,16 @@ const AllActores = ({media="movie"}) => {
                 </div>
                 <div className="todos" id="equipe">
                     {
-                        Array.from(crew).map((i, key)=>{
-                            return <a key={key} href={`/actores/${slugify(i[1][0].name,{lower:true,strict: true})}/${i[1][0].id}`} className="todos-a">
-                            <img loading="lazy" alt={i[1][0].name} src={
-                                i[1][0].profile_path===null && i[1][0].gender===0 ? userMale: 
-                                i[1][0].profile_path===null && i[1][0].gender===1 ? userFemale:
-                                i[1][0].profile_path===null && i[1][0].gender===2 ? userMale:
-                                `https://image.tmdb.org/t/p/w300${i[1][0].profile_path}`}/>
-                            <h3>{i[1][0].name}</h3>
-                            <h4>
-                                {i[1].map((j,k)=>{
-                                    return <span key={k}>{j.job}</span>
-                                })}
-                            </h4>
+                        crew.map((item, key)=>(
+                            <a key={key} href={`/actores/${slugify(item.name,{lower:true,strict: true})}/${item.id}`} className="todos-a">
+                            <img loading="lazy" alt={item.name} src={
+                                item.profile_path===null && item.gender===1 ? userFemale:
+                                item.profile_path===null ? userMale:
+                                `https://image.tmdb.org/t/p/w300${item.profile_path}`}/>
+                            <h3>{item.name}</h3>
+                            <h4>{item.job}</h4>
                         </a>
-                        }) 
+                        ))
                     }
                 </div>
             </div>
